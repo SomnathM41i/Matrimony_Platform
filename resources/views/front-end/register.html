@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Register on BouddhMatrimony — Create your free profile and find your perfect life partner in the Bouddh community.">
+  <title>Register Free — BouddhMatrimony</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<div id="loader"><div class="loader-inner"><div class="loader-ring"></div><div class="loader-text">BouddhMatrimony</div></div></div>
+
+<header class="header">
+  <div class="container">
+    <nav class="nav">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/images/logo.png" alt="BouddhMatrimony" onerror="this.style.display='none'">
+        <div><span>Bouddha</span><span style="color:var(--accent)">Matrimony</span></div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="packages.html">Packages</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="login.html" class="btn btn-outline btn-sm">Login</a>
+        <a href="register.html" class="btn btn-primary btn-sm">Register Free</a>
+      </div>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </nav>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="packages.html">Packages</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+    <div class="mobile-actions">
+      <a href="login.html" class="btn btn-outline btn-sm" style="flex:1;justify-content:center">Login</a>
+      <a href="register.html" class="btn btn-primary btn-sm" style="flex:1;justify-content:center">Register</a>
+    </div>
+  </div>
+</header>
+
+<section class="register-section">
+  <div class="register-card">
+    <!-- Header -->
+    <div class="register-header">
+      <h2>Create Your Free Profile 🙏</h2>
+      <p>Join thousands of Bouddh families. Complete your profile in just 4 simple steps.</p>
+      <!-- Progress Steps -->
+      <div class="steps-progress">
+        <div class="prog-step active" id="prog-0">
+          <div class="prog-dot">1</div>
+          <div class="prog-label">Personal</div>
+        </div>
+        <div style="flex:1;max-width:60px;height:2px;background:rgba(255,255,255,0.2);margin:17px 0 0;"></div>
+        <div class="prog-step" id="prog-1">
+          <div class="prog-dot">2</div>
+          <div class="prog-label">Contact</div>
+        </div>
+        <div style="flex:1;max-width:60px;height:2px;background:rgba(255,255,255,0.2);margin:17px 0 0;" id="line-1"></div>
+        <div class="prog-step" id="prog-2">
+          <div class="prog-dot">3</div>
+          <div class="prog-label">Location</div>
+        </div>
+        <div style="flex:1;max-width:60px;height:2px;background:rgba(255,255,255,0.2);margin:17px 0 0;" id="line-2"></div>
+        <div class="prog-step" id="prog-3">
+          <div class="prog-dot">4</div>
+          <div class="prog-label">Account</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form Body -->
+    <div class="register-body">
+
+      <!-- Step 1: Personal Details -->
+      <div class="form-step active" id="step-0">
+        <h3>Personal Details</h3>
+        <p>Tell us about yourself to help us find your best matches.</p>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">First Name *</label>
+            <input type="text" class="form-control" name="firstName" placeholder="Your first name" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last Name *</label>
+            <input type="text" class="form-control" name="lastName" placeholder="Your last name" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Gender *</label>
+            <select class="form-control" name="gender" required>
+              <option value="">Select gender</option>
+              <option>Male</option>
+              <option>Female</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Date of Birth *</label>
+            <input type="date" class="form-control" name="dob" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Religion *</label>
+            <select class="form-control" name="religion" required>
+              <option selected>Bouddh (Buddhist)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Caste / Sub-community</label>
+            <select class="form-control" name="caste">
+              <option value="">Select caste</option>
+              <option>Mahar / Mang</option>
+              <option>Chambhar</option>
+              <option>Dhor</option>
+              <option>Bhangi</option>
+              <option>Other SC/ST</option>
+              <option>Prefer not to say</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Highest Education *</label>
+            <select class="form-control" name="education" required>
+              <option value="">Select education</option>
+              <option>10th / SSC</option>
+              <option>12th / HSC</option>
+              <option>Diploma</option>
+              <option>Graduate (B.A. / B.Sc. / B.Com)</option>
+              <option>Graduate (B.E. / B.Tech)</option>
+              <option>Post Graduate (M.A. / M.Sc.)</option>
+              <option>MBA / Management</option>
+              <option>Medical (MBBS / BDS)</option>
+              <option>Law (LLB / LLM)</option>
+              <option>Doctorate (PhD)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Occupation *</label>
+            <select class="form-control" name="occupation" required>
+              <option value="">Select occupation</option>
+              <option>Government Job</option>
+              <option>Private Sector</option>
+              <option>Business / Self-employed</option>
+              <option>Doctor</option>
+              <option>Engineer</option>
+              <option>Teacher / Professor</option>
+              <option>Lawyer</option>
+              <option>Defence / Police</option>
+              <option>Student</option>
+              <option>Not Working</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Annual Income</label>
+          <select class="form-control" name="income">
+            <option value="">Select income range</option>
+            <option>Below ₹2 Lakh</option>
+            <option>₹2–5 Lakh</option>
+            <option>₹5–10 Lakh</option>
+            <option>₹10–20 Lakh</option>
+            <option>₹20 Lakh+</option>
+          </select>
+        </div>
+
+        <div class="step-nav">
+          <div></div>
+          <button type="button" class="btn btn-primary" data-next>Next: Contact Details →</button>
+        </div>
+      </div>
+
+      <!-- Step 2: Contact Details -->
+      <div class="form-step" id="step-1">
+        <h3>Contact Details</h3>
+        <p>Your contact information — kept private and shared only with mutual matches.</p>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Mobile Number *</label>
+            <input type="tel" class="form-control" name="mobile" placeholder="+91 XXXXX XXXXX" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Alternate Mobile</label>
+            <input type="tel" class="form-control" name="altMobile" placeholder="+91 XXXXX XXXXX">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Email Address *</label>
+          <input type="email" class="form-control" name="email" placeholder="your@email.com" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">About Yourself</label>
+          <textarea class="form-control" name="about" rows="4" placeholder="Write a brief introduction about yourself, your values, and what you're looking for in a life partner..." style="resize:vertical;"></textarea>
+        </div>
+
+        <div class="step-nav">
+          <button type="button" class="btn btn-outline" data-prev>← Back</button>
+          <button type="button" class="btn btn-primary" data-next>Next: Location →</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Location -->
+      <div class="form-step" id="step-2">
+        <h3>Location Details</h3>
+        <p>Let us know where you are based to find matches in your region.</p>
+
+        <div class="form-group">
+          <label class="form-label">Address</label>
+          <input type="text" class="form-control" name="address" placeholder="House / Flat No., Street, Area">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">City *</label>
+            <input type="text" class="form-control" name="city" placeholder="Your city" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">State *</label>
+            <select class="form-control" name="state" required>
+              <option value="">Select state</option>
+              <option>Maharashtra</option>
+              <option>Madhya Pradesh</option>
+              <option>Uttar Pradesh</option>
+              <option>Gujarat</option>
+              <option>Karnataka</option>
+              <option>Rajasthan</option>
+              <option>Delhi</option>
+              <option>Punjab</option>
+              <option>Haryana</option>
+              <option>Bihar</option>
+              <option>West Bengal</option>
+              <option>Tamil Nadu</option>
+              <option>Andhra Pradesh</option>
+              <option>Telangana</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Country *</label>
+            <select class="form-control" name="country" required>
+              <option selected>India</option>
+              <option>USA</option>
+              <option>UK</option>
+              <option>Canada</option>
+              <option>Australia</option>
+              <option>UAE</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">PIN Code</label>
+            <input type="text" class="form-control" name="pin" placeholder="6-digit PIN code" maxlength="6">
+          </div>
+        </div>
+
+        <!-- Profile Photo Upload -->
+        <div class="form-group">
+          <label class="form-label">Profile Photo</label>
+          <div class="upload-area" id="uploadArea">
+            <input type="file" id="profilePhoto" accept="image/*">
+            <div class="upload-icon">📷</div>
+            <div class="upload-text">Click to upload your photo<br><strong>JPG, PNG up to 5MB</strong></div>
+          </div>
+        </div>
+
+        <div class="step-nav">
+          <button type="button" class="btn btn-outline" data-prev>← Back</button>
+          <button type="button" class="btn btn-primary" data-next>Next: Account Setup →</button>
+        </div>
+      </div>
+
+      <!-- Step 4: Account -->
+      <div class="form-step" id="step-3">
+        <h3>Account Setup</h3>
+        <p>Create a secure password to protect your account.</p>
+
+        <div class="form-group">
+          <label class="form-label">Create Password *</label>
+          <div style="position:relative;display:flex;align-items:center;">
+            <input type="password" class="form-control" name="password" placeholder="Min. 8 characters" required autocomplete="new-password" style="padding-right:52px;" id="passField1">
+            <button type="button" class="toggle-pass" style="position:absolute;right:14px;background:none;border:none;cursor:pointer;font-size:1.1rem;padding:4px;">👁️</button>
+          </div>
+          <div style="margin-top:8px;font-size:0.78rem;color:var(--text-light);">Must contain at least 8 characters with letters and numbers.</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Confirm Password *</label>
+          <div style="position:relative;display:flex;align-items:center;">
+            <input type="password" class="form-control" name="confirmPassword" placeholder="Re-enter your password" required autocomplete="new-password" style="padding-right:52px;" id="passField2">
+            <button type="button" class="toggle-pass" style="position:absolute;right:14px;background:none;border:none;cursor:pointer;font-size:1.1rem;padding:4px;">👁️</button>
+          </div>
+        </div>
+
+        <!-- Referral -->
+        <div class="form-group">
+          <label class="form-label">Referral Code (Optional)</label>
+          <input type="text" class="form-control" name="referral" placeholder="Enter referral code if any">
+        </div>
+
+        <!-- Terms -->
+        <div style="background:var(--bg-light);border-radius:var(--radius-sm);padding:20px;border:1px solid var(--border);margin-bottom:24px;">
+          <label class="checkbox-label" style="align-items:flex-start;">
+            <input type="checkbox" id="terms" style="margin-top:3px;flex-shrink:0;" required>
+            <span>I agree to BouddhMatrimony's <a href="#" style="color:var(--primary);font-weight:600;">Terms & Conditions</a> and <a href="#" style="color:var(--primary);font-weight:600;">Privacy Policy</a>. I confirm that I am above 18 years of age and the information provided is accurate.</span>
+          </label>
+        </div>
+
+        <div style="background:rgba(196,30,58,0.04);border-radius:var(--radius-sm);padding:16px;border:1px solid rgba(196,30,58,0.1);margin-bottom:24px;font-size:0.85rem;color:var(--text-muted);">
+          🙏 By registering, you commit to engaging respectfully with all members of the Bouddh community on this platform.
+        </div>
+
+        <button type="button" class="btn btn-primary btn-lg" id="registerSubmit" style="width:100%;justify-content:center;">
+          🎉 Complete Registration
+        </button>
+
+        <div class="step-nav" style="margin-top:0;padding-top:16px;border-top:none;justify-content:flex-start;">
+          <button type="button" class="btn btn-outline" data-prev>← Back</button>
+        </div>
+      </div>
+
+    </div>
+    <!-- End register-body -->
+
+    <div style="text-align:center;padding:0 40px 32px;font-size:0.88rem;color:var(--text-muted);">
+      Already have an account? <a href="login.html" style="color:var(--primary);font-weight:600;">Login here</a>
+    </div>
+  </div>
+</section>
+
+<button id="scrollTop">↑</button>
+<script src="assets/js/script.js"></script>
+
+<script>
+// Step-by-step navigation override for this page (DOM-ready)
+document.addEventListener('DOMContentLoaded', function() {
+  const steps = document.querySelectorAll('.form-step');
+  const progs = [
+    document.getElementById('prog-0'),
+    document.getElementById('prog-1'),
+    document.getElementById('prog-2'),
+    document.getElementById('prog-3'),
+  ];
+  let current = 0;
+
+  function showStep(n) {
+    steps.forEach((s, i) => s.classList.toggle('active', i === n));
+    progs.forEach((p, i) => {
+      if (!p) return;
+      p.classList.toggle('active', i === n);
+      p.classList.toggle('completed', i < n);
+      if (i < n) p.querySelector('.prog-dot').textContent = '✓';
+      else p.querySelector('.prog-dot').textContent = i + 1;
+    });
+    current = n;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('[data-next]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const activeStep = document.querySelector('.form-step.active');
+      let valid = true;
+      activeStep.querySelectorAll('[required]').forEach(f => {
+        if (!f.value.trim()) {
+          f.style.borderColor = 'var(--primary)';
+          f.style.boxShadow = '0 0 0 3px rgba(196,30,58,0.1)';
+          valid = false;
+          setTimeout(() => { f.style.borderColor = ''; f.style.boxShadow = ''; }, 2000);
+        }
+      });
+      if (!valid) { showToast('Please fill all required fields.', 'error'); return; }
+      if (current < steps.length - 1) showStep(current + 1);
+    });
+  });
+
+  document.querySelectorAll('[data-prev]').forEach(btn => {
+    btn.addEventListener('click', () => { if (current > 0) showStep(current - 1); });
+  });
+
+  document.getElementById('registerSubmit').addEventListener('click', function() {
+    const terms = document.getElementById('terms');
+    if (!terms.checked) { showToast('Please accept Terms & Conditions.', 'error'); return; }
+    const p1 = document.getElementById('passField1').value;
+    const p2 = document.getElementById('passField2').value;
+    if (p1.length < 8) { showToast('Password must be at least 8 characters.', 'error'); return; }
+    if (p1 !== p2) { showToast('Passwords do not match!', 'error'); return; }
+    showToast('🎉 Registration successful! Check your email to verify your account.', 'success');
+    setTimeout(() => window.location.href = 'login.html', 2500);
+  });
+
+  showStep(0);
+});
+</script>
+<style>
+@media(max-width:640px){
+  .register-body{padding:24px 16px!important;}
+  .register-header{padding:24px 20px!important;}
+  .steps-progress{gap:4px;}
+  .steps-progress > div[style]{max-width:28px!important;}
+}
+</style>
+</body>
+</html>

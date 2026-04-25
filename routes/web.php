@@ -11,3 +11,7 @@ Route::get('/setup-db', function () {
 
     return "Database setup completed";
 });
+
+Route::get('/', function () {
+    return view('front-end.index');
+});
