@@ -1,49 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Login to BouddhMatrimony — Access your account and connect with your perfect match.">
-  <title>Login — BouddhMatrimony</title>
-  <link rel="stylesheet" href="assets/css/style.css">
-</head>
-<body>
+@extends('front-end.layout.app')
 
-<div id="loader"><div class="loader-inner"><div class="loader-ring"></div><div class="loader-text">BouddhMatrimony</div></div></div>
+@section('title', "Matrimony - Find Your Perfect Life Partner")
 
-<header class="header">
-  <div class="container">
-    <nav class="nav">
-      <a href="index.html" class="nav-logo">
-        <img src="assets/images/logo.png" alt="BouddhMatrimony" onerror="this.style.display='none'">
-        <div><span>Bouddha</span><span style="color:var(--accent)">Matrimony</span></div>
-      </a>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About Us</a></li>
-        <li><a href="packages.html">Packages</a></li>
-        <li><a href="contact.html">Contact Us</a></li>
-      </ul>
-      <div class="nav-actions">
-        <a href="login.html" class="btn btn-outline btn-sm active">Login</a>
-        <a href="register.html" class="btn btn-primary btn-sm">Register Free</a>
-      </div>
-      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
-    </nav>
-  </div>
-  <div class="mobile-menu" id="mobileMenu">
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About Us</a></li>
-      <li><a href="packages.html">Packages</a></li>
-      <li><a href="contact.html">Contact Us</a></li>
-    </ul>
-    <div class="mobile-actions">
-      <a href="login.html" class="btn btn-outline btn-sm" style="flex:1;justify-content:center">Login</a>
-      <a href="register.html" class="btn btn-primary btn-sm" style="flex:1;justify-content:center">Register</a>
-    </div>
-  </div>
-</header>
+@section('content')
 
 <!-- Auth Section -->
 <section class="auth-section">
@@ -119,7 +78,4 @@
   </div>
 </section>
 
-<button id="scrollTop">↑</button>
-<script src="assets/js/script.js"></script>
-</body>
-</html>
+@endsection

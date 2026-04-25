@@ -1,49 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="About BouddhMatrimony — Our mission, vision, values and team dedicated to connecting Bouddh community families.">
-  <title>About Us — BouddhMatrimony</title>
-  <link rel="stylesheet" href="assets/css/style.css">
-</head>
-<body>
+@extends('front-end.layout.app')
 
-<div id="loader"><div class="loader-inner"><div class="loader-ring"></div><div class="loader-text">BouddhMatrimony</div></div></div>
+@section('title', "Matrimony - Find Your Perfect Life Partner")
 
-<header class="header">
-  <div class="container">
-    <nav class="nav">
-      <a href="index.html" class="nav-logo">
-        <img src="assets/images/logo.png" alt="BouddhMatrimony" onerror="this.style.display='none'">
-        <div><span>Bouddha</span><span style="color:var(--accent)">Matrimony</span></div>
-      </a>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html" class="active">About Us</a></li>
-        <li><a href="packages.html">Packages</a></li>
-        <li><a href="contact.html">Contact Us</a></li>
-      </ul>
-      <div class="nav-actions">
-        <a href="login.html" class="btn btn-outline btn-sm">Login</a>
-        <a href="register.html" class="btn btn-primary btn-sm">Register Free</a>
-      </div>
-      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
-    </nav>
-  </div>
-  <div class="mobile-menu" id="mobileMenu">
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About Us</a></li>
-      <li><a href="packages.html">Packages</a></li>
-      <li><a href="contact.html">Contact Us</a></li>
-    </ul>
-    <div class="mobile-actions">
-      <a href="login.html" class="btn btn-outline btn-sm" style="flex:1;justify-content:center">Login</a>
-      <a href="register.html" class="btn btn-primary btn-sm" style="flex:1;justify-content:center">Register</a>
-    </div>
-  </div>
-</header>
+@section('content')
 
 <!-- Page Hero -->
 <section class="page-hero">
@@ -250,61 +209,4 @@
   </div>
 </section>
 
-<!-- Footer -->
-<footer class="footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <h3>🙏 BouddhMatrimony</h3>
-        <p>Dedicated matrimonial platform for the Bouddh (Buddhist) community. Connecting hearts with respect, tradition, and shared values.</p>
-        <div class="social-links">
-          <a href="#" class="social-link">f</a>
-          <a href="#" class="social-link">📷</a>
-          <a href="#" class="social-link">💬</a>
-          <a href="#" class="social-link">▶</a>
-        </div>
-      </div>
-      <div class="footer-col">
-        <h4>Quick Links</h4>
-        <ul class="footer-links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="packages.html">Packages</a></li>
-          <li><a href="contact.html">Contact Us</a></li>
-          <li><a href="register.html">Register Free</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Community</h4>
-        <ul class="footer-links">
-          <li><a href="#">Success Stories</a></li>
-          <li><a href="#">Browse Profiles</a></li>
-          <li><a href="#">Community Blog</a></li>
-          <li><a href="#">Bouddh Events</a></li>
-        </ul>
-      </div>
-      <div class="footer-col footer-contact">
-        <h4>Contact Us</h4>
-        <p>📍 Nagpur, Maharashtra, India</p>
-        <p>📧 info@bouddhmatrimony.com</p>
-        <p>📞 +91 98765 43210</p>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© 2024 BouddhMatrimony. All rights reserved. Jai Bhim 🙏</p>
-      <ul class="footer-bottom-links">
-        <li><a href="#">Privacy Policy</a></li>
-        <li><a href="#">Terms & Conditions</a></li>
-        <li><a href="#">Refund Policy</a></li>
-      </ul>
-    </div>
-  </div>
-</footer>
-
-<button id="scrollTop">↑</button>
-<script src="assets/js/script.js"></script>
-<style>
-@media(max-width:768px){.about-intro-grid,.mv-grid{grid-template-columns:1fr!important;gap:24px!important;}}
-</style>
-</body>
-</html>
+@endsection
