@@ -26,6 +26,8 @@ Homestead.yaml
 .DS_Store
 Thumbs.db
 
+
+
 # Logs
 *.log
 
