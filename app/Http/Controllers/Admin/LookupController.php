@@ -75,7 +75,7 @@ class LookupController extends Controller
     public function store(Request $request, string $type): RedirectResponse
     {
         $model = $this->resolve($type);
-
+    //dd($request); exit;
         $data = $request->validate($this->validationRules($type));
         //dd($request); exit;
         $data['is_active'] = $request->boolean('is_active');
