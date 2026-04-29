@@ -1,5 +1,5 @@
 /* ============================================
-   BouddhMatrimony — Main Stylesheet
+    — Main Stylesheet
    Color Palette extracted from logo:
    Primary:    #C41E3A (Crimson Red)
    Secondary:  #8B0000 (Deep Maroon)
@@ -748,13 +748,13 @@ select.form-control {
   font-family: var(--font-display);
   font-size: 3rem;
   font-weight: 700;
-  color: #fff;
+  color: #000000;
   line-height: 1;
   display: block;
 }
 .stat-label {
   font-size: 0.9rem;
-  color: rgba(255,255,255,0.7);
+  color: rgb(0, 0, 0);
   margin-top: 8px;
   font-weight: 500;
   text-transform: uppercase;

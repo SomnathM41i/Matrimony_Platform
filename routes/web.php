@@ -13,25 +13,25 @@ Route::get('/setup-db', function () {
 });
 
 Route::get('/', function () {
-    return view('front-end.index');
+    return view('user.index');
 })->name('home');
 
 Route::get('/about', function () {
-    return view('front-end.about');
+    return view('user.about');
 })->name('about');
 
 Route::get('/packages', function () {
-    return view('front-end.packages');
+    return view('user.packages');
 })->name('packages');
 
 Route::get('/contact', function () {
-    return view('front-end.contact');
+    return view('user.contact');
 })->name('contact');
 
 Route::get('/login', function () {
-    return view('front-end.auth.login');
+    return redirect()->route('user.login');
 })->name('login');
 
 Route::get('/register', function () {
-    return view('front-end.auth.register');
+    return redirect()->route('user.register');
 })->name('register');

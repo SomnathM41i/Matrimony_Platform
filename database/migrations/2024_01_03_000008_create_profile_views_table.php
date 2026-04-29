@@ -9,10 +9,10 @@ return new class extends Migration {
         Schema::create('profile_views', function (Blueprint $table) {
             $table->id();
             $table->foreignId('viewer_id')->constrained('users')->cascadeOnDelete();
-            $table->foreignId('profile_user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('viewed_user_id')->constrained('users')->cascadeOnDelete();
             $table->timestamp('viewed_at')->useCurrent();
-            $table->index(['viewer_id', 'profile_user_id']);
-            $table->index('profile_user_id');
+            $table->index(['viewer_id', 'viewed_user_id']);
+            $table->index('viewed_user_id');
         });
     }
     public function down(): void { Schema::dropIfExists('profile_views'); }

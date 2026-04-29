@@ -1,5 +1,5 @@
 /* ============================================
-   BouddhMatrimony — Main JavaScript
+    — Main JavaScript
 ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {

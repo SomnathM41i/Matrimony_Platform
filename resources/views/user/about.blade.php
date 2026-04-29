@@ -1,4 +1,4 @@
-@extends('front-end.layout.app')
+@extends('user.layouts.app')
 
 @section('title', "Matrimony - Find Your Perfect Life Partner")
 

@@ -13,7 +13,7 @@
   <meta property="og:title" content="Matrimony — Find Your Perfect Match">
   <meta property="og:description" content="A trusted matrimonial platform for everyone">
 
-  <title>Matrimony — Find Your Perfect Life Partner</title>
+  <title>@yield('title')</title>
 
   <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 </head>
@@ -29,7 +29,7 @@
   </div>
 
   <!-- Header -->
-  @include('front-end.layout.head')
+  @include('user.layouts.head')
 
       <main>
 
@@ -38,7 +38,7 @@
     </main>
 
   <!-- Footer -->
-  @include('front-end.layout.foot')
+  @include('user.layouts.foot')
 
   <script src="{{ asset('assets/js/script.js') }}"></script>
 
