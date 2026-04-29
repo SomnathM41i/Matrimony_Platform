@@ -4,12 +4,21 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 
 Route::get('/setup-db', function () {
-    Artisan::call('migrate', ['--force' => true]);
-    Artisan::call('db:seed', [
-        '--class' => 'RolePermissionSeeder'
-    ]);
 
-    return "Database setup completed";
+    // 🔁 Fresh migration (drops all tables and recreates)
+    Artisan::call('migrate:fresh', ['--force' => true]);
+
+    // 🌱 Run multiple seeders
+    Artisan::call('db:seed', ['--class' => 'RolePermissionSeeder', '--force' => true]);
+    // Artisan::call('db:seed', ['--class' => 'LookupSeeder', '--force' => true]);
+
+    // 🔗 Storage link
+    Artisan::call('storage:link');
+
+    return response()->json([
+        'status' => true,
+        'message' => 'Database refreshed, seeded & storage linked successfully ✅'
+    ]);
 });
 
 Route::get('/', function () {
