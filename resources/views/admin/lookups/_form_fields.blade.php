@@ -1,20 +1,4 @@
-{{--
-|--------------------------------------------------------------------------
-| _form_fields.blade.php
-| Shared partial for Create & Edit modals.
-|
-| Variables expected:
-|   $formId       — 'create' or 'edit'
-|   $record       — Eloquent model instance (null for create)
-|   $parents      — array of parent config from $meta
-|   $extraFields  — array of extra field configs
-|   $type         — current lookup type slug
-|   $primaryField — 'name' or 'label'
-|   $columns      — active columns for this lookup type
-|--------------------------------------------------------------------------
---}}
 
-{{-- ── PARENT / CASCADE SELECTS ────────────────────────────── --}}
 @foreach($parents as $parent)
     @php
         $isDependent = isset($parent['depends_on']);

@@ -6,17 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-/**
- * LookupApiController
- *
- * Serves lightweight JSON lists for cascade dropdowns in the Lookup admin UI.
- * Routes: GET /admin/api/lookups/{type}?parent_id={id}
- */
 class LookupApiController extends Controller
 {
-    /**
-     * Maps URL slug → [Model class, parent FK column (if any)]
-     */
+
+
     private array $map = [
         'religions'            => [\App\Models\Religion::class,          null],
         'castes'               => [\App\Models\Caste::class,             'religion_id'],
@@ -35,10 +28,7 @@ class LookupApiController extends Controller
         'areas'                => [\App\Models\Area::class,              'city_id'],
     ];
 
-    /**
-     * Return a flat JSON list for use in <select> dropdowns.
-     * Optionally filtered by parent_id.
-     */
+
     public function index(Request $request, string $type): JsonResponse
     {
         if (! isset($this->map[$type])) {

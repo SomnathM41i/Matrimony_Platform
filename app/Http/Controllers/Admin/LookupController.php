@@ -10,13 +10,7 @@ use Illuminate\View\View;
 
 class LookupController extends Controller
 {
-    /**
-     * Get model map (runtime — safe)
-     *
-     * BUG FIX #1: Added all missing types that were in routes/API but absent here:
-     *   mother-tongues, rashis, nakshatras, education-levels, professions, annual-income-ranges
-     *   Previously these returned 404 on every CRUD operation.
-     */
+
     private function map(): array
     {
         return [
@@ -25,12 +19,12 @@ class LookupController extends Controller
             'sub-castes'           => \App\Models\SubCaste::class,
             'gotras'               => \App\Models\Gotra::class,
             'communities'          => \App\Models\Community::class,
-            'mother-tongues'       => \App\Models\MotherTongue::class,   // was missing
-            'rashis'               => \App\Models\Rashi::class,           // was missing
-            'nakshatras'           => \App\Models\Nakshatra::class,       // was missing
-            'education-levels'     => \App\Models\EducationLevel::class,  // was missing
-            'professions'          => \App\Models\Profession::class,      // was missing
-            'annual-income-ranges' => \App\Models\AnnualIncomeRange::class, // was missing
+            'mother-tongues'       => \App\Models\MotherTongue::class,   
+            'rashis'               => \App\Models\Rashi::class,           
+            'nakshatras'           => \App\Models\Nakshatra::class,       
+            'education-levels'     => \App\Models\EducationLevel::class,  
+            'professions'          => \App\Models\Profession::class,      
+            'annual-income-ranges' => \App\Models\AnnualIncomeRange::class, 
             'countries'            => \App\Models\Country::class,
             'states'               => \App\Models\State::class,
             'cities'               => \App\Models\City::class,
@@ -38,9 +32,6 @@ class LookupController extends Controller
         ];
     }
 
-    /**
-     * Resolve model by type
-     */
     private function resolve(string $type)
     {
         $map = $this->map();
@@ -62,16 +53,6 @@ class LookupController extends Controller
         return view('admin.lookups.index', compact('records', 'type'));
     }
 
-    /**
-     * STORE
-     *
-     * BUG FIX #2: Original only validated 'name' + 'is_active', silently dropping
-     *   all other fields: label, min_value, max_value, currency, iso_code,
-     *   phone_code, code, pincode, english_name, sort_order.
-     *   Now all optional type-specific fields are validated and saved.
-     *
-     * BUG FIX #4: Replaced truthy string checks with proper boolean() calls.
-     */
     public function store(Request $request, string $type): RedirectResponse
     {
         $model = $this->resolve($type);
@@ -92,15 +73,6 @@ class LookupController extends Controller
         return back()->with('success', ucfirst($type) . ' created.');
     }
 
-    /**
-     * UPDATE (toggle or full update)
-     *
-     * BUG FIX #3: Full-update branch previously validated only 'name' + 'is_active',
-     *   losing all extra fields on edit. Now delegates to the same rules as store().
-     *
-     * BUG FIX #4: _toggle_only was checked as a truthy value on a raw request input
-     *   (string "1"). Now uses $request->boolean() for proper semantics.
-     */
     public function update(Request $request, string $type, int $id): RedirectResponse
     {
         $model = $this->resolve($type);
@@ -138,13 +110,6 @@ class LookupController extends Controller
         return back()->with('success', ucfirst($type) . ' deleted.');
     }
 
-    /**
-     * IMPORT
-     *
-     * BUG FIX #12: Method was referenced in routes but didn't exist, causing
-     *   a runtime BindingResolutionException / BadMethodCallException.
-     *   Stub implemented — replace body with real CSV/Excel import logic as needed.
-     */
     public function import(Request $request, string $type): RedirectResponse
     {
         $this->resolve($type); // validates the type
@@ -153,18 +118,11 @@ class LookupController extends Controller
             'file' => ['required', 'file', 'mimes:csv,txt', 'max:2048'],
         ]);
 
-        // TODO: implement CSV import logic here
-        // e.g. use League\Csv or a dedicated import job
 
         return back()->with('success', ucfirst($type) . ' import completed.');
     }
 
-    /**
-     * EXPORT
-     *
-     * BUG FIX #12: Method was referenced in routes but didn't exist.
-     *   Stub returns a CSV download — expand as needed.
-     */
+
     public function export(string $type): Response
     {
         $model = $this->resolve($type);
@@ -182,11 +140,7 @@ class LookupController extends Controller
         ]);
     }
 
-    /**
-     * Return validation rules appropriate for the given lookup type.
-     *
-     * Centralises rules so store() and update() stay in sync.
-     */
+
     private function validationRules(string $type): array
     {
         // Base rules for every type
