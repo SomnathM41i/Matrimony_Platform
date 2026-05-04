@@ -23,122 +23,106 @@
         </div>
       @endif
 
-      <form method="POST" action="{{ route('user.register.post') }}">
-        @csrf
+    <form method="POST" action="{{ route('user.register.post') }}">
+      @csrf
 
-        {{-- ================= STEP 1 ================= --}}
-        <div class="form-step active">
-          <h3>Personal Details</h3>
+      <h3>Personal Details</h3>
 
-          <div class="form-row">
-            <div class="form-group">
-              <label>First Name *</label>
-              <input type="text" name="first_name"
-                     pattern="[A-Za-z\s\-]+"
-                     title="Only letters, spaces and hyphens allowed"
-                     class="form-control @error('first_name') is-invalid @enderror"
-                     value="{{ old('first_name') }}">
-              @error('first_name') <small class="error">{{ $message }}</small> @enderror
-            </div>
-
-            <div class="form-group">
-              <label>Last Name *</label>
-              <input type="text" name="last_name"
-                     pattern="[A-Za-z\s\-]+"
-                     class="form-control @error('last_name') is-invalid @enderror"
-                     value="{{ old('last_name') }}">
-              @error('last_name') <small class="error">{{ $message }}</small> @enderror
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label>Gender *</label>
-              <select name="gender"
-                      class="form-control @error('gender') is-invalid @enderror">
-                <option value="">Select</option>
-                <option value="male" {{ old('gender')=='male'?'selected':'' }}>Male</option>
-                <option value="female" {{ old('gender')=='female'?'selected':'' }}>Female</option>
-              </select>
-              @error('gender') <small class="error">{{ $message }}</small> @enderror
-            </div>
-
-            <div class="form-group">
-              <label>Date of Birth *</label>
-              <input type="date" name="date_of_birth"
-                     max="{{ now()->subYears(18)->format('Y-m-d') }}"
-                     min="{{ now()->subYears(80)->format('Y-m-d') }}"
-                     class="form-control @error('date_of_birth') is-invalid @enderror"
-                     value="{{ old('date_of_birth') }}">
-              @error('date_of_birth') <small class="error">{{ $message }}</small> @enderror
-            </div>
-          </div>
-
-          <button type="button" class="btn btn-primary" data-next>Next</button>
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name *</label>
+          <input type="text" name="first_name"
+                class="form-control @error('first_name') is-invalid @enderror"
+                value="{{ old('first_name') }}">
+          @error('first_name') <small class="error">{{ $message }}</small> @enderror
         </div>
 
-        {{-- ================= STEP 2 ================= --}}
-        <div class="form-step">
-          <h3>Contact Details</h3>
+        <div class="form-group">
+          <label>Last Name *</label>
+          <input type="text" name="last_name"
+                class="form-control @error('last_name') is-invalid @enderror"
+                value="{{ old('last_name') }}">
+          @error('last_name') <small class="error">{{ $message }}</small> @enderror
+        </div>
+      </div>
 
-          <div class="form-group">
-            <label>Mobile *</label>
-            <input type="tel" name="phone"
-                   pattern="[0-9]{10}"
-                   placeholder="Enter 10 digit number"
-                   class="form-control @error('phone') is-invalid @enderror"
-                   value="{{ old('phone') }}">
-            @error('phone') <small class="error">{{ $message }}</small> @enderror
-          </div>
-
-          <div class="form-group">
-            <label>Email *</label>
-            <input type="email" name="email"
-                   class="form-control @error('email') is-invalid @enderror"
-                   value="{{ old('email') }}">
-            @error('email') <small class="error">{{ $message }}</small> @enderror
-          </div>
-
-          <div class="step-nav">
-            <button type="button" class="btn btn-outline" data-prev>Back</button>
-            <button type="button" class="btn btn-primary" data-next>Next</button>
-          </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Gender *</label>
+          <select name="gender"
+                  class="form-control @error('gender') is-invalid @enderror">
+            <option value="">Select</option>
+            <option value="male" {{ old('gender')=='male'?'selected':'' }}>Male</option>
+            <option value="female" {{ old('gender')=='female'?'selected':'' }}>Female</option>
+          </select>
+          @error('gender') <small class="error">{{ $message }}</small> @enderror
         </div>
 
-        {{-- ================= STEP 3 ================= --}}
-        <div class="form-step">
-          <h3>Account Setup</h3>
-
-          <div class="form-group">
-            <label>Password *</label>
-            <input type="password" name="password"
-                   pattern="(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}"
-                   title="Password must contain letters and numbers"
-                   class="form-control @error('password') is-invalid @enderror">
-            @error('password') <small class="error">{{ $message }}</small> @enderror
-          </div>
-
-          <div class="form-group">
-            <label>Confirm Password *</label>
-            <input type="password" name="password_confirmation" class="form-control">
-          </div>
-
-          <div class="form-group">
-            <label>
-              <input type="checkbox" name="terms" value="1"
-                     {{ old('terms') ? 'checked' : '' }}>
-              Accept Terms & Conditions
-            </label>
-            @error('terms') <small class="error">{{ $message }}</small> @enderror
-          </div>
-
-          <div class="step-nav">
-            <button type="button" class="btn btn-outline" data-prev>Back</button>
-            <button type="submit" class="btn btn-primary">🎉 Register</button>
-          </div>
+        <div class="form-group">
+          <label>Date of Birth *</label>
+          <input type="date" name="date_of_birth"
+                max="{{ now()->subYears(18)->format('Y-m-d') }}"
+                class="form-control">
+          @error('date_of_birth') <small class="error">{{ $message }}</small> @enderror
         </div>
+      </div>
 
-      </form>
+      <h3>Contact Details</h3>
+
+      <div class="form-group">
+        <label>Mobile *</label>
+        <input type="tel" name="phone"
+              class="form-control @error('phone') is-invalid @enderror"
+              value="{{ old('phone') }}">
+        @error('phone') <small class="error">{{ $message }}</small> @enderror
+      </div>
+
+      <div class="form-group">
+        <label>Email *</label>
+        <input type="email" name="email"
+              class="form-control @error('email') is-invalid @enderror"
+              value="{{ old('email') }}">
+        @error('email') <small class="error">{{ $message }}</small> @enderror
+      </div>
+
+      <h3>Account Setup</h3>
+
+      <div class="form-group" style="position:relative;">
+        <label>Password *</label>
+        <input type="password" name="password"
+              class="form-control @error('password') is-invalid @enderror">
+
+        <button type="button" class="toggle-pass"
+          onclick="togglePassword(this)"
+          style="position:absolute; right:14px; top:38px; background:none; border:none;">
+          👁️
+        </button>
+
+        @error('password') <small class="error">{{ $message }}</small> @enderror
+      </div>
+
+      <div class="form-group" style="position:relative;">
+        <label>Confirm Password *</label>
+        <input type="password" name="password_confirmation" class="form-control">
+
+        <button type="button" class="toggle-pass"
+          onclick="togglePassword(this)"
+          style="position:absolute; right:14px; top:38px; background:none; border:none;">
+          👁️
+        </button>
+      </div>
+
+      <div class="form-group">
+        <label>
+          <input type="checkbox" name="terms" value="1"
+                {{ old('terms') ? 'checked' : '' }}>
+          Accept Terms & Conditions
+        </label>
+        @error('terms') <small class="error">{{ $message }}</small> @enderror
+      </div>
+
+      <button type="submit" class="btn btn-primary">🎉 Register</button>
+    </form>
 
     </div>
 

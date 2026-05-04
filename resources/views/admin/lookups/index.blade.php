@@ -108,18 +108,19 @@
             'parents'     => [],
             'extra_fields'=> [],
         ],
+        // FIX: columns use min_amount/max_amount to match AnnualIncomeRange model
         'annual-income-ranges' => [
             'label'       => 'Annual Income Ranges',
             'singular'    => 'Income Range',
             'icon'        => 'fa-indian-rupee-sign',
             'color'       => 'gold',
-            'columns'     => ['label', 'min_value', 'max_value', 'currency', 'sort_order', 'is_active'],
+            'columns'     => ['label', 'min_amount', 'max_amount', 'currency', 'sort_order', 'is_active'],
             'parents'     => [],
             'extra_fields'=> [
-                ['key' => 'label',     'label' => 'Label',      'type' => 'text',   'required' => true],
-                ['key' => 'min_value', 'label' => 'Min Value',  'type' => 'number', 'required' => true],
-                ['key' => 'max_value', 'label' => 'Max Value',  'type' => 'number', 'required' => false],
-                ['key' => 'currency',  'label' => 'Currency',   'type' => 'text',   'required' => false, 'default' => 'INR'],
+                ['key' => 'label',      'label' => 'Label',     'type' => 'text',   'required' => true],
+                ['key' => 'min_amount', 'label' => 'Min Value', 'type' => 'number', 'required' => true],
+                ['key' => 'max_amount', 'label' => 'Max Value', 'type' => 'number', 'required' => false],
+                ['key' => 'currency',   'label' => 'Currency',  'type' => 'text',   'required' => false, 'default' => 'INR'],
             ],
         ],
         'countries' => [
@@ -130,8 +131,8 @@
             'columns'     => ['name', 'iso_code', 'phone_code', 'sort_order', 'is_active'],
             'parents'     => [],
             'extra_fields'=> [
-                ['key' => 'iso_code',   'label' => 'ISO Code',    'type' => 'text', 'required' => true],
-                ['key' => 'phone_code', 'label' => 'Phone Code',  'type' => 'text', 'required' => false],
+                ['key' => 'iso_code',   'label' => 'ISO Code',   'type' => 'text', 'required' => true],
+                ['key' => 'phone_code', 'label' => 'Phone Code', 'type' => 'text', 'required' => false],
             ],
         ],
         'states' => [
@@ -196,6 +197,7 @@
     $accentColor = $colorMap[$color] ?? 'var(--rose)';
 
     // Human-readable column headers
+    // FIX: added min_amount / max_amount headers
     $colHeaders = [
         'name'         => 'Name',
         'label'        => 'Label',
@@ -209,8 +211,8 @@
         'phone_code'   => 'Phone Code',
         'code'         => 'Code',
         'pincode'      => 'Pincode',
-        'min_value'    => 'Min (₹)',
-        'max_value'    => 'Max (₹)',
+        'min_amount'   => 'Min (₹)',
+        'max_amount'   => 'Max (₹)',
         'currency'     => 'Currency',
         'sort_order'   => 'Order',
         'is_active'    => 'Status',
@@ -263,10 +265,6 @@
 </div>
 @endif
 
-{{--
-    BUG FIX #9: Tab links previously used raw url('/admin/lookups/'.$tabType).
-    Now use the named route system so they stay correct if the prefix ever changes.
---}}
 <div class="lookup-tabs-wrap">
     <div class="lookup-tabs">
         @foreach([
@@ -370,7 +368,8 @@
                                 {{ $record->city?->name ?? '—' }}
                             </span>
 
-                        @elseif($col === 'min_value' || $col === 'max_value')
+                        {{-- FIX: was min_value/max_value — now min_amount/max_amount --}}
+                        @elseif($col === 'min_amount' || $col === 'max_amount')
                             <span style="font-family:monospace;font-size:.8rem;">
                                 {{ $record->{$col} !== null ? '₹'.number_format($record->{$col}) : '—' }}
                             </span>
@@ -738,9 +737,7 @@ function closeIfOverlay(e, id) {
 
 // ── CREATE MODAL ──────────────────────────────────────────────
 function openCreateModal() {
-    // Reset form
     document.getElementById('createForm').reset();
-    // Reset cascaded selects
     document.querySelectorAll('#createModal select[data-depends]').forEach(sel => {
         sel.innerHTML = '<option value="">— select parent first —</option>';
         sel.disabled = true;
@@ -753,11 +750,9 @@ function openEditModal(id, record) {
     const form = document.getElementById('editForm');
     form.action = BASE_URL + '/' + id;
 
-    // Build form fields dynamically
     let html = buildFormFields('edit', record);
     document.getElementById('editFormBody').innerHTML = html;
 
-    // Pre-fill cascade parents then children
     prefillCascades('edit', record);
 
     openModal('editModal');
@@ -769,18 +764,6 @@ function buildFormFields(formId, record) {
     // Parent dropdowns
     PARENT_CONFIG.forEach(parent => {
         const isDependent = !!parent.depends_on;
-
-        /*
-         * BUG FIX #6 / #7: The old code set data-triggers on the parent select but
-         * handleParentChange() then used a hardcoded name→model map instead of reading
-         * data-triggers + data-cascade-url.  This broke gotras/communities (both use
-         * religion_id but should NOT cascade), and completely broke the areas cascade
-         * (city_id was not in the hardcoded map).
-         *
-         * Fix: store cascade_for as data-cascade-for and the child model URL as
-         * data-cascade-url on the triggering parent; handleParentChange reads them
-         * directly — no hardcoded name mapping needed.
-         */
         html += `
         <div class="form-group">
             <label class="form-label">${parent.label} ${parent.required ? '<span style="color:var(--danger)">*</span>' : ''}</label>
@@ -797,7 +780,7 @@ function buildFormFields(formId, record) {
         </div>`;
     });
 
-    // Primary name/label field (skip for income-ranges which has custom extra fields)
+    // Primary name field
     if (PRIMARY_FIELD === 'name') {
         const val = record ? (record.name || '') : '';
         html += `
@@ -808,9 +791,9 @@ function buildFormFields(formId, record) {
         </div>`;
     }
 
-    // Extra fields specific to this lookup type
+    // Extra fields
     EXTRA_FIELDS.forEach(field => {
-        if (field.key === PRIMARY_FIELD) return; // already rendered above
+        if (field.key === PRIMARY_FIELD) return;
         const val = record ? (record[field.key] || field.default || '') : (field.default || '');
         html += `
         <div class="form-group">
@@ -823,14 +806,15 @@ function buildFormFields(formId, record) {
         </div>`;
     });
 
-    // Income range label + min/max/currency (PRIMARY_FIELD === 'label')
+    // Income range — label + min_amount / max_amount / currency
+    // FIX: was record.min_value / record.max_value — now record.min_amount / record.max_amount
     if (PRIMARY_FIELD === 'label') {
-        const labelVal    = record ? (record.label || '') : '';
-        const minVal      = record ? (record.min_value ?? 0) : 0;
-        const maxVal      = record ? (record.max_value ?? '') : '';
-        const currencies  = ['INR','USD','GBP','EUR','AED','CAD','AUD'];
-        const curVal      = record ? (record.currency || 'INR') : 'INR';
-        const curOptions  = currencies.map(c =>
+        const labelVal   = record ? (record.label || '') : '';
+        const minVal     = record ? (record.min_amount ?? 0) : 0;
+        const maxVal     = record ? (record.max_amount ?? '') : '';
+        const currencies = ['INR','USD','GBP','EUR','AED','CAD','AUD'];
+        const curVal     = record ? (record.currency || 'INR') : 'INR';
+        const curOptions = currencies.map(c =>
             `<option value="${c}" ${curVal === c ? 'selected' : ''}>${c}</option>`
         ).join('');
         html += `
@@ -841,13 +825,13 @@ function buildFormFields(formId, record) {
         </div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
             <div class="form-group">
-                <label class="form-label">Min Value (₹) <span style="color:var(--danger)">*</span></label>
-                <input type="number" name="min_value" class="form-control" required min="0"
+                <label class="form-label">Min Amount (₹) <span style="color:var(--danger)">*</span></label>
+                <input type="number" name="min_amount" class="form-control" required min="0"
                     placeholder="0" value="${minVal}">
             </div>
             <div class="form-group">
-                <label class="form-label">Max Value (₹)</label>
-                <input type="number" name="max_value" class="form-control" min="0"
+                <label class="form-label">Max Amount (₹)</label>
+                <input type="number" name="max_amount" class="form-control" min="0"
                     placeholder="Leave blank for unlimited" value="${maxVal}">
             </div>
         </div>
@@ -857,7 +841,7 @@ function buildFormFields(formId, record) {
         </div>`;
     }
 
-    // Sort order (if column exists in this type)
+    // Sort order
     const hasSortOrder = {{ in_array('sort_order', $columns) ? 'true' : 'false' }};
     if (hasSortOrder) {
         const val = record ? (record.sort_order ?? 0) : 0;
@@ -890,19 +874,8 @@ function buildFormFields(formId, record) {
 }
 
 // ── CASCADE HANDLING ──────────────────────────────────────────
-/*
- * BUG FIX #5 / #6 / #7 / #8: The old handler used:
- *   (a) select.dataset.triggers  — but the attribute was data-cascade-for
- *   (b) a hardcoded name→model map — which missed 'city_id→areas' entirely
- *       and falsely cascaded gotras/communities (religion_id but no cascade)
- *
- * New approach: read data-cascade-for and data-cascade-url directly from the
- * triggering element.  No hardcoded name mapping needed.  Works for every
- * current and future cascade pair without code changes.
- */
 function handleParentChange(select, formId) {
     const cascadeFor = select.dataset.cascadeFor;
-    // No cascade target for this parent (e.g. gotras, communities)
     if (!cascadeFor) return;
 
     const childId = `${formId}_${cascadeFor}`;
@@ -916,10 +889,6 @@ function handleParentChange(select, formId) {
         return;
     }
 
-    // Derive child model from the child select's own data-cascade-url,
-    // or fall back to computing it from the parent's cascade-url + cascadeFor key.
-    // The cleanest approach: each parent stores data-cascade-url for *itself*;
-    // the child's model is in PARENT_CONFIG.
     const childConfig = PARENT_CONFIG.find(p => p.key === cascadeFor);
     if (!childConfig) return;
 
@@ -940,24 +909,20 @@ function handleParentChange(select, formId) {
         });
 }
 
-// Pre-fill cascade values when editing
 async function prefillCascades(formId, record) {
     for (const parent of PARENT_CONFIG) {
-        if (parent.depends_on) continue; // handled after its triggering parent
+        if (parent.depends_on) continue;
 
         const sel = document.getElementById(`${formId}_${parent.key}`);
         if (!sel) continue;
 
-        // Load all options for this parent's own select
         try {
             const res  = await fetch(`${AJAX_BASE}/${parent.model}`);
             const data = await res.json();
             sel.innerHTML = '<option value="">— Select —</option>' +
                 data.map(item => `<option value="${item.id}" ${record && record[parent.key] == item.id ? 'selected' : ''}>${item.name}</option>`).join('');
 
-            // Trigger cascade for dependent children if this parent has a value
             if (parent.cascade_for && record && record[parent.key]) {
-                // Manually fire the cascade fetch using handleParentChange logic
                 const cascadeFor  = parent.cascade_for;
                 const childConfig = PARENT_CONFIG.find(p => p.key === cascadeFor);
                 const child       = document.getElementById(`${formId}_${cascadeFor}`);
@@ -982,8 +947,7 @@ async function prefillCascades(formId, record) {
 
 // ── DELETE CONFIRM ────────────────────────────────────────────
 function confirmDelete(id, name) {
-    document.getElementById('deleteModalMsg').textContent =
-        `Delete "${name}"?`;
+    document.getElementById('deleteModalMsg').textContent = `Delete "${name}"?`;
     document.getElementById('deleteForm').action = BASE_URL + '/' + id;
     openModal('deleteModal');
 }
@@ -1020,7 +984,7 @@ function exportCSV() {
     const rows = [...table.querySelectorAll('tr')];
     const csv = rows.map(row =>
         [...row.querySelectorAll('th,td')]
-            .slice(0, -1) // remove actions column
+            .slice(0, -1)
             .map(cell => `"${cell.textContent.trim().replace(/"/g,'""')}"`)
             .join(',')
     ).join('\n');
@@ -1040,13 +1004,8 @@ function escHtml(str) {
         .replace(/"/g,'&quot;');
 }
 
-// ── INIT: load parent select options for create modal ─────────
+// ── INIT ──────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-    /*
-     * BUG FIX #6 (create modal): The Blade partial sets data-cascade-for on
-     * non-dependent parents.  The DOMContentLoaded init now reads that same
-     * attribute to load options, consistent with how handleParentChange works.
-     */
     PARENT_CONFIG.filter(p => !p.depends_on).forEach(parent => {
         const sel = document.getElementById(`create_${parent.key}`);
         if (!sel) return;
@@ -1058,7 +1017,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     });
 
-    // Toggle label update
     document.addEventListener('change', e => {
         if (e.target.type === 'checkbox' && e.target.name === 'is_active') {
             const label = e.target.closest('.toggle-row')?.querySelector('.toggle-label');
@@ -1066,14 +1024,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Auto-dismiss session alerts
     setTimeout(() => {
         document.getElementById('sessionAlert')?.remove();
     }, 4000);
 });
 </script>
 
-{{-- Toggle switch styles --}}
 <style>
 .toggle-row {
     display: flex; align-items: center; gap: .875rem;

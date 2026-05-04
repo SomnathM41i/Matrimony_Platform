@@ -11,7 +11,7 @@
       <div class="auth-logo">
         <img src="{{ asset('assets/images/logo.png') }}" alt="BouddhMatrimony" onerror="this.style.display='none'">
         <h2>Welcome Back 🙏</h2>
-        <p>Login to your BouddhMatrimony account</p>
+        <p>Login to your Matrimony account</p>
       </div>
 
       {{-- SUCCESS MESSAGE --}}
@@ -51,11 +51,11 @@
                    autocomplete="current-password"
                    style="padding-right:52px;">
 
-            <button type="button" class="toggle-pass"
-              onclick="togglePassword(this)"
-              style="position:absolute;right:14px;background:none;border:none;cursor:pointer;font-size:1.1rem;padding:4px;">
-              👁️
-            </button>
+              <button type="button" class="toggle-pass"
+                onclick="togglePassword(this)"
+                style="position:absolute; right:14px; z-index:10; background:none; border:none; cursor:pointer; font-size:1.1rem;">
+                👁️
+              </button>
           </div>
 
           @error('password')
@@ -83,24 +83,6 @@
         </button>
       </form>
 
-      {{-- OR --}}
-      <div style="display:flex;align-items:center;gap:12px;margin:24px 0;">
-        <div style="flex:1;height:1px;background:var(--border);"></div>
-        <span style="font-size:0.82rem;color:var(--text-light);">OR</span>
-        <div style="flex:1;height:1px;background:var(--border);"></div>
-      </div>
-
-      {{-- SOCIAL --}}
-      <div style="display:flex;gap:12px;">
-        <button type="button" onclick="showToast('Google login coming soon!','info')" class="social-btn">
-          <span>G</span> Google
-        </button>
-
-        <button type="button" onclick="showToast('Facebook login coming soon!','info')" class="social-btn">
-          <span style="color:#1877f2;">f</span> Facebook
-        </button>
-      </div>
-
       {{-- FOOTER --}}
       <div class="auth-footer">
         Don't have an account?
@@ -124,12 +106,5 @@
   </div>
 </section>
 
-{{-- PASSWORD TOGGLE SCRIPT --}}
-<script>
-function togglePassword(btn) {
-  const input = btn.previousElementSibling;
-  input.type = input.type === 'password' ? 'text' : 'password';
-}
-</script>
 
 @endsection

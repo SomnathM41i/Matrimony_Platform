@@ -12,7 +12,7 @@
 
   <meta property="og:title" content="Matrimony — Find Your Perfect Match">
   <meta property="og:description" content="A trusted matrimonial platform for everyone">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <title>@yield('title')</title>
 
   <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">

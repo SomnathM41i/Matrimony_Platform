@@ -29,7 +29,7 @@
 
         @auth
           <div style="display:flex;align-items:center;gap:12px;">
-
+            <a href="{{ route('user.matches.index') }}"  class="btn btn-outline btn-sm">Matches</a>
             {{-- DASHBOARD LINK --}}
             <a href="{{ route('user.dashboard') }}" class="btn btn-outline btn-sm">Dashboard</a>
 
@@ -99,18 +99,10 @@
                   @endif
                 </div>
 
-                {{--
-                  MY PROFILE → user.profile.me (ProfileController@myProfile)
-                  Shows the full profile details page
-                --}}
                 <a href="{{ route('user.profile.me') }}" class="dropdown-item" role="menuitem">
                   👤 My Profile
                 </a>
 
-                {{--
-                  EDIT PROFILE → user.profile.edit (ProfileController@editProfile)
-                  Redirects to the first incomplete setup step
-                --}}
                 <a href="{{ route('user.profile.edit') }}" class="dropdown-item" role="menuitem">
                   ✏️ Edit Profile
                 </a>
@@ -119,7 +111,7 @@
                   💎 My Plan
                 </a>
 
-                <a href="{{ route('user.settings.index') }}" class="dropdown-item" role="menuitem">
+                <a href="{{ route('user.profile.setup.show', 7) }}" class="dropdown-item" role="menuitem">
                   ⚙️ Settings
                 </a>
 

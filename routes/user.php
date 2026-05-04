@@ -6,7 +6,11 @@ use App\Http\Controllers\User\Auth\RegisterController;
 use App\Http\Controllers\User\Auth\ForgotPasswordController;
 use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\ProfileSetupController;
-use App\Http\Controllers\User\ProfileController;          // ← NEW
+use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\User\MatchesController;
+use App\Http\Controllers\User\InterestsController;
+use App\Http\Controllers\User\SearchController;
+use App\Http\Controllers\User\ShortlistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -84,24 +88,39 @@ Route::middleware(['auth', 'verified', 'user.active', 'user.role'])->group(funct
     });
 
     // ── My Profile & Edit ─────────────────────────────────────────────────
-    // CHANGED: replaced abort(501) stubs with real ProfileController methods
     Route::get('/profile/me',      [ProfileController::class, 'myProfile'])->name('user.profile.me');
     Route::get('/profile/me/edit', [ProfileController::class, 'editProfile'])->name('user.profile.edit');
 
     // Public profile by slug
-    Route::get('/profile/{slug}', fn($slug) => abort(501, 'Phase 2 — not yet implemented'))
+    Route::get('/profile/{slug}', [ProfileController::class, 'publicProfile'])
          ->name('user.profile.public')
          ->where('slug', '[a-z0-9\-]+');
 
+    // ── Matches ───────────────────────────────────────────────────────────
+    Route::get('/matches', [MatchesController::class, 'index'])->name('user.matches.index');
+
+    // ── Search ────────────────────────────────────────────────────────────
+    Route::get('/search',                            [SearchController::class, 'index'])            ->name('user.search.index');
+    Route::post('/search/save',                      [SearchController::class, 'saveSearch'])       ->name('user.search.save');
+    Route::delete('/search/saved/{savedSearch}',     [SearchController::class, 'deleteSavedSearch'])->name('user.search.saved.delete');
+
+    // ── Interests ─────────────────────────────────────────────────────────
+    Route::get('/interests/sent',                    [InterestsController::class, 'sent'])    ->name('user.interests.sent');
+    Route::get('/interests/received',                [InterestsController::class, 'received'])->name('user.interests.received');
+    Route::post('/interests/send/{user}',            [InterestsController::class, 'send'])   ->name('user.interests.send');
+    Route::delete('/interests/{interest}/cancel',    [InterestsController::class, 'cancel']) ->name('user.interests.cancel');
+    Route::patch('/interests/{interest}/accept',     [InterestsController::class, 'accept']) ->name('user.interests.accept');
+    Route::patch('/interests/{interest}/decline',    [InterestsController::class, 'decline'])->name('user.interests.decline');
+
+    // ── Shortlist ─────────────────────────────────────────────────────────
+    Route::get('/shortlist',                         [ShortlistController::class, 'index'])  ->name('user.shortlist.index');
+    Route::post('/shortlist/toggle/{user}',          [ShortlistController::class, 'toggle']) ->name('user.shortlist.toggle');
+    Route::delete('/shortlist/{shortlist}',          [ShortlistController::class, 'remove']) ->name('user.shortlist.remove');
+
     // ── Remaining Phase stubs ─────────────────────────────────────────────
-    Route::get('/matches',             fn() => abort(501, 'Phase 3 — not yet implemented'))->name('user.matches.index');
-    Route::get('/search',              fn() => abort(501, 'Phase 3 — not yet implemented'))->name('user.search.index');
-    Route::get('/interests/sent',      fn() => abort(501, 'Phase 4 — not yet implemented'))->name('user.interests.sent');
-    Route::get('/interests/received',  fn() => abort(501, 'Phase 4 — not yet implemented'))->name('user.interests.received');
-    Route::get('/messages',            fn() => abort(501, 'Phase 4 — not yet implemented'))->name('user.messages.index');
-    Route::get('/shortlist',           fn() => abort(501, 'Phase 5 — not yet implemented'))->name('user.shortlist.index');
-    Route::get('/subscription',        fn() => abort(501, 'Phase 6 — not yet implemented'))->name('user.subscription.show');
-    Route::get('/packages',            fn() => abort(501, 'Phase 6 — not yet implemented'))->name('user.packages.index');
-    Route::get('/notifications',       fn() => abort(501, 'Phase 7 — not yet implemented'))->name('user.notifications.index');
-    Route::get('/settings',            fn() => abort(501, 'Phase 7 — not yet implemented'))->name('user.settings.index');
+    Route::get('/messages',      fn() => abort(501, 'Phase 4 — not yet implemented'))->name('user.messages.index');
+    Route::get('/subscription',  fn() => abort(501, 'Phase 6 — not yet implemented'))->name('user.subscription.show');
+    Route::get('/packages',      fn() => abort(501, 'Phase 6 — not yet implemented'))->name('user.packages.index');
+    Route::get('/notifications', fn() => abort(501, 'Phase 7 — not yet implemented'))->name('user.notifications.index');
+    Route::get('/settings',      fn() => abort(501, 'Phase 7 — not yet implemented'))->name('user.settings.index');
 });

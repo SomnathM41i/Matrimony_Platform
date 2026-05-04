@@ -1,4 +1,3 @@
-
 @foreach($parents as $parent)
     @php
         $isDependent = isset($parent['depends_on']);
@@ -107,7 +106,7 @@
 @endforeach
 
 
-{{-- ── LABEL FIELD (for income ranges) ────────────────────── --}}
+{{-- ── LABEL + INCOME RANGE FIELDS (annual-income-ranges only) ── --}}
 @if($primaryField === 'label')
 <div class="form-group">
     <label class="form-label">
@@ -126,23 +125,26 @@
     @enderror
 </div>
 
-{{-- Income range: min / max side-by-side --}}
 @if($type === 'annual-income-ranges')
+{{-- FIX: was min_value / max_value — now min_amount / max_amount to match AnnualIncomeRange model --}}
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
     <div class="form-group">
-        <label class="form-label">Min Value (₹) <span style="color:var(--danger)">*</span></label>
-        <input type="number" name="min_value" class="form-control" required min="0"
+        <label class="form-label">Min Amount (₹) <span style="color:var(--danger)">*</span></label>
+        <input type="number" name="min_amount" class="form-control" required min="0"
             placeholder="0"
-            value="{{ old('min_value', $record?->min_value ?? 0) }}">
-        @error('min_value')
+            value="{{ old('min_amount', $record?->min_amount ?? 0) }}">
+        @error('min_amount')
             <p class="form-error">{{ $message }}</p>
         @enderror
     </div>
     <div class="form-group">
-        <label class="form-label">Max Value (₹)</label>
-        <input type="number" name="max_value" class="form-control" min="0"
+        <label class="form-label">Max Amount (₹)</label>
+        <input type="number" name="max_amount" class="form-control" min="0"
             placeholder="Leave blank for unlimited"
-            value="{{ old('max_value', $record?->max_value ?? '') }}">
+            value="{{ old('max_amount', $record?->max_amount ?? '') }}">
+        @error('max_amount')
+            <p class="form-error">{{ $message }}</p>
+        @enderror
     </div>
 </div>
 <div class="form-group">

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Interest;
+use App\Models\User;
 use App\Services\User\ProfileSetupService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -44,7 +46,6 @@ class ProfileController extends Controller
             'activeSubscription',
         ]);
 
-        // If profile setup not started, redirect to wizard
         if (!$user->profile || !$user->profile->height_cm) {
             return redirect()->route('user.profile.setup.show', 1)
                              ->with('info', 'Please complete your profile first.');
@@ -56,12 +57,64 @@ class ProfileController extends Controller
     }
 
     // =========================================================================
+    // PUBLIC PROFILE — View another member's profile by slug
+    // GET /user/profile/{slug}  →  user.profile.public
+    // =========================================================================
+
+    public function publicProfile(string $slug): View|RedirectResponse
+    {
+        $user = User::where('profile_slug', $slug)
+            ->where('account_status', 'active')
+            // ->whereNotNull('email_verified_at')
+            ->firstOrFail();
+
+        $user->load([
+            'profile',
+            'profile.religion',
+            'profile.caste',
+            'profile.subCaste',
+            'profile.gotra',
+            'profile.community',
+            'profile.motherTongue',
+            'profile.rashi',
+            'profile.nakshatra',
+            'profile.educationLevel',
+            'profile.profession',
+            'profile.annualIncomeRange',
+            'profile.country',
+            'profile.state',
+            'profile.city',
+            'profile.area',
+            'photos',
+            'primaryPhoto',
+            'partnerPreference',
+        ]);
+
+        $authUser = Auth::user()->load(['sentInterests', 'shortlists']);
+
+        // Has auth user sent interest to this profile?
+        $interestSent = $authUser->sentInterests
+            ->where('receiver_id', $user->id)
+            ->first(); // Interest model or null
+
+        // Has auth user shortlisted this profile?
+        $isShortlisted = $authUser->shortlists
+            ->where('shortlisted_user_id', $user->id)
+            ->isNotEmpty();
+
+        // Has the viewed user sent interest to auth user?
+        $interestReceived = Interest::where('sender_id', $user->id)
+            ->where('receiver_id', $authUser->id)
+            ->first(); // Interest model or null
+
+        return view('user.profile.public-profile', compact(
+            'user', 'authUser', 'interestSent', 'isShortlisted', 'interestReceived'
+        ));
+    }
+
+    // =========================================================================
     // EDIT PROFILE — Redirect to the correct incomplete setup step
     // GET /user/profile/me/edit  →  user.profile.edit
-    //
-    // Logic:
-    //   - If profile is fully complete → go to Step 1 to allow editing any section
-    //   - If incomplete → go to the first incomplete step
     // =========================================================================
 
     public function editProfile(): RedirectResponse
@@ -75,13 +128,11 @@ class ProfileController extends Controller
 
         $completedStep = $this->setupService->getCompletedStep($user);
 
-        // Profile fully complete (all 7 steps done) → let user pick any step from Step 1
         if ($completedStep >= 7) {
             return redirect()->route('user.profile.setup.show', 1)
                              ->with('info', 'Your profile is complete. You can edit any section below.');
         }
 
-        // Go to next incomplete step
         $nextStep = min($completedStep + 1, 7);
 
         return redirect()->route('user.profile.setup.show', $nextStep)

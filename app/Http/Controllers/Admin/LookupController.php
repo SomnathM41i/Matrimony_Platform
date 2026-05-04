@@ -19,12 +19,12 @@ class LookupController extends Controller
             'sub-castes'           => \App\Models\SubCaste::class,
             'gotras'               => \App\Models\Gotra::class,
             'communities'          => \App\Models\Community::class,
-            'mother-tongues'       => \App\Models\MotherTongue::class,   
-            'rashis'               => \App\Models\Rashi::class,           
-            'nakshatras'           => \App\Models\Nakshatra::class,       
-            'education-levels'     => \App\Models\EducationLevel::class,  
-            'professions'          => \App\Models\Profession::class,      
-            'annual-income-ranges' => \App\Models\AnnualIncomeRange::class, 
+            'mother-tongues'       => \App\Models\MotherTongue::class,
+            'rashis'               => \App\Models\Rashi::class,
+            'nakshatras'           => \App\Models\Nakshatra::class,
+            'education-levels'     => \App\Models\EducationLevel::class,
+            'professions'          => \App\Models\Profession::class,
+            'annual-income-ranges' => \App\Models\AnnualIncomeRange::class,
             'countries'            => \App\Models\Country::class,
             'states'               => \App\Models\State::class,
             'cities'               => \App\Models\City::class,
@@ -56,9 +56,9 @@ class LookupController extends Controller
     public function store(Request $request, string $type): RedirectResponse
     {
         $model = $this->resolve($type);
-    //dd($request); exit;
+
         $data = $request->validate($this->validationRules($type));
-        //dd($request); exit;
+
         $data['is_active'] = $request->boolean('is_active');
 
         // Parent FK relations — only include if present in the request
@@ -118,10 +118,8 @@ class LookupController extends Controller
             'file' => ['required', 'file', 'mimes:csv,txt', 'max:2048'],
         ]);
 
-
         return back()->with('success', ucfirst($type) . ' import completed.');
     }
-
 
     public function export(string $type): Response
     {
@@ -139,7 +137,6 @@ class LookupController extends Controller
             'Content-Disposition' => 'attachment; filename="' . $type . '.csv"',
         ]);
     }
-
 
     private function validationRules(string $type): array
     {
@@ -163,10 +160,11 @@ class LookupController extends Controller
         // Type-specific extra fields
         switch ($type) {
             case 'annual-income-ranges':
-                $rules['label']     = ['required', 'string', 'max:150'];
-                $rules['min_value'] = ['required', 'numeric', 'min:0'];
-                $rules['max_value'] = ['nullable', 'numeric', 'min:0'];
-                $rules['currency']  = ['nullable', 'string', 'max:5'];
+                $rules['label']      = ['required', 'string', 'max:150'];
+                // FIX: use min_amount / max_amount to match AnnualIncomeRange model $fillable
+                $rules['min_amount'] = ['required', 'numeric', 'min:0'];
+                $rules['max_amount'] = ['nullable', 'numeric', 'min:0'];
+                $rules['currency']   = ['nullable', 'string', 'max:5'];
                 break;
 
             case 'countries':
