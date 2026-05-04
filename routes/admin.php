@@ -59,6 +59,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/reset-password', [AdminLoginController::class, 'resetPassword'])->name('password.update');
     });
 
+        Route::get('users/stop-impersonation', [UserController::class, 'stopImpersonation'])
+         ->name('users.stop-impersonation');
+
+
     // ─────────────────────────────────────────────────────────────────
     // AUTHENTICATED ADMIN ROUTES
     // ─────────────────────────────────────────────────────────────────
@@ -107,7 +111,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             // NOTE: stop-impersonation must be declared BEFORE the resource routes
             // (or before any route that uses {user}) to avoid Laravel treating
             // "stop-impersonation" as a model binding value.
-            Route::get('users/stop-impersonation',      [UserController::class, 'stopImpersonation'])->name('users.stop-impersonation');
+           
             Route::post('users/{user}/login-as',        [UserController::class, 'loginAs'])->name('users.login-as');
         });
 

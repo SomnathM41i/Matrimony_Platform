@@ -14,32 +14,27 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class AdminAuthenticate
 {
+// Http/Middleware/AdminAuthenticate.php
+
     public function handle(Request $request, Closure $next): Response
     {
-        // Not logged in at all
         if (!Auth::check()) {
-            if ($request->expectsJson()) {
-                return response()->json(['message' => 'Unauthenticated.'], 401);
-            }
-            return redirect()->route('admin.login')
-                             ->with('error', 'Please log in to access the admin panel.');
+            return redirect()->route('admin.login')->with('error', 'Please log in.');
         }
 
         $user = Auth::user();
 
-        // Must have a role
-        if (!$user->role) {
-            Auth::logout();
-            return redirect()->route('admin.login')
-                             ->with('error', 'Your account has no assigned role. Contact support.');
+        // ✅ Allow impersonating sessions through — stopImpersonation handles re-auth
+        if (session('impersonating') && session('impersonator_id')) {
+            return $next($request);
         }
 
-        // Only allow super_admin, admin, relationship_manager roles into the panel
+        if (!$user->role) { /* ... */ }
+
         $allowedRoles = ['super_admin', 'admin', 'relationship_manager'];
         if (!in_array($user->role->name, $allowedRoles, true)) {
             Auth::logout();
-            return redirect()->route('admin.login')
-                             ->with('error', 'You do not have permission to access the admin panel.');
+            return redirect()->route('admin.login')->with('error', 'Access denied.');
         }
 
         return $next($request);

@@ -330,28 +330,45 @@ class UserController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('home'))
+        return redirect(route('user.dashboard'))
             ->with('impersonation_notice', "Browsing as {$user->name}.");
     }
 
     public function stopImpersonation(): RedirectResponse
     {
+        // Not impersonating — redirect appropriately
         if (!session('impersonating')) {
+            // If somehow an admin hits this while logged in normally, go to dashboard
             return redirect()->route('admin.dashboard');
         }
 
         $adminId = session('impersonator_id');
 
+        // Pull admin BEFORE clearing session
+        $admin = User::find($adminId);
+
+        if (!$admin) {
+            // Admin account was deleted — just log out cleanly
+            Auth::logout();
+            session()->invalidate();
+            session()->regenerateToken();
+            return redirect()->route('admin.login')->with('error', 'Original admin account not found.');
+        }
+
+        // Clear impersonation flags
         session()->forget(['impersonating', 'impersonator_id', 'impersonator_name']);
 
-        $admin = User::findOrFail($adminId);
+        // Log back in as admin — this regenerates the session internally
         Auth::login($admin);
+
+        // Force a fresh session regenerate to be safe
+        request()->session()->regenerate();
 
         $this->logActivity('impersonation_stopped', $admin);
 
         return redirect()
             ->route('admin.users.index')
-            ->with('success', 'Impersonation ended.');
+            ->with('success', 'Impersonation ended. Welcome back, ' . $admin->name . '.');
     }
 
     // =========================================================================
