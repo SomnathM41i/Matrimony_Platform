@@ -227,15 +227,15 @@
                         <span>Shortlist</span>
                     </a>
 
-                    <a href="{{ route('user.messages.index') }}" class="quick-action-btn">
+                    <!-- <a href="{{ route('user.messages.index') }}" class="quick-action-btn">
                         <span style="font-size:1.4rem;">💬</span>
                         <span>Messages</span>
-                    </a>
+                    </a> -->
 
-                    <a href="{{ route('user.subscription.show') }}" class="quick-action-btn" style="border-color:var(--gold,#f59e0b);color:var(--gold,#f59e0b);">
+                    <!-- <a href="{{ route('user.subscription.show') }}" class="quick-action-btn" style="border-color:var(--gold,#f59e0b);color:var(--gold,#f59e0b);">
                         <span style="font-size:1.4rem;">💎</span>
                         <span>Upgrade</span>
-                    </a>
+                    </a> -->
 
                 </div>
             </div>
@@ -327,9 +327,9 @@
                     <p style="margin:0 0 14px;font-size:0.9rem;color:var(--text-muted);">
                         You are on the <strong>Free Plan</strong>. Upgrade to unlock premium features.
                     </p>
-                    <a href="{{ route('user.packages.index') }}" class="btn btn-gold btn-sm" style="width:100%;justify-content:center;">
+                    <!-- <a href="{{ route('user.packages.index') }}" class="btn btn-gold btn-sm" style="width:100%;justify-content:center;">
                         💎 Upgrade Now
-                    </a>
+                    </a> -->
                 @endif
             </div>
 

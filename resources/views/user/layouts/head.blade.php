@@ -107,9 +107,9 @@
                   ✏️ Edit Profile
                 </a>
 
-                <a href="{{ route('user.subscription.show') }}" class="dropdown-item" role="menuitem">
+                <!-- <a href="{{ route('user.subscription.show') }}" class="dropdown-item" role="menuitem">
                   💎 My Plan
-                </a>
+                </a> -->
 
                 <a href="{{ route('user.profile.setup.show', 7) }}" class="dropdown-item" role="menuitem">
                   ⚙️ Settings
