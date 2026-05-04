@@ -32,7 +32,27 @@
   @include('user.layouts.head')
 
       <main>
-
+{{--
+    ============================================================
+    SNIPPET — add this banner to your FRONTEND layout (e.g.
+    resources/views/layouts/app.blade.php) so the admin sees
+    the impersonation notice while browsing as the user.
+    ============================================================
+--}}
+ 
+@if(session('impersonating'))
+    <div class="fixed bottom-0 inset-x-0 z-50 bg-amber-500 text-white text-sm font-medium
+                flex items-center justify-between px-6 py-3 shadow-lg">
+        <span>
+            👤 You are browsing as <strong>{{ auth()->user()->name }}</strong>
+            (impersonated by <strong>{{ session('impersonator_name') }}</strong>)
+        </span>
+        <a href="{{ route('admin.users.stop-impersonation') }}"
+           class="ml-4 bg-white text-amber-700 font-semibold text-xs px-3 py-1 rounded-full hover:bg-amber-100 transition">
+            ✕ Return to Admin Panel
+        </a>
+    </div>
+@endif
   @yield('content')
 
     </main>

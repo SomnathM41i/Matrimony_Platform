@@ -4,170 +4,226 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Role;
+use App\Models\SubscriptionPackage;
 use App\Models\User;
-use Illuminate\Http\RedirectResponse;
+use App\Models\UserSubscription;
+use App\Models\ActivityLog;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 
 class UserController extends Controller
 {
+    // =========================================================================
+    // LIST USERS
+    // =========================================================================
     public function index(Request $request): View
     {
         $users = User::with('role', 'profile')
-            ->when($request->search, fn($q) => $q->where(function ($q) use ($request) {
-                $q->where('name', 'like', "%{$request->search}%")
-                  ->orWhere('email', 'like', "%{$request->search}%")
-                  ->orWhere('phone', 'like', "%{$request->search}%");
-            }))
-            ->when($request->role, fn($q) => $q->whereHas('role', fn($q) => $q->where('name', $request->role)))
-            ->when($request->status, fn($q) => $q->where('account_status', $request->status))
-            ->when($request->premium, fn($q) => $q->where('is_premium', true))
+            ->when($request->search, fn($q) =>
+                $q->where(fn($q) =>
+                    $q->where('name', 'like', "%{$request->search}%")
+                      ->orWhere('email', 'like', "%{$request->search}%")
+                      ->orWhere('phone', 'like', "%{$request->search}%")
+                )
+            )
+            ->when($request->role, fn($q) =>
+                $q->whereHas('role', fn($q) => $q->where('name', $request->role))
+            )
+            ->when($request->status, fn($q) =>
+                $q->where('account_status', $request->status)
+            )
             ->latest()
             ->paginate(20)
             ->withQueryString();
 
-        $roles = Role::all();
-        return view('admin.users.index', compact('users', 'roles'));
+        return view('admin.users.index', [
+            'users' => $users,
+            'roles' => Role::all()
+        ]);
     }
 
-    public function create(): View
-    {
-        $roles = Role::all();
-        return view('admin.users.create', compact('roles'));
-    }
-
+    // =========================================================================
+    // CREATE USER
+    // =========================================================================
     public function store(Request $request): RedirectResponse
     {
-        $validated = $request->validate([
+        $data = $request->validate([
             'role_id'        => ['required', 'exists:roles,id'],
-            'name'           => ['required', 'string', 'max:100'],
+            'name'           => ['required', 'max:100'],
             'email'          => ['required', 'email', 'unique:users,email'],
-            'phone'          => ['nullable', 'string', 'max:20'],
-            'gender'         => ['nullable', 'in:male,female,other'],
-            'account_status' => ['required', 'in:active,suspended,banned,pending'],
+            'phone'          => ['nullable'],
+            'account_status' => ['required'],
             'password'       => ['required', 'confirmed', 'min:8'],
         ]);
 
-        // Hash password
-        $validated['password'] = \Hash::make($validated['password']);
+        $data['password'] = Hash::make($data['password']);
 
-        // Create user
-        $user = \App\Models\User::create($validated);
-
-        // Auto verify email (optional)
+        $user = User::create($data);
         $user->markEmailAsVerified();
 
-        return redirect()
-            ->route('admin.users.show', $user->id)
+        $this->log('user_created', $user);
+
+        return redirect()->route('admin.users.show', $user)
             ->with('success', 'User created successfully.');
     }
 
+    // =========================================================================
+    // SHOW USER
+    // =========================================================================
     public function show(User $user): View
     {
-        $user->load('role', 'profile', 'activeSubscription', 'assignedRm');
+        $user->load('role', 'profile', 'activeSubscription');
         return view('admin.users.show', compact('user'));
     }
 
-    public function edit(User $user): View
-    {
-        $roles = Role::all();
-        return view('admin.users.edit', compact('user', 'roles'));
-    }
-
+    // =========================================================================
+    // UPDATE USER
+    // =========================================================================
     public function update(Request $request, User $user): RedirectResponse
     {
-        $validated = $request->validate([
+        $data = $request->validate([
             'role_id'        => ['required', 'exists:roles,id'],
-            'name'           => ['required', 'string', 'max:100'],
+            'name'           => ['required', 'max:100'],
             'email'          => ['required', 'email', 'unique:users,email,' . $user->id],
-            'phone'          => ['nullable', 'string', 'max:20'],
-            'gender'         => ['nullable', 'in:male,female,other'],
-            'account_status' => ['required', 'in:active,suspended,banned,pending'],
+            'account_status' => ['required'],
             'password'       => ['nullable', 'confirmed', 'min:8'],
         ]);
 
-        if ($request->filled('password')) {
-            $validated['password'] = Hash::make($validated['password']);
+        if (!empty($data['password'])) {
+            $data['password'] = Hash::make($data['password']);
         } else {
-            unset($validated['password']);
+            unset($data['password']);
         }
 
-        $user->update($validated);
+        $old = $user->toArray();
+        $user->update($data);
 
-        return redirect()->route('admin.users.show', $user)
-                         ->with('success', 'User updated successfully.');
+        $this->log('user_updated', $user, $old, $user->toArray());
+
+        return back()->with('success', 'User updated successfully.');
     }
 
+    // =========================================================================
+    // DELETE USER
+    // =========================================================================
     public function destroy(User $user): RedirectResponse
     {
-        $user->delete(); // Soft delete
-        return redirect()->route('admin.users.index')
-                         ->with('success', 'User deleted (soft).');
+        $user->delete();
+        $this->log('user_deleted', $user);
+
+        return back()->with('success', 'User deleted.');
     }
 
-    public function forceDelete(User $user): RedirectResponse
-    {
-        $user->forceDelete();
-        return redirect()->route('admin.users.index')
-                         ->with('success', 'User permanently deleted.');
-    }
-
-    public function restore(int $id): RedirectResponse
-    {
-        $user = User::onlyTrashed()->findOrFail($id);
-        $user->restore();
-        return redirect()->route('admin.users.index')
-                         ->with('success', 'User restored.');
-    }
-
-    public function trashed(): View
-    {
-        $users = User::onlyTrashed()->with('role')->latest('deleted_at')->paginate(20);
-        return view('admin.users.trashed', compact('users'));
-    }
-
+    // =========================================================================
+    // TOGGLE STATUS
+    // =========================================================================
     public function toggleStatus(User $user): RedirectResponse
     {
         $user->update([
             'account_status' => $user->account_status === 'active' ? 'suspended' : 'active',
         ]);
-        return back()->with('success', 'User status updated.');
+
+        $this->log('status_changed', $user);
+
+        return back()->with('success', 'Status updated.');
     }
 
-    public function togglePremium(User $user): RedirectResponse
+    // =========================================================================
+    // ASSIGN PLAN
+    // =========================================================================
+    public function assignPlan(Request $request, User $user): RedirectResponse
     {
-        $user->update([
-            'is_premium'         => !$user->is_premium,
-            'premium_expires_at' => !$user->is_premium ? now()->addYear() : null,
+        $request->validate([
+            'plan_id'    => ['required', 'exists:subscription_packages,id'],
+            'start_date' => ['required', 'date'],
         ]);
-        return back()->with('success', 'Premium status updated.');
+
+        $plan = SubscriptionPackage::findOrFail($request->plan_id);
+
+        UserSubscription::where('user_id', $user->id)
+            ->where('is_active', true)
+            ->update(['is_active' => false]);
+
+        $start = now();
+        $end   = $start->copy()->addDays($plan->duration_days);
+
+        UserSubscription::create([
+            'user_id'                 => $user->id,
+            'subscription_package_id' => $plan->id,
+            'is_active'               => true,
+            'starts_at'               => $start,
+            'expires_at'              => $end,
+        ]);
+
+        $user->update([
+            'is_premium' => true,
+            'premium_expires_at' => $end,
+        ]);
+
+        $this->log('plan_assigned', $user, null, [
+            'plan' => $plan->name,
+            'expires_at' => $end
+        ]);
+
+        return back()->with('success', 'Plan assigned.');
     }
 
-    public function verifyEmail(User $user): RedirectResponse
+    // =========================================================================
+    // IMPERSONATION
+    // =========================================================================
+    public function loginAs(User $user): RedirectResponse
     {
-        if (!$user->hasVerifiedEmail()) {
-            $user->markEmailAsVerified();
+        if ($user->account_status !== 'active') {
+            return back()->with('error', 'User not active.');
         }
-        return back()->with('success', 'Email verified.');
+
+        $admin = Auth::user();
+
+        session([
+            'impersonating' => true,
+            'impersonator_id' => $admin->id,
+        ]);
+
+        $this->log('impersonation_started', $user, null, [
+            'admin' => $admin->name
+        ]);
+
+        Auth::login($user);
+
+        return redirect('/')->with('success', 'Now logged in as user.');
     }
 
-    public function activity(User $user): View
+    public function stopImpersonation(): RedirectResponse
     {
-        $logs = $user->activityLogs()->latest('created_at')->paginate(30);
-        return view('admin.users.activity', compact('user', 'logs'));
+        $adminId = session('impersonator_id');
+
+        session()->forget(['impersonating', 'impersonator_id']);
+
+        $admin = User::findOrFail($adminId);
+        Auth::login($admin);
+
+        return redirect()->route('admin.users.index')
+            ->with('success', 'Returned to admin.');
     }
 
-    public function profile(User $user): View
+    // =========================================================================
+    // CENTRAL LOG FUNCTION
+    // =========================================================================
+    private function log($action, $model, $old = null, $new = null): void
     {
-        $user->load('profile.religion', 'profile.caste', 'profile.city', 'profile.educationLevel', 'profile.profession');
-        return view('admin.users.profile', compact('user'));
-    }
-
-    public function export(Request $request)
-    {
-        // Blueprint: return CSV export of users
-        // Implement with maatwebsite/excel or spatie/simple-excel
-        abort(501, 'Export not yet implemented. Add maatwebsite/excel.');
+        ActivityLog::create([
+            'user_id'     => Auth::id(),
+            'action'      => $action,
+            'model_type'  => get_class($model),
+            'model_id'    => $model->id,
+            'old_values'  => $old,
+            'new_values'  => $new,
+            'ip_address'  => request()->ip(),
+            'user_agent'  => request()->userAgent(),
+            'created_at'  => now(),
+        ]);
     }
 }

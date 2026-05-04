@@ -26,7 +26,7 @@ use App\Http\Controllers\Admin\LookupController;
 use App\Http\Controllers\Admin\LookupApiController;
 use App\Http\Controllers\Admin\MatrimonyController;
 
-use Illuminate\Http\Request; 
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,16 +74,41 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // ─── User Management ──────────────────────────────────────────
         Route::middleware('admin.permission:manage_users')->group(function () {
+
             Route::resource('users', UserController::class);
+
+            // ── Status / quick-actions ───────────────────────────────
             Route::patch('users/{user}/toggle-status',  [UserController::class, 'toggleStatus'])->name('users.toggle-status');
             Route::patch('users/{user}/toggle-premium', [UserController::class, 'togglePremium'])->name('users.toggle-premium');
             Route::post('users/{user}/verify-email',    [UserController::class, 'verifyEmail'])->name('users.verify-email');
+
+            // ── Profile / Activity ───────────────────────────────────
             Route::get('users/{user}/activity',         [UserController::class, 'activity'])->name('users.activity');
             Route::get('users/{user}/profile',          [UserController::class, 'profile'])->name('users.profile');
+
+            // ── Soft-delete helpers ──────────────────────────────────
             Route::delete('users/{user}/force-delete',  [UserController::class, 'forceDelete'])->name('users.force-delete');
             Route::patch('users/{user}/restore',        [UserController::class, 'restore'])->name('users.restore');
             Route::get('users/trashed',                 [UserController::class, 'trashed'])->name('users.trashed');
+
+            // ── Export ───────────────────────────────────────────────
             Route::get('users/export',                  [UserController::class, 'export'])->name('users.export');
+
+            // ── Assign Plan ──────────────────────────────────────────
+            // GET  /admin/users/{user}/assign-plan  → show form
+            // POST /admin/users/{user}/assign-plan  → save
+            Route::get('users/{user}/assign-plan',      [UserController::class, 'showAssignPlan'])->name('users.assign-plan');
+            Route::post('users/{user}/assign-plan',     [UserController::class, 'assignPlan'])->name('users.assign-plan.post');
+
+            // ── Impersonation (Login as User) ────────────────────────
+            // POST /admin/users/{user}/login-as        → start impersonation
+            // GET  /admin/users/stop-impersonation     → end impersonation (no {user} needed)
+            //
+            // NOTE: stop-impersonation must be declared BEFORE the resource routes
+            // (or before any route that uses {user}) to avoid Laravel treating
+            // "stop-impersonation" as a model binding value.
+            Route::get('users/stop-impersonation',      [UserController::class, 'stopImpersonation'])->name('users.stop-impersonation');
+            Route::post('users/{user}/login-as',        [UserController::class, 'loginAs'])->name('users.login-as');
         });
 
         // ─── Roles & Permissions ──────────────────────────────────────
@@ -189,7 +214,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
                 Route::get('sitemap', [SeoSettingController::class, 'sitemap'])->name('sitemap');
                 Route::post('sitemap/generate', [SeoSettingController::class, 'generateSitemap'])->name('sitemap.generate');
 
-              
                 Route::resource('sitemap-entries', SeoSettingController::class)
                     ->only(['store', 'update', 'destroy'])
                     ->names([
@@ -245,29 +269,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         });
 
         // ─── Lookup / Master Data ─────────────────────────────────────
-        // Route::middleware('admin.permission:manage_lookups')->prefix('lookups')->name('lookups.')->group(function () {
-        //     $lookupEntities = [
-        //         'religions', 'castes', 'sub-castes', 'gotras', 'communities',
-        //         'mother-tongues', 'rashis', 'nakshatras',
-        //         'education-levels', 'professions', 'annual-income-ranges',
-        //         'countries', 'states', 'cities', 'areas',
-        //     ];
-        //     foreach ($lookupEntities as $entity) {
-        //         Route::resource($entity, LookupController::class)
-        //             ->parameters([$entity => 'lookup'])
-        //             ->names($entity); // 👈 IMPORTANT FIX
-        //     }
-        //     Route::post('{type}/import',   [LookupController::class, 'import'])->name('import');
-        //     Route::get('{type}/export',    [LookupController::class, 'export'])->name('export');
-        // });
-
-        // ── AJAX API for cascade dropdowns ──────────────────────────────
         Route::get('/api/lookups/{type}', [LookupApiController::class, 'index'])
             ->name('api.lookups');
-        
-        // ── Lookup CRUD ─────────────────────────────────────────────────
+
         Route::prefix('lookups')->name('lookups.')->group(function () {
-        
+
             $types = [
                 'religions'            => 'religions',
                 'castes'               => 'castes',
@@ -285,7 +291,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
                 'cities'               => 'cities',
                 'areas'                => 'areas',
             ];
-        
+
             foreach ($types as $slug => $routeName) {
 
                 Route::get("/{$slug}", function () use ($slug) {
@@ -304,12 +310,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
                     return app(\App\Http\Controllers\Admin\LookupController::class)->destroy($slug, $lookup);
                 })->name("{$routeName}.destroy");
             }
-        
+
             Route::post('/import/{type}', [LookupController::class, 'import'])->name('import');
             Route::get( '/export/{type}', [LookupController::class, 'export'])->name('export');
         });
- 
- 
 
         // ─── Activity Logs ────────────────────────────────────────────
         Route::middleware('admin.permission:view_logs')->prefix('logs')->name('logs.')->group(function () {
