@@ -21,12 +21,12 @@
                 </a>
             </li>
 
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('admin.analytics.index') ? 'active' : '' }}"
                    href="{{ route('admin.analytics.index') }}">
                     <i class="fas fa-chart-line"></i> Analytics
                 </a>
-            </li>
+            </li> -->
 
         </ul>
     </nav>
@@ -43,7 +43,7 @@
                 </a>
             </li>
 
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('admin.users.trashed') ? 'active' : '' }}"
                    href="{{ route('admin.users.trashed') }}">
                     <i class="fas fa-trash"></i> Trashed Users
@@ -75,7 +75,7 @@
                    href="{{ route('admin.rm.index') }}">
                     <i class="fas fa-user-tie"></i> Relationship Managers
                 </a>
-            </li>
+            </li> -->
 
         </ul>
     </nav>
@@ -123,7 +123,7 @@
   
 
     <!-- MATRIMONY -->
-    <nav class="nav-section">
+    <!-- <nav class="nav-section">
         <div class="nav-section-title">Matrimony</div>
         <ul class="nav">
 
@@ -163,7 +163,7 @@
             </li>
 
         </ul>
-    </nav>
+    </nav> -->
 
     <!-- BUSINESS -->
     <nav class="nav-section">
@@ -177,7 +177,7 @@
                 </a>
             </li>
 
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('admin.analytics.revenue') ? 'active' : '' }}"
                    href="{{ route('admin.analytics.revenue') }}">
                     <i class="fas fa-rupee-sign"></i> Revenue
@@ -189,13 +189,13 @@
                    href="{{ route('admin.analytics.subscriptions') }}">
                     <i class="fas fa-receipt"></i> Subscriptions
                 </a>
-            </li>
+            </li> -->
 
         </ul>
     </nav>
 
     <!-- ANALYTICS -->
-    <nav class="nav-section">
+    <!-- <nav class="nav-section">
         <div class="nav-section-title">Analytics</div>
         <ul class="nav">
 
@@ -227,10 +227,10 @@
             </li>
 
         </ul>
-    </nav>
+    </nav> -->
 
     <!-- NOTIFICATIONS -->
-    <nav class="nav-section">
+    <!-- <nav class="nav-section">
         <div class="nav-section-title">Notifications</div>
         <ul class="nav">
 
@@ -263,10 +263,10 @@
             </li>
 
         </ul>
-    </nav>
+    </nav> -->
 
     <!-- CMS -->
-    <nav class="nav-section">
+    <!-- <nav class="nav-section">
         <div class="nav-section-title">CMS</div>
         <ul class="nav">
 
@@ -306,10 +306,10 @@
             </li>
 
         </ul>
-    </nav>
+    </nav> -->
 
     <!-- SEO -->
-    <nav class="nav-section">
+    <!-- <nav class="nav-section">
         <div class="nav-section-title">SEO</div>
         <ul class="nav">
 
@@ -335,10 +335,10 @@
             </li>
 
         </ul>
-    </nav>
+    </nav> -->
 
     <!-- SUPPORT -->
-    <nav class="nav-section">
+    <!-- <nav class="nav-section">
         <div class="nav-section-title">Support</div>
         <ul class="nav">
 
@@ -357,10 +357,10 @@
             </li>
 
         </ul>
-    </nav>
+    </nav> -->
 
     <!-- SYSTEM -->
-    <nav class="nav-section">
+    <!-- <nav class="nav-section">
         <div class="nav-section-title">System</div>
         <ul class="nav">
 
@@ -395,7 +395,7 @@
             </li>
 
         </ul>
-    </nav>
+    </nav> -->
 
 </aside>
 @endauth
