@@ -15,7 +15,7 @@
       <ul class="nav-links">
         <li><a href="{{ route('home') }}"     class="{{ request()->routeIs('home')     ? 'active' : '' }}">Home</a></li>
         <li><a href="{{ route('about') }}"    class="{{ request()->routeIs('about')    ? 'active' : '' }}">About Us</a></li>
-        <li><a href="{{ route('packages') }}" class="{{ request()->routeIs('packages') ? 'active' : '' }}">Packages</a></li>
+        <li><a href="{{ route('user.packages.index') }}" class="{{ request()->routeIs('user.packages.index') ? 'active' : '' }}">Packages</a></li>
         <li><a href="{{ route('contact') }}"  class="{{ request()->routeIs('contact')  ? 'active' : '' }}">Contact Us</a></li>
       </ul>
 
@@ -107,9 +107,9 @@
                   ✏️ Edit Profile
                 </a>
 
-                <!-- <a href="{{ route('user.subscription.show') }}" class="dropdown-item" role="menuitem">
+                <a href="{{ route('user.subscription.show') }}" class="dropdown-item" role="menuitem">
                   💎 My Plan
-                </a> -->
+                </a>
 
                 <a href="{{ route('user.profile.setup.show', 7) }}" class="dropdown-item" role="menuitem">
                   ⚙️ Settings

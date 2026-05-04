@@ -11,6 +11,8 @@ use App\Http\Controllers\User\MatchesController;
 use App\Http\Controllers\User\InterestsController;
 use App\Http\Controllers\User\SearchController;
 use App\Http\Controllers\User\ShortlistController;
+use App\Http\Controllers\User\PackagesController;
+use App\Http\Controllers\User\SubscriptionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -119,8 +121,8 @@ Route::middleware(['auth', 'verified', 'user.active', 'user.role'])->group(funct
 
     // ── Remaining Phase stubs ─────────────────────────────────────────────
     Route::get('/messages',      fn() => abort(501, 'Phase 4 — not yet implemented'))->name('user.messages.index');
-    Route::get('/subscription',  fn() => abort(501, 'Phase 6 — not yet implemented'))->name('user.subscription.show');
-    Route::get('/packages',      fn() => abort(501, 'Phase 6 — not yet implemented'))->name('user.packages.index');
+    Route::get('/packages',     [PackagesController::class,    'index'])->name('user.packages.index');
+    Route::get('/subscription', [SubscriptionController::class, 'show'])->name('user.subscription.show');
     Route::get('/notifications', fn() => abort(501, 'Phase 7 — not yet implemented'))->name('user.notifications.index');
     Route::get('/settings',      fn() => abort(501, 'Phase 7 — not yet implemented'))->name('user.settings.index');
 });

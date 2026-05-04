@@ -232,10 +232,10 @@
                         <span>Messages</span>
                     </a> -->
 
-                    <!-- <a href="{{ route('user.subscription.show') }}" class="quick-action-btn" style="border-color:var(--gold,#f59e0b);color:var(--gold,#f59e0b);">
+                    <a href="{{ route('user.subscription.show') }}" class="quick-action-btn" style="border-color:var(--gold,#f59e0b);color:var(--gold,#f59e0b);">
                         <span style="font-size:1.4rem;">💎</span>
                         <span>Upgrade</span>
-                    </a> -->
+                    </a>
 
                 </div>
             </div>
