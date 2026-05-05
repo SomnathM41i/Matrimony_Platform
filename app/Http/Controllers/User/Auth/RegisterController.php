@@ -73,8 +73,11 @@ class RegisterController extends Controller
             'user_agent'  => $request->userAgent(),
         ]);
 
-        return redirect()->route('user.verification.notice')
-                         ->with('success', 'Account created! Please verify your email to continue.');
+        // return redirect()->route('user.verification.notice')
+        //                  ->with('success', 'Account created! Please verify your email to continue.');
+
+        return redirect()->route('user.profile.setup.show', 1)
+                ->with('success', 'Account created! Please complete your profile.');
     }
 
     // ── Email verification ────────────────────────────────────────────────────

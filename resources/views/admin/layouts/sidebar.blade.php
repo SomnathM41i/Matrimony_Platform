@@ -360,7 +360,7 @@
     </nav> -->
 
     <!-- SYSTEM -->
-    <!-- <nav class="nav-section">
+    <nav class="nav-section">
         <div class="nav-section-title">System</div>
         <ul class="nav">
 
@@ -395,7 +395,7 @@
             </li>
 
         </ul>
-    </nav> -->
+    </nav>
 
 </aside>
 @endauth

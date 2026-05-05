@@ -9,13 +9,19 @@
   <div class="container">
     <div class="setup-card">
 
+      {{-- Alerts --}}
       @if (session('success'))
         <div class="alert alert-success">✅ {{ session('success') }}</div>
       @endif
+
       @if ($errors->any())
         <div class="alert alert-error">
           <strong>Please fix the following:</strong>
-          <ul>@foreach ($errors->all() as $e)<li>{{ $e }}</li>@endforeach</ul>
+          <ul>
+            @foreach ($errors->all() as $e)
+              <li>{{ $e }}</li>
+            @endforeach
+          </ul>
         </div>
       @endif
 
@@ -29,45 +35,81 @@
 
       <form method="POST" action="{{ route('user.profile.setup.save', 6) }}">
         @csrf
-
         @php $pref = $preference; @endphp
 
-        {{-- Age & Height --}}
+        {{-- AGE & HEIGHT --}}
         <div class="form-section">
-          <h3 class="form-section-title">Age &amp; Physical</h3>
+          <h3 class="form-section-title">Age & Physical</h3>
+
           <div class="form-row form-row-4">
+
+            {{-- Min Age --}}
             <div class="form-group">
               <label class="form-label">Min Age <span class="req">*</span></label>
-              <input type="number" name="age_min" min="18" max="80"
-                class="form-control @error('age_min') is-invalid @enderror"
-                value="{{ old('age_min', $pref->age_min ?? 22) }}">
-              @error('age_min') <span class="field-error">{{ $message }}</span> @enderror
+              <select name="age_min" class="form-control">
+                @for ($i = 18; $i <= 60; $i++)
+                  <option value="{{ $i }}"
+                    {{ old('age_min', $pref->age_min ?? 22) == $i ? 'selected' : '' }}>
+                    {{ $i }} years
+                  </option>
+                @endfor
+              </select>
             </div>
+
+            {{-- Max Age --}}
             <div class="form-group">
               <label class="form-label">Max Age <span class="req">*</span></label>
-              <input type="number" name="age_max" min="18" max="80"
-                class="form-control @error('age_max') is-invalid @enderror"
-                value="{{ old('age_max', $pref->age_max ?? 35) }}">
-              @error('age_max') <span class="field-error">{{ $message }}</span> @enderror
+              <select name="age_max" class="form-control">
+                @for ($i = 18; $i <= 60; $i++)
+                  <option value="{{ $i }}"
+                    {{ old('age_max', $pref->age_max ?? 35) == $i ? 'selected' : '' }}>
+                    {{ $i }} years
+                  </option>
+                @endfor
+              </select>
             </div>
+
+            {{-- Min Height --}}
             <div class="form-group">
-              <label class="form-label">Min Height (cm)</label>
-              <input type="number" name="height_min_cm" min="100" max="250"
-                class="form-control @error('height_min_cm') is-invalid @enderror"
-                value="{{ old('height_min_cm', $pref->height_min_cm ?? '') }}"
-                placeholder="Any">
-              @error('height_min_cm') <span class="field-error">{{ $message }}</span> @enderror
+              <label class="form-label">Min Height</label>
+              <select name="height_min_cm" class="form-control">
+                <option value="">Any</option>
+                @for ($cm = 140; $cm <= 210; $cm++)
+                  @php
+                    $totalInches = round($cm / 2.54);
+                    $feet = intdiv($totalInches, 12);
+                    $inches = $totalInches % 12;
+                  @endphp
+                  <option value="{{ $cm }}"
+                    {{ old('height_min_cm', $pref->height_min_cm ?? '') == $cm ? 'selected' : '' }}>
+                    {{ $cm }} cm ({{ $feet }} feet{{ $inches ? ' '.$inches.' inches' : '' }})
+                  </option>
+                @endfor
+              </select>
             </div>
+
+            {{-- Max Height --}}
             <div class="form-group">
-              <label class="form-label">Max Height (cm)</label>
-              <input type="number" name="height_max_cm" min="100" max="250"
-                class="form-control @error('height_max_cm') is-invalid @enderror"
-                value="{{ old('height_max_cm', $pref->height_max_cm ?? '') }}"
-                placeholder="Any">
-              @error('height_max_cm') <span class="field-error">{{ $message }}</span> @enderror
+              <label class="form-label">Max Height</label>
+              <select name="height_max_cm" class="form-control">
+                <option value="">Any</option>
+                @for ($cm = 140; $cm <= 210; $cm++)
+                  @php
+                    $totalInches = round($cm / 2.54);
+                    $feet = intdiv($totalInches, 12);
+                    $inches = $totalInches % 12;
+                  @endphp
+                  <option value="{{ $cm }}"
+                    {{ old('height_max_cm', $pref->height_max_cm ?? '') == $cm ? 'selected' : '' }}>
+                    {{ $cm }} cm ({{ $feet }} feet{{ $inches ? ' '.$inches.' inches' : '' }})
+                  </option>
+                @endfor
+              </select>
             </div>
+
           </div>
 
+          {{-- Marital Status --}}
           <div class="form-group">
             <label class="form-label">Preferred Marital Status</label>
             <div class="checkbox-grid">
@@ -82,18 +124,18 @@
           </div>
         </div>
 
-        {{-- Religion & Community --}}
+        {{-- RELIGION --}}
         <div class="form-section">
-          <h3 class="form-section-title">Religion &amp; Community</h3>
-          <div class="form-group">
-            <label class="checkbox-label" style="margin-bottom:16px;">
-              <input type="hidden" name="caste_no_bar" value="0">
-              <input type="checkbox" name="caste_no_bar" value="1"
-                {{ old('caste_no_bar', $pref->caste_no_bar ?? false) ? 'checked' : '' }}>
-              Caste No Bar — I'm open to all castes
-            </label>
-          </div>
+          <h3 class="form-section-title">Religion & Community</h3>
 
+          <label class="checkbox-label">
+            <input type="hidden" name="caste_no_bar" value="0">
+            <input type="checkbox" name="caste_no_bar" value="1"
+              {{ old('caste_no_bar', $pref->caste_no_bar ?? false) ? 'checked' : '' }}>
+            Caste No Bar
+          </label>
+
+          {{-- Religion --}}
           <div class="form-group">
             <label class="form-label">Preferred Religion(s)</label>
             <div class="checkbox-grid">
@@ -107,6 +149,7 @@
             </div>
           </div>
 
+          {{-- Mother Tongue --}}
           <div class="form-group">
             <label class="form-label">Preferred Mother Tongue(s)</label>
             <div class="checkbox-grid">
@@ -120,11 +163,10 @@
             </div>
           </div>
 
+          {{-- Manglik --}}
           <div class="form-group">
             <label class="form-label">Manglik Preference</label>
-            <select name="manglik_pref"
-              class="form-control @error('manglik_pref') is-invalid @enderror"
-              style="max-width:320px;">
+            <select name="manglik_pref" class="form-control">
               <option value="">No Preference</option>
               @foreach ($manglik_options as $opt)
                 <option value="{{ $opt }}"
@@ -136,11 +178,12 @@
           </div>
         </div>
 
-        {{-- Location --}}
+        {{-- LOCATION --}}
         <div class="form-section">
           <h3 class="form-section-title">Location Preference</h3>
+
           <div class="form-group">
-            <label class="form-label">Preferred Country / Countries</label>
+            <label class="form-label">Preferred Country</label>
             <div class="checkbox-grid">
               @foreach ($countries as $country)
                 <label class="checkbox-chip">
@@ -153,9 +196,8 @@
           </div>
 
           <div class="form-group" style="max-width:320px;">
-            <label class="form-label">Residency Status Preference</label>
-            <select name="residency_status_pref"
-              class="form-control @error('residency_status_pref') is-invalid @enderror">
+            <label class="form-label">Residency Status</label>
+            <select name="residency_status_pref" class="form-control">
               <option value="">Any</option>
               @foreach ($residency_statuses as $rs)
                 <option value="{{ $rs }}"
@@ -167,11 +209,12 @@
           </div>
         </div>
 
-        {{-- Education & Career --}}
+        {{-- EDUCATION --}}
         <div class="form-section">
-          <h3 class="form-section-title">Education &amp; Career</h3>
+          <h3 class="form-section-title">Education & Career</h3>
+
           <div class="form-group">
-            <label class="form-label">Preferred Education Level(s)</label>
+            <label class="form-label">Education Level</label>
             <div class="checkbox-grid">
               @foreach ($education_levels as $level)
                 <label class="checkbox-chip">
@@ -183,10 +226,9 @@
             </div>
           </div>
 
-          <div class="form-group" style="max-width:380px;">
-            <label class="form-label">Minimum Annual Income</label>
-            <select name="annual_income_range_id_min"
-              class="form-control @error('annual_income_range_id_min') is-invalid @enderror">
+          <div class="form-group">
+            <label class="form-label">Minimum Income</label>
+            <select name="annual_income_range_id_min" class="form-control">
               <option value="">No Preference</option>
               @foreach ($annual_income_ranges as $range)
                 <option value="{{ $range->id }}"
@@ -198,70 +240,46 @@
           </div>
         </div>
 
-        {{-- Lifestyle --}}
+        {{-- LIFESTYLE --}}
         <div class="form-section">
-          <h3 class="form-section-title">Lifestyle Preferences</h3>
+          <h3 class="form-section-title">Lifestyle</h3>
+
           <div class="form-row form-row-3">
-            <div class="form-group">
-              <label class="form-label">Diet</label>
-              <div class="checkbox-stack">
-                @foreach ($diet_options as $d)
-                  <label class="checkbox-label">
-                    <input type="checkbox" name="diet[]" value="{{ $d }}"
-                      {{ in_array($d, old('diet', $pref->diet ?? [])) ? 'checked' : '' }}>
-                    {{ ucwords(str_replace('_', ' ', $d)) }}
-                  </label>
-                @endforeach
+            @foreach (['diet'=>$diet_options,'smoking'=>$smoking_options,'drinking'=>$drinking_options] as $key => $options)
+              <div class="form-group">
+                <label class="form-label">{{ ucfirst($key) }}</label>
+                <div class="checkbox-stack">
+                  @foreach ($options as $opt)
+                    <label class="checkbox-label">
+                      <input type="checkbox" name="{{ $key }}[]" value="{{ $opt }}"
+                        {{ in_array($opt, old($key, $pref->$key ?? [])) ? 'checked' : '' }}>
+                      {{ ucwords(str_replace('_',' ',$opt)) }}
+                    </label>
+                  @endforeach
+                </div>
               </div>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Smoking</label>
-              <div class="checkbox-stack">
-                @foreach ($smoking_options as $s)
-                  <label class="checkbox-label">
-                    <input type="checkbox" name="smoking[]" value="{{ $s }}"
-                      {{ in_array($s, old('smoking', $pref->smoking ?? [])) ? 'checked' : '' }}>
-                    {{ ucwords($s) }}
-                  </label>
-                @endforeach
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Drinking</label>
-              <div class="checkbox-stack">
-                @foreach ($drinking_options as $d)
-                  <label class="checkbox-label">
-                    <input type="checkbox" name="drinking[]" value="{{ $d }}"
-                      {{ in_array($d, old('drinking', $pref->drinking ?? [])) ? 'checked' : '' }}>
-                    {{ ucwords($d) }}
-                  </label>
-                @endforeach
-              </div>
-            </div>
+            @endforeach
           </div>
         </div>
 
-        {{-- About Partner --}}
+        {{-- ABOUT --}}
         <div class="form-section">
-          <h3 class="form-section-title">Describe Your Ideal Partner</h3>
-          <div class="form-group">
-            <textarea name="about_partner" rows="4"
-              class="form-control @error('about_partner') is-invalid @enderror"
-              placeholder="Describe your ideal life partner — values, personality, qualities you admire…"
-              maxlength="1000">{{ old('about_partner', $pref->about_partner ?? '') }}</textarea>
-            @error('about_partner') <span class="field-error">{{ $message }}</span> @enderror
-            <span class="field-hint">Optional but helps attract the right matches.</span>
-          </div>
+          <h3 class="form-section-title">About Partner</h3>
+          <textarea name="about_partner" rows="4" class="form-control">
+            {{ old('about_partner', $pref->about_partner ?? '') }}
+          </textarea>
         </div>
 
         <div class="setup-actions">
           <a href="{{ route('user.profile.setup.show', 5) }}" class="btn btn-outline">← Back</a>
-          <button type="submit" class="btn btn-primary btn-lg">Save &amp; Continue →</button>
+          <button type="submit" class="btn btn-primary btn-lg">Save & Continue →</button>
         </div>
+
       </form>
     </div>
   </div>
 </section>
 
 @include('user.profile.setup._setup_styles')
+
 @endsection
