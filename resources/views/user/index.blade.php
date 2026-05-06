@@ -33,7 +33,7 @@
     background:
         linear-gradient(to right,
             rgba(13,8,16,.96) 0%,
-            rgba(13,8,16,.82) 16%,
+            rgba(13, 8, 16, 0) 33%,
             rgba(13,8,16,.38) 100%),
         linear-gradient(to top,
             rgba(139,0,0,.40) 0%,
