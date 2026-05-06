@@ -266,7 +266,7 @@
     </nav> -->
 
     <!-- CMS -->
-    <!-- <nav class="nav-section">
+    <nav class="nav-section">
         <div class="nav-section-title">CMS</div>
         <ul class="nav">
 
@@ -306,7 +306,7 @@
             </li>
 
         </ul>
-    </nav> -->
+    </nav>
 
     <!-- SEO -->
     <!-- <nav class="nav-section">
