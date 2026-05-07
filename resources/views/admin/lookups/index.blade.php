@@ -108,18 +108,17 @@
             'parents'     => [],
             'extra_fields'=> [],
         ],
-        // FIX: columns use min_amount/max_amount to match AnnualIncomeRange model
         'annual-income-ranges' => [
             'label'       => 'Annual Income Ranges',
             'singular'    => 'Income Range',
             'icon'        => 'fa-indian-rupee-sign',
             'color'       => 'gold',
-            'columns'     => ['label', 'min_amount', 'max_amount', 'currency', 'sort_order', 'is_active'],
+            'columns'     => ['label', 'min_value', 'max_value', 'currency', 'sort_order', 'is_active'],
             'parents'     => [],
             'extra_fields'=> [
                 ['key' => 'label',      'label' => 'Label',     'type' => 'text',   'required' => true],
-                ['key' => 'min_amount', 'label' => 'Min Value', 'type' => 'number', 'required' => true],
-                ['key' => 'max_amount', 'label' => 'Max Value', 'type' => 'number', 'required' => false],
+                ['key' => 'min_value', 'label' => 'Min Value', 'type' => 'number', 'required' => true],
+                ['key' => 'max_value', 'label' => 'Max Value', 'type' => 'number', 'required' => false],
                 ['key' => 'currency',   'label' => 'Currency',  'type' => 'text',   'required' => false, 'default' => 'INR'],
             ],
         ],
@@ -197,7 +196,6 @@
     $accentColor = $colorMap[$color] ?? 'var(--rose)';
 
     // Human-readable column headers
-    // FIX: added min_amount / max_amount headers
     $colHeaders = [
         'name'         => 'Name',
         'label'        => 'Label',
@@ -211,8 +209,8 @@
         'phone_code'   => 'Phone Code',
         'code'         => 'Code',
         'pincode'      => 'Pincode',
-        'min_amount'   => 'Min (₹)',
-        'max_amount'   => 'Max (₹)',
+        'min_value'   => 'Min (₹)',
+        'max_value'   => 'Max (₹)',
         'currency'     => 'Currency',
         'sort_order'   => 'Order',
         'is_active'    => 'Status',
@@ -368,8 +366,7 @@
                                 {{ $record->city?->name ?? '—' }}
                             </span>
 
-                        {{-- FIX: was min_value/max_value — now min_amount/max_amount --}}
-                        @elseif($col === 'min_amount' || $col === 'max_amount')
+                        @elseif($col === 'min_value' || $col === 'max_value')
                             <span style="font-family:monospace;font-size:.8rem;">
                                 {{ $record->{$col} !== null ? '₹'.number_format($record->{$col}) : '—' }}
                             </span>
@@ -794,6 +791,7 @@ function buildFormFields(formId, record) {
     // Extra fields
     EXTRA_FIELDS.forEach(field => {
         if (field.key === PRIMARY_FIELD) return;
+        if (LOOKUP_TYPE === 'annual-income-ranges') return;
         const val = record ? (record[field.key] || field.default || '') : (field.default || '');
         html += `
         <div class="form-group">
@@ -806,12 +804,11 @@ function buildFormFields(formId, record) {
         </div>`;
     });
 
-    // Income range — label + min_amount / max_amount / currency
-    // FIX: was record.min_value / record.max_value — now record.min_amount / record.max_amount
+    // Income range — label + min_value / max_value / currency
     if (PRIMARY_FIELD === 'label') {
         const labelVal   = record ? (record.label || '') : '';
-        const minVal     = record ? (record.min_amount ?? 0) : 0;
-        const maxVal     = record ? (record.max_amount ?? '') : '';
+        const minVal     = record ? (record.min_value ?? 0) : 0;
+        const maxVal     = record ? (record.max_value ?? '') : '';
         const currencies = ['INR','USD','GBP','EUR','AED','CAD','AUD'];
         const curVal     = record ? (record.currency || 'INR') : 'INR';
         const curOptions = currencies.map(c =>
@@ -825,13 +822,13 @@ function buildFormFields(formId, record) {
         </div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
             <div class="form-group">
-                <label class="form-label">Min Amount (₹) <span style="color:var(--danger)">*</span></label>
-                <input type="number" name="min_amount" class="form-control" required min="0"
+                <label class="form-label">Min Value (₹) <span style="color:var(--danger)">*</span></label>
+                <input type="number" name="min_value" class="form-control" required min="0"
                     placeholder="0" value="${minVal}">
             </div>
             <div class="form-group">
-                <label class="form-label">Max Amount (₹)</label>
-                <input type="number" name="max_amount" class="form-control" min="0"
+                <label class="form-label">Max Value (₹)</label>
+                <input type="number" name="max_value" class="form-control" min="0"
                     placeholder="Leave blank for unlimited" value="${maxVal}">
             </div>
         </div>

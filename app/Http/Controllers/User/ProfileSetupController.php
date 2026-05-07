@@ -46,7 +46,7 @@ class ProfileSetupController extends Controller
 
     public function show(int $step): View|RedirectResponse
     {
-        $user    = Auth::user()->load(['profile', 'partnerPreference', 'photos']);
+        $user    = Auth::user()->load(['profile', 'partnerPreference', 'photos', 'activeSubscription.package']);
         $profile = $user->profile;
 
         // Guard: if no profile row exists yet, force Step 1
@@ -78,7 +78,7 @@ class ProfileSetupController extends Controller
 
     public function save(int $step, \Illuminate\Http\Request $request): RedirectResponse
     {
-        $user = Auth::user()->load('profile');
+        $user = Auth::user()->load(['profile', 'photos', 'activeSubscription.package']);
 
         // Resolve the correct FormRequest per step and validate
         $validated = $this->resolveAndValidate($step, $request);
@@ -250,7 +250,10 @@ class ProfileSetupController extends Controller
             4 => [
                 'education_levels'     => EducationLevel::where('is_active', true)->orderBy('sort_order')->get(['id', 'name']),
                 'professions'          => Profession::where('is_active', true)->orderBy('sort_order')->get(['id', 'name']),
-                'annual_income_ranges' => AnnualIncomeRange::where('is_active', true)->orderBy('sort_order')->get(['id', 'label']),
+                'annual_income_ranges' => AnnualIncomeRange::where('is_active', true)
+                    ->orderBy('sort_order')
+                    ->orderBy('min_value')
+                    ->get(['id', 'label', 'min_value', 'max_value', 'currency']),
             ],
 
             5 => [
@@ -277,7 +280,10 @@ class ProfileSetupController extends Controller
                 'countries'            => Country::where('is_active', true)->orderBy('sort_order')->get(['id', 'name']),
                 'education_levels'     => EducationLevel::where('is_active', true)->orderBy('sort_order')->get(['id', 'name']),
                 'professions'          => Profession::where('is_active', true)->orderBy('sort_order')->get(['id', 'name']),
-                'annual_income_ranges' => AnnualIncomeRange::where('is_active', true)->orderBy('sort_order')->get(['id', 'label']),
+                'annual_income_ranges' => AnnualIncomeRange::where('is_active', true)
+                    ->orderBy('sort_order')
+                    ->orderBy('min_value')
+                    ->get(['id', 'label', 'min_value', 'max_value', 'currency']),
                 'rashis'               => Rashi::where('is_active', true)->orderBy('sort_order')->get(['id', 'name']),
                 'marital_statuses'     => ['never_married', 'divorced', 'widowed', 'awaiting_divorce'],
                 'diet_options'         => ['vegetarian', 'non_vegetarian', 'eggetarian', 'vegan', 'jain'],
@@ -295,7 +301,7 @@ class ProfileSetupController extends Controller
                 'contact_privacy_opts' => ['all', 'accepted_interest', 'premium'],
                 'visibility_opts'      => ['everyone', 'registered', 'hidden'],
 
-                'max_photos' => 5,
+                'max_photos' => $this->photoLimitFor($user),
             ],
 
             default => [],
@@ -324,5 +330,16 @@ class ProfileSetupController extends Controller
         $formRequest = app($formRequestClass);
 
         return $formRequest->validated();
+    }
+
+    private function photoLimitFor($user): ?int
+    {
+        if ($user->activeSubscription?->isValid()) {
+            $limit = (int) $user->activeSubscription->package->photo_gallery_limit;
+
+            return $limit <= 0 ? null : $limit;
+        }
+
+        return 1;
     }
 }

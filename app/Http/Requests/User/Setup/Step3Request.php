@@ -11,6 +11,19 @@ class Step3Request extends FormRequest
         return auth()->check();
     }
 
+    protected function prepareForValidation(): void
+    {
+        if (!$this->filled('birth_time')) {
+            return;
+        }
+
+        $birthTime = (string) $this->input('birth_time');
+
+        if (preg_match('/^\d{2}:\d{2}:\d{2}$/', $birthTime)) {
+            $this->merge(['birth_time' => substr($birthTime, 0, 5)]);
+        }
+    }
+
     public function rules(): array
     {
         // All horoscope fields are optional — step is skippable

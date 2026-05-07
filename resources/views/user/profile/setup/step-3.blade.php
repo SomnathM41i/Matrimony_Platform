@@ -5,6 +5,13 @@
 
 @include('user.profile.setup._progress', ['step' => 3])
 
+@php
+  $birthTimeValue = old('birth_time', $profile->birth_time ?? '');
+  if ($birthTimeValue && preg_match('/^\d{2}:\d{2}:\d{2}$/', $birthTimeValue)) {
+      $birthTimeValue = substr($birthTimeValue, 0, 5);
+  }
+@endphp
+
 <section class="setup-section">
   <div class="container">
     <div class="setup-card">
@@ -99,7 +106,8 @@
               <label class="form-label">Birth Time</label>
               <input type="time" name="birth_time"
                 class="form-control @error('birth_time') is-invalid @enderror"
-                value="{{ old('birth_time', $profile->birth_time ?? '') }}">
+                value="{{ $birthTimeValue }}"
+                step="60">
               @error('birth_time') <span class="field-error">{{ $message }}</span> @enderror
               <span class="field-hint">Used to calculate accurate horoscope</span>
             </div>
@@ -119,12 +127,13 @@
         <div class="setup-actions">
           <a href="{{ route('user.profile.setup.show', 2) }}" class="btn btn-outline">← Back</a>
           <div style="display:flex;gap:12px;align-items:center;">
-            <form method="POST" action="{{ route('user.profile.setup.skip', 3) }}" style="margin:0;">
-              @csrf
-              <button type="submit" class="btn btn-outline" style="color:var(--text-muted);border-color:var(--border);">
-                Skip for now
-              </button>
-            </form>
+            <button type="submit"
+              formaction="{{ route('user.profile.setup.skip', 3) }}"
+              formmethod="POST"
+              class="btn btn-outline"
+              style="color:var(--text-muted);border-color:var(--border);">
+              Skip for now
+            </button>
             <button type="submit" class="btn btn-primary btn-lg">Save &amp; Continue →</button>
           </div>
         </div>

@@ -48,7 +48,9 @@ class LookupController extends Controller
     {
         $model = $this->resolve($type);
 
-        $records = $model::latest()->paginate(15);
+        $records = $type === 'annual-income-ranges'
+            ? $model::orderBy('sort_order')->orderBy('min_value')->paginate(15)
+            : $model::latest()->paginate(15);
 
         return view('admin.lookups.index', compact('records', 'type'));
     }
@@ -125,7 +127,9 @@ class LookupController extends Controller
     {
         $model = $this->resolve($type);
 
-        $records = $model::orderBy('id')->get();
+        $records = $type === 'annual-income-ranges'
+            ? $model::orderBy('sort_order')->orderBy('min_value')->get()
+            : $model::orderBy('id')->get();
 
         $csv = $records->map(fn ($r) => implode(',', array_map(
             fn ($v) => '"' . str_replace('"', '""', (string) $v) . '"',
@@ -161,9 +165,8 @@ class LookupController extends Controller
         switch ($type) {
             case 'annual-income-ranges':
                 $rules['label']      = ['required', 'string', 'max:150'];
-                // FIX: use min_amount / max_amount to match AnnualIncomeRange model $fillable
-                $rules['min_amount'] = ['required', 'numeric', 'min:0'];
-                $rules['max_amount'] = ['nullable', 'numeric', 'min:0'];
+                $rules['min_value']  = ['required', 'integer', 'min:0'];
+                $rules['max_value']  = ['nullable', 'integer', 'min:0', 'gte:min_value'];
                 $rules['currency']   = ['nullable', 'string', 'max:5'];
                 break;
 

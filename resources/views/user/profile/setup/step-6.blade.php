@@ -233,7 +233,7 @@
               @foreach ($annual_income_ranges as $range)
                 <option value="{{ $range->id }}"
                   {{ old('annual_income_range_id_min', $pref->annual_income_range_id_min ?? '') == $range->id ? 'selected' : '' }}>
-                  {{ $range->label }}
+                  {{ $range->display_label }}
                 </option>
               @endforeach
             </select>

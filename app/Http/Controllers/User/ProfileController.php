@@ -90,7 +90,12 @@ class ProfileController extends Controller
             'partnerPreference',
         ]);
 
-        $authUser = Auth::user()->load(['sentInterests', 'shortlists']);
+        $authUser = Auth::user()->load(['sentInterests', 'shortlists', 'activeSubscription.package']);
+        $isSelf = $authUser->id === $user->id;
+
+        if (!$isSelf && $user->profile?->profile_visibility === 'hidden') {
+            abort(404);
+        }
 
         // Has auth user sent interest to this profile?
         $interestSent = $authUser->sentInterests
@@ -107,9 +112,50 @@ class ProfileController extends Controller
             ->where('receiver_id', $authUser->id)
             ->first(); // Interest model or null
 
+        $hasAcceptedInterest = $interestSent?->status === 'accepted'
+            || $interestReceived?->status === 'accepted';
+        $viewerHasPremiumPlan = $authUser->activeSubscription?->isValid()
+            && (bool) $authUser->activeSubscription->package;
+        $viewerCanSeeContactByPlan = $authUser->activeSubscription?->isValid()
+            && (bool) $authUser->activeSubscription->package?->can_see_contact;
+
+        $canViewPhotos = $isSelf || $this->privacyAllows(
+            $user->profile?->photo_privacy ?? 'all',
+            $hasAcceptedInterest,
+            $viewerHasPremiumPlan
+        );
+        $canViewContact = !$isSelf
+            && $viewerCanSeeContactByPlan
+            && $this->privacyAllows(
+                $user->profile?->contact_privacy ?? 'accepted_interest',
+                $hasAcceptedInterest,
+                $viewerHasPremiumPlan
+            );
+
+        $visiblePhotos = $canViewPhotos
+            ? ($isSelf ? $user->photos : $user->photos->where('is_approved', true)->values())
+            : collect();
+
         return view('user.profile.public-profile', compact(
-            'user', 'authUser', 'interestSent', 'isShortlisted', 'interestReceived'
+            'user',
+            'authUser',
+            'interestSent',
+            'isShortlisted',
+            'interestReceived',
+            'canViewPhotos',
+            'canViewContact',
+            'visiblePhotos'
         ));
+    }
+
+    private function privacyAllows(string $setting, bool $hasAcceptedInterest, bool $viewerHasPremiumPlan): bool
+    {
+        return match ($setting) {
+            'all' => true,
+            'accepted_interest' => $hasAcceptedInterest,
+            'premium' => $viewerHasPremiumPlan,
+            default => false,
+        };
     }
 
     // =========================================================================

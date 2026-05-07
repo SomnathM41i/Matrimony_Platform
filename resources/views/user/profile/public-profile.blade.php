@@ -7,7 +7,8 @@
 @php
     $profile  = $user->profile;
     $pref     = $user->partnerPreference;
-    $photoUrl = $user->primaryPhoto?->url ?? asset('assets/images/default-user.png');
+    $displayPhoto = $visiblePhotos->firstWhere('is_primary', true) ?? $visiblePhotos->first();
+    $photoUrl = $displayPhoto?->url ?? asset('assets/images/default-user.png');
     $isSelf   = auth()->id() === $user->id;
 
     $fmt = fn($v) => $v ? ucwords(str_replace('_', ' ', $v)) : null;
@@ -528,7 +529,7 @@
             <div class="mp-item">
               <label>Annual Income</label>
               <span class="value {{ !$profile->annualIncomeRange ? 'empty' : '' }}">
-                {{ $profile->annualIncomeRange?->label ?? '—' }}
+                {{ $profile->annualIncomeRange?->display_label ?? '—' }}
               </span>
             </div>
 
@@ -603,7 +604,7 @@
       </div>
 
       {{-- Photos --}}
-      @if($user->photos->isNotEmpty())
+      @if($visiblePhotos->isNotEmpty())
       <div class="mp-card">
         <div class="mp-card-header">
           <h3 class="mp-card-title">
@@ -611,11 +612,22 @@
           </h3>
         </div>
         <div class="mp-gallery">
-          @foreach($user->photos->where('is_approved', true) as $photo)
+          @foreach($visiblePhotos as $photo)
             <div class="mp-gallery-item">
               <img src="{{ $photo->thumbnail_url ?? $photo->url }}" alt="Photo">
             </div>
           @endforeach
+        </div>
+      </div>
+      @elseif(!$canViewPhotos)
+      <div class="mp-card">
+        <div class="mp-card-header">
+          <h3 class="mp-card-title">
+            <span class="icon" style="background:#f0f9ff;">📷</span> Photos
+          </h3>
+        </div>
+        <div class="mp-gallery">
+          <div class="mp-no-photo">Photos are private for this profile.</div>
         </div>
       </div>
       @endif
@@ -709,6 +721,33 @@
       </div>
       @endif
 
+      {{-- Contact Details --}}
+      @if(!$isSelf)
+      <div class="mp-card">
+        <div class="mp-card-header">
+          <h3 class="mp-card-title">
+            <span class="icon" style="background:#ecfdf5;">📞</span> Contact Details
+          </h3>
+        </div>
+        <div class="mp-card-body">
+          @if($canViewContact)
+            <div class="mp-item" style="margin-bottom:12px;">
+              <label>Email</label>
+              <span class="value">{{ $user->email }}</span>
+            </div>
+            <div class="mp-item">
+              <label>Phone</label>
+              <span class="value">{{ $user->phone ?? '—' }}</span>
+            </div>
+          @else
+            <p style="font-size:0.85rem;color:#6b7280;margin:0;line-height:1.6;">
+              Contact details are private or require a plan with contact access.
+            </p>
+          @endif
+        </div>
+      </div>
+      @endif
+
       {{-- Quick Stats --}}
       <div class="mp-card">
         <div class="mp-card-header">
@@ -723,7 +762,7 @@
               <div class="lbl">Complete</div>
             </div>
             <div class="pub-stat">
-              <div class="num">{{ $user->photos->count() }}</div>
+              <div class="num">{{ $visiblePhotos->count() }}</div>
               <div class="lbl">Photos</div>
             </div>
             <div class="pub-stat">

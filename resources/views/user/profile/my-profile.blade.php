@@ -720,7 +720,7 @@
             <div class="mp-item">
               <label>Annual Income</label>
               <span class="value {{ !$profile->annualIncomeRange ? 'empty' : '' }}">
-                {{ $profile->annualIncomeRange?->label ?? '—' }}
+                {{ $profile->annualIncomeRange?->display_label ?? '—' }}
               </span>
             </div>
 

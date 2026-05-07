@@ -186,10 +186,10 @@ class ProfileSetupService
         // ── Handle photo uploads ──────────────────────────────────────────
         if (!empty($data['photos'])) {
             $existingCount = $user->photos()->count();
-            $maxPhotos     = 5;
+            $maxPhotos     = $this->photoLimitFor($user);
 
             foreach ($data['photos'] as $index => $photoFile) {
-                if ($existingCount >= $maxPhotos) {
+                if ($maxPhotos !== null && $existingCount >= $maxPhotos) {
                     break; // Enforce admin-defined limit
                 }
 
@@ -229,6 +229,19 @@ class ProfileSetupService
             'contact_privacy'    => $data['contact_privacy'],
             'profile_visibility' => $data['profile_visibility'],
         ]);
+    }
+
+    private function photoLimitFor(User $user): ?int
+    {
+        $user->loadMissing('activeSubscription.package');
+
+        if ($user->activeSubscription?->isValid()) {
+            $limit = (int) $user->activeSubscription->package->photo_gallery_limit;
+
+            return $limit <= 0 ? null : $limit;
+        }
+
+        return 1;
     }
 
     // =========================================================================

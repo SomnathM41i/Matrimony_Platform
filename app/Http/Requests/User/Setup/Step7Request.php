@@ -3,6 +3,7 @@
 namespace App\Http\Requests\User\Setup;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class Step7Request extends FormRequest
 {
@@ -13,18 +14,30 @@ class Step7Request extends FormRequest
 
     public function rules(): array
     {
+        $user = $this->user()?->loadMissing('activeSubscription.package', 'photos');
+        $maxPhotos = $user?->activeSubscription?->isValid()
+            ? (int) $user->activeSubscription->package->photo_gallery_limit
+            : 1;
+        $remaining = $maxPhotos <= 0
+            ? null
+            : max(0, $maxPhotos - (int) $user?->photos()->count());
+
         return [
             // Photos (optional but validated if present)
-            'photos'   => ['nullable', 'array', 'max:5'],
+            'photos'   => array_filter(['nullable', 'array', $remaining !== null ? 'max:' . $remaining : null]),
             'photos.*' => ['image', 'mimes:jpeg,png,webp', 'max:5120'], // 5MB
 
             // Primary photo (optional)
-            'primary_photo_id' => ['nullable', 'integer', 'exists:profile_photos,id'],
+            'primary_photo_id' => [
+                'nullable',
+                'integer',
+                Rule::exists('profile_photos', 'id')->where('user_id', $this->user()?->id),
+            ],
 
             // Privacy settings
-            'photo_privacy' => ['required', 'in:all,matches_only,hidden'],
-            'contact_privacy' => ['required', 'in:all,accepted_interest,premium_only'],
-            'profile_visibility' => ['required', 'in:all,registered_users,hidden'],
+            'photo_privacy' => ['required', 'in:all,accepted_interest,premium'],
+            'contact_privacy' => ['required', 'in:all,accepted_interest,premium'],
+            'profile_visibility' => ['required', 'in:everyone,registered,hidden'],
         ];
     }
 

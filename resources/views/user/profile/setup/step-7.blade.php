@@ -62,14 +62,25 @@
         @endif
 
         {{-- Upload new photos --}}
-        @if ($photos->count() < $max_photos)
+        @php
+          $remainingPhotos = is_null($max_photos) ? null : max(0, $max_photos - $photos->count());
+          $canUploadMore = is_null($max_photos) || $photos->count() < $max_photos;
+        @endphp
+
+        @if ($canUploadMore)
         <div class="form-section">
           <h3 class="form-section-title">
             Upload Photos
-            <span class="photo-count-badge">{{ $photos->count() }} / {{ $max_photos }}</span>
+            <span class="photo-count-badge">
+              {{ $photos->count() }} / {{ is_null($max_photos) ? 'Unlimited' : $max_photos }}
+            </span>
           </h3>
           <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:20px;">
-            You can upload up to {{ $max_photos - $photos->count() }} more photo(s).
+            @if(is_null($remainingPhotos))
+              Your current plan allows unlimited photo uploads.
+            @else
+              You can upload up to {{ $remainingPhotos }} more photo(s).
+            @endif
             Accepted formats: JPG, PNG, WEBP. Max 5 MB per photo.
           </p>
 
@@ -77,7 +88,7 @@
             <input type="file" id="photoFiles" name="photos[]"
               accept="image/jpeg,image/png,image/webp"
               multiple
-              data-max="{{ $max_photos - $photos->count() }}"
+              data-max="{{ $remainingPhotos ?? 999 }}"
               style="display:none;">
             <div class="upload-icon">📸</div>
             <p class="upload-text">
@@ -95,7 +106,7 @@
         @else
           <div class="skip-notice" style="background:rgba(26,63,160,0.06);border-color:rgba(26,63,160,0.2);">
             <span>✅</span>
-            <div>You have uploaded the maximum of {{ $max_photos }} photos.</div>
+            <div>You have uploaded the maximum of {{ $max_photos }} photo(s) allowed by your current plan.</div>
           </div>
         @endif
 
@@ -114,8 +125,8 @@
                     <option value="{{ $opt }}"
                       {{ old('photo_privacy', $profile->photo_privacy ?? 'all') == $opt ? 'selected' : '' }}>
                       @if ($opt === 'all') Visible to Everyone
-                      @elseif ($opt === 'matches_only') Accepted Matches Only
-                      @else Hidden from All
+                      @elseif ($opt === 'accepted_interest') Accepted Interests Only
+                      @else Premium Members Only
                       @endif
                     </option>
                   @endforeach

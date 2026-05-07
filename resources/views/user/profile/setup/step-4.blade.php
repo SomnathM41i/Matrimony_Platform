@@ -106,11 +106,14 @@
               @foreach ($annual_income_ranges as $range)
                 <option value="{{ $range->id }}"
                   {{ old('annual_income_range_id', $profile->annual_income_range_id ?? '') == $range->id ? 'selected' : '' }}>
-                  {{ $range->label }}
+                  {{ $range->display_label }}
                 </option>
               @endforeach
             </select>
             @error('annual_income_range_id') <span class="field-error">{{ $message }}</span> @enderror
+            @if($annual_income_ranges->isEmpty())
+              <span class="field-error">No active income ranges are configured. Please add them from the admin lookup panel.</span>
+            @endif
             <span class="field-hint">Your income is shown only to matches you accept.</span>
           </div>
         </div>

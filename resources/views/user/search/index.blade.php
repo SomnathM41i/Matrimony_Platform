@@ -214,7 +214,7 @@
                     <div class="filter-section">
                         <span class="filter-label">Marital Status</span>
                         <div class="filter-checkbox-group">
-                            @foreach(['never_married','divorced','widowed','separated'] as $ms)
+                            @foreach(['never_married','divorced','widowed','awaiting_divorce'] as $ms)
                                 <label>
                                     <input type="checkbox" name="marital_status[]" value="{{ $ms }}"
                                         {{ in_array($ms, (array)($f['marital_status'] ?? [])) ? 'checked' : '' }}>
@@ -267,7 +267,7 @@
                         <span class="filter-label">Manglik</span>
                         <select name="manglik_status" class="filter-select">
                             <option value="">Any</option>
-                            @foreach(['manglik','non_manglik','anshik_manglik'] as $mg)
+                            @foreach(['yes','no','partial','dont_know'] as $mg)
                                 <option value="{{ $mg }}" {{ ($f['manglik_status'] ?? '') === $mg ? 'selected' : '' }}>
                                     {{ $fmt($mg) }}
                                 </option>
@@ -310,7 +310,7 @@
                             <option value="">Any</option>
                             @foreach($incomeRanges as $ir)
                                 <option value="{{ $ir->id }}" {{ ($f['annual_income_range_id'] ?? '') == $ir->id ? 'selected' : '' }}>
-                                    {{ $ir->label }}
+                                    {{ $ir->display_label }}
                                 </option>
                             @endforeach
                         </select>
@@ -386,7 +386,7 @@
                         <span class="filter-label">Complexion</span>
                         <select name="complexion" class="filter-select">
                             <option value="">Any</option>
-                            @foreach(['fair','wheatish','dark'] as $cx)
+                            @foreach(['very_fair','fair','wheatish','dark'] as $cx)
                                 <option value="{{ $cx }}" {{ ($f['complexion'] ?? '') === $cx ? 'selected' : '' }}>{{ $fmt($cx) }}</option>
                             @endforeach
                         </select>
@@ -475,7 +475,7 @@
                     @foreach($results as $member)
                         @php
                             $mp    = $member->profile;
-                            $photo = $member->primaryPhoto?->url;
+                            $photo = $member->can_view_photo ? $member->primaryPhoto?->url : null;
                             $name  = $mp?->first_name
                                         ? ($mp->first_name . ' ' . substr($mp->last_name ?? '', 0, 1) . '.')
                                         : $member->name;
