@@ -32,9 +32,21 @@ Route::get('/migrate', function () {
     ]);
 });
 
+use Illuminate\Support\Facades\Route;
+
 Route::get('/storage-link', function () {
 
-    Artisan::call('storage:link');
+    $target = storage_path('app/public');
+    $link = public_path('storage');
+
+    if (file_exists($link)) {
+        return response()->json([
+            'status' => true,
+            'message' => 'Storage link already exists ✅'
+        ]);
+    }
+
+    symlink($target, $link);
 
     return response()->json([
         'status' => true,
