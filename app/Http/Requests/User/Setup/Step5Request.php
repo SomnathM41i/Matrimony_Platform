@@ -24,7 +24,8 @@ class Step5Request extends FormRequest
             'residency_status'  => ['required', 'in:resident_indian,nri,oci,foreign_national'],
 
             // Family
-            'family_type'       => ['required', 'in:nuclear,joint,extended'],
+            // FIX #2: Removed 'extended' — DB enum only allows 'nuclear' and 'joint'
+            'family_type'       => ['required', 'in:nuclear,joint'],
             'family_status'     => ['nullable', 'in:middle_class,upper_middle_class,affluent,rich'],
             'father_occupation' => ['nullable', 'string', 'max:150'],
             'mother_occupation' => ['nullable', 'string', 'max:150'],

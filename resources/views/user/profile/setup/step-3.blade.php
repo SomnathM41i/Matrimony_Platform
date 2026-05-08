@@ -60,8 +60,8 @@
                   <option value="{{ $rashi->id }}"
                     {{ old('rashi_id', $profile->rashi_id ?? '') == $rashi->id ? 'selected' : '' }}>
                     {{ $rashi->name }}
-                    @if ($rashi->sanskrit_name && $rashi->sanskrit_name !== $rashi->name)
-                      ({{ $rashi->sanskrit_name }})
+                    @if ($rashi->english_name && $rashi->english_name !== $rashi->name)
+                      ({{ $rashi->english_name }})
                     @endif
                   </option>
                 @endforeach

@@ -258,7 +258,8 @@ class ProfileSetupController extends Controller
 
             5 => [
                 'countries'          => Country::where('is_active', true)->orderBy('sort_order')->get(['id', 'name']),
-                'family_types'       => ['nuclear', 'joint', 'extended'],
+                // FIX #2: Removed 'extended' — not in DB enum; matches Step5Request
+                'family_types'       => ['nuclear', 'joint'],
                 'family_statuses'    => ['middle_class', 'upper_middle_class', 'affluent', 'rich'],
                 'residency_statuses' => ['resident_indian', 'nri', 'oci', 'foreign_national'],
                 // Pre-populate if editing

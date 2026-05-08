@@ -123,6 +123,8 @@
                 <span class="field-error">{{ $message }}</span>
               @enderror
 
+            </div>{{-- FIX #1: Closed height form-group div (was missing, causing Weight to nest inside Height) --}}
+
             {{-- Weight --}}
             <div class="form-group">
               <label class="form-label">Weight</label>
@@ -201,7 +203,7 @@
           <div class="form-row form-row-3">
 
             <div class="form-group">
-              <label class="form-label">Diet</label>
+              <label class="form-label">Diet <span class="req">*</span></label>
 
               <select name="diet" class="form-control">
                 <option value="">Select</option>
@@ -215,7 +217,7 @@
             </div>
 
             <div class="form-group">
-              <label class="form-label">Smoking</label>
+              <label class="form-label">Smoking <span class="req">*</span></label>
 
               <select name="smoking" class="form-control">
                 <option value="">Select</option>
@@ -229,7 +231,7 @@
             </div>
 
             <div class="form-group">
-              <label class="form-label">Drinking</label>
+              <label class="form-label">Drinking <span class="req">*</span></label>
 
               <select name="drinking" class="form-control">
                 <option value="">Select</option>

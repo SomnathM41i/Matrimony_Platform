@@ -62,7 +62,9 @@
           <label>Date of Birth *</label>
           <input type="date" name="date_of_birth"
                 max="{{ now()->subYears(18)->format('Y-m-d') }}"
-                class="form-control">
+                {{-- FIX #9: Restore value on validation error --}}
+                value="{{ old('date_of_birth') }}"
+                class="form-control @error('date_of_birth') is-invalid @enderror">
           @error('date_of_birth') <small class="error">{{ $message }}</small> @enderror
         </div>
       </div>
@@ -103,7 +105,7 @@
 
       <div class="form-group" style="position:relative;">
         <label>Confirm Password *</label>
-        <input type="password" name="password_confirmation" class="form-control">
+        <input type="password" name="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror">
 
         <button type="button" class="toggle-pass"
           onclick="togglePassword(this)"

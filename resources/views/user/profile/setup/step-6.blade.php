@@ -47,7 +47,7 @@
             <div class="form-group">
               <label class="form-label">Min Age <span class="req">*</span></label>
               <select name="age_min" class="form-control">
-                @for ($i = 18; $i <= 60; $i++)
+                @for ($i = 18; $i <= 80; $i++) {{-- FIX #8: Extended to 80 to match Step6Request max:80 --}}
                   <option value="{{ $i }}"
                     {{ old('age_min', $pref->age_min ?? 22) == $i ? 'selected' : '' }}>
                     {{ $i }} years
@@ -60,7 +60,7 @@
             <div class="form-group">
               <label class="form-label">Max Age <span class="req">*</span></label>
               <select name="age_max" class="form-control">
-                @for ($i = 18; $i <= 60; $i++)
+                @for ($i = 18; $i <= 80; $i++) {{-- FIX #8: Extended to 80 to match Step6Request max:80 --}}
                   <option value="{{ $i }}"
                     {{ old('age_max', $pref->age_max ?? 35) == $i ? 'selected' : '' }}>
                     {{ $i }} years
@@ -265,9 +265,8 @@
         {{-- ABOUT --}}
         <div class="form-section">
           <h3 class="form-section-title">About Partner</h3>
-          <textarea name="about_partner" rows="4" class="form-control">
-            {{ old('about_partner', $pref->about_partner ?? '') }}
-          </textarea>
+          {{-- FIX #11: Value on same line as opening tag — prevents leading whitespace/newline being saved --}}
+          <textarea name="about_partner" rows="4" class="form-control">{{ old('about_partner', $pref->about_partner ?? '') }}</textarea>
         </div>
 
         <div class="setup-actions">
