@@ -32,6 +32,17 @@ Route::get('/migrate', function () {
     ]);
 });
 
+Route::get('/storage-link', function () {
+
+    Artisan::call('storage:link');
+
+    return response()->json([
+        'status' => true,
+        'message' => 'Storage linked successfully ✅'
+    ]);
+});
+
+
 
 Route::get('/', function () {
     return view('user.index');
