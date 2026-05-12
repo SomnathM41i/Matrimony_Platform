@@ -10,11 +10,12 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('user_subscription_id')->constrained()->cascadeOnDelete();
-            $table->string('feature_key');
-            $table->unsignedInteger('used')->default(0);
-            $table->date('usage_date')->nullable();
+            $table->string('feature_key');           // e.g. 'interests_limit', 'messages_limit', 'contact_views'
+            $table->unsignedInteger('used')->default(0); // cumulative total used during this subscription
             $table->timestamps();
-            $table->index(['user_id', 'feature_key', 'usage_date']);
+            // One row per user+subscription+feature; no date partitioning needed
+            $table->unique(['user_subscription_id', 'feature_key'], 'usage_sub_feature_unique');
+            $table->index(['user_id', 'feature_key']);
         });
     }
     public function down(): void { Schema::dropIfExists('subscription_usage'); }

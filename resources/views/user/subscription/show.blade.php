@@ -167,8 +167,10 @@
                     @if($pkg->can_see_contact)
                         <span class="sub-feat-pill">📞 Contact Access</span>
                     @endif
-                    @if($pkg->messages_per_day > 0)
-                        <span class="sub-feat-pill">💬 Direct Messaging</span>
+                    @if($pkg->messages_limit == 0 || $pkg->messages_limit > 0)
+                        <span class="sub-feat-pill">💬 Direct Messaging
+                            @if($pkg->messages_limit > 0)({{ $pkg->messages_limit }} total)@endif
+                        </span>
                     @endif
                     @if($pkg->priority_in_search)
                         <span class="sub-feat-pill">🔝 Priority Listing</span>
@@ -197,11 +199,8 @@
         {{-- Stats strip --}}
         <div class="sub-stats">
             <div class="sub-stat-card">
-                <div class="sub-stat-num">
-                    {{ $activeSubscription->expires_at->diffInDays(now()) > 0
-                        ? $activeSubscription->expires_at->diffInDays(now())
-                        : $activeSubscription->expires_at->diffInDays(now(), false) }}
-                </div>
+                {{-- FIX: was diffInDays(now()) which gives absolute value both ways; correct direction is now()->diffInDays(expires_at) --}}
+                <div class="sub-stat-num">{{ now()->diffInDays($activeSubscription->expires_at) }}</div>
                 <div class="sub-stat-lbl">Days Remaining</div>
             </div>
             <div class="sub-stat-card">
@@ -209,12 +208,12 @@
                 <div class="sub-stat-lbl">Photo Limit</div>
             </div>
             <div class="sub-stat-card">
-                <div class="sub-stat-num">{{ $pkg->messages_per_day <= 0 ? '∞' : $pkg->messages_per_day }}</div>
-                <div class="sub-stat-lbl">Messages / Day</div>
+                <div class="sub-stat-num">{{ $pkg->messages_limit <= 0 ? '∞' : $pkg->messages_limit }}</div>
+                <div class="sub-stat-lbl">Messages (Total)</div>
             </div>
             <div class="sub-stat-card">
-                <div class="sub-stat-num">{{ $pkg->interests_per_day <= 0 ? '∞' : $pkg->interests_per_day }}</div>
-                <div class="sub-stat-lbl">Interests / Day</div>
+                <div class="sub-stat-num">{{ $pkg->interests_limit <= 0 ? '∞' : $pkg->interests_limit }}</div>
+                <div class="sub-stat-lbl">Interests (Total)</div>
             </div>
         </div>
 

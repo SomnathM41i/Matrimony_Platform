@@ -238,7 +238,7 @@
                 // Feature rows: key → label
                 $featureMap = [
                     'Unlimited Profile Views'      => !$isFree,
-                    'Direct Messaging'             => $pkg->messages_per_day > 0,
+                    'Direct Messaging'             => $pkg->messages_limit > 0 || ($pkg->messages_limit == 0 && !$isFree),
                     'Contact Details Access'       => $pkg->can_see_contact,
                     'Advanced Search Filters'      => $pkg->priority_in_search,
                     'Priority Listing in Search'   => $pkg->priority_in_search,
@@ -388,8 +388,9 @@
                 <tr>
                     <td>Direct Messaging</td>
                     @foreach($packages as $pkg)
-                        <td class="{{ $pkg->messages_per_day > 0 ? 'yes' : 'no' }}">
-                            {{ $pkg->messages_per_day > 0 ? '✓' : '✗' }}
+                        @php $hasMsg = !$pkg->isFree() && ($pkg->messages_limit == 0 || $pkg->messages_limit > 0); @endphp
+                        <td class="{{ $hasMsg ? 'yes' : 'no' }}">
+                            {{ $hasMsg ? ($pkg->messages_limit > 0 ? $pkg->messages_limit . ' msgs' : '✓') : '✗' }}
                         </td>
                     @endforeach
                 </tr>

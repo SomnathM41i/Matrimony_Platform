@@ -110,7 +110,7 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title"><i class="fas fa-sliders"></i> Usage Limits</h3>
-                    <span style="font-size:.75rem;color:var(--text-muted);">Leave blank for unlimited</span>
+                    <span style="font-size:.75rem;color:var(--text-muted);">Total for full plan duration · 0 = Unlimited</span>
                 </div>
                 <div class="card-body">
 
@@ -120,28 +120,32 @@
                             <label class="form-label">Contact Views</label>
                             <input type="number" name="contact_views" class="form-control"
                                    value="{{ old('contact_views', $plan->contact_views ?? '') }}"
-                                   min="0" placeholder="Unlimited">
+                                   min="0" placeholder="0 = Unlimited">
+                            <small style="font-size:.7rem;color:var(--text-muted);">Total contacts viewable during plan</small>
                         </div>
 
                         <div class="form-group">
-                            <label class="form-label">Interests per Day</label>
-                            <input type="number" name="interests_per_day" class="form-control"
-                                   value="{{ old('interests_per_day', $plan->interests_per_day ?? '') }}"
-                                   min="0" placeholder="Unlimited">
+                            <label class="form-label">Interests Limit</label>
+                            <input type="number" name="interests_limit" class="form-control"
+                                   value="{{ old('interests_limit', $plan->interests_limit ?? '') }}"
+                                   min="0" placeholder="0 = Unlimited">
+                            <small style="font-size:.7rem;color:var(--text-muted);">Total interests sendable during plan</small>
                         </div>
 
                         <div class="form-group">
-                            <label class="form-label">Messages per Day</label>
-                            <input type="number" name="messages_per_day" class="form-control"
-                                   value="{{ old('messages_per_day', $plan->messages_per_day ?? '') }}"
-                                   min="0" placeholder="Unlimited">
+                            <label class="form-label">Messages Limit</label>
+                            <input type="number" name="messages_limit" class="form-control"
+                                   value="{{ old('messages_limit', $plan->messages_limit ?? '') }}"
+                                   min="0" placeholder="0 = Unlimited">
+                            <small style="font-size:.7rem;color:var(--text-muted);">Total messages sendable during plan</small>
                         </div>
 
                         <div class="form-group">
                             <label class="form-label">Photo Gallery Limit</label>
                             <input type="number" name="photo_gallery_limit" class="form-control"
                                    value="{{ old('photo_gallery_limit', $plan->photo_gallery_limit ?? '') }}"
-                                   min="0" placeholder="Unlimited">
+                                   min="0" placeholder="0 = Unlimited">
+                            <small style="font-size:.7rem;color:var(--text-muted);">Max photos user can upload</small>
                         </div>
                     </div>
 

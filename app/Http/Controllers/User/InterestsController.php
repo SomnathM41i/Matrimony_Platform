@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Interest;
+use App\Models\SubscriptionUsage;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -113,6 +114,21 @@ class InterestsController extends Controller
             return $this->respond($request, 'info', 'Interest already sent.');
         }
 
+        // Guard: total interests limit for the plan duration
+        $authUser->loadMissing('activeSubscription.package');
+        $sub = $authUser->activeSubscription;
+        if ($sub?->isValid()) {
+            $limit = (int) $sub->package->interests_limit;
+            if ($limit > 0) {
+                $used = SubscriptionUsage::getUsed($sub->id, 'interests_limit');
+                if ($used >= $limit) {
+                    return $this->respond($request, 'error',
+                        "You have reached your plan's interest limit of {$limit}. Upgrade your plan to send more."
+                    );
+                }
+            }
+        }
+
         $request->validate([
             'message' => 'nullable|string|max:500',
         ]);
@@ -123,6 +139,11 @@ class InterestsController extends Controller
             'status'      => 'pending',
             'message'     => $request->input('message'),
         ]);
+
+        // Track usage against subscription
+        if ($sub?->isValid()) {
+            SubscriptionUsage::increment($authUser->id, $sub->id, 'interests_limit');
+        }
 
         return $this->respond($request, 'success', 'Interest sent successfully!');
     }

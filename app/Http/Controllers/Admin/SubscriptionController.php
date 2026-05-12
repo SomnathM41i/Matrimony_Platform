@@ -179,8 +179,8 @@ class SubscriptionController extends Controller
             'is_featured'           => 'boolean',
             // Limits
             'contact_views'         => 'nullable|integer|min:0',
-            'interests_per_day'     => 'nullable|integer|min:0',
-            'messages_per_day'      => 'nullable|integer|min:0',
+            'interests_limit'       => 'nullable|integer|min:0',
+            'messages_limit'        => 'nullable|integer|min:0',
             'photo_gallery_limit'   => 'nullable|integer|min:0',
             // Feature toggles
             'can_see_contact'       => 'boolean',

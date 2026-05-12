@@ -147,10 +147,10 @@
 
                 @php
                     $features = [
-                        ['icon'=>'fa-eye',        'label'=>'Contact Views',   'val'=> $plan->contact_views ?? '∞'],
-                        ['icon'=>'fa-heart',       'label'=>'Interests/Day',   'val'=> $plan->interests_per_day ?? '∞'],
-                        ['icon'=>'fa-message',     'label'=>'Messages/Day',    'val'=> $plan->messages_per_day ?? '∞'],
-                        ['icon'=>'fa-image',       'label'=>'Photo Gallery',   'val'=> $plan->photo_gallery_limit ?? '∞'],
+                        ['icon'=>'fa-eye',        'label'=>'Contact Views',   'val'=> $plan->contact_views   > 0 ? $plan->contact_views   : '∞'],
+                        ['icon'=>'fa-heart',       'label'=>'Interests Limit', 'val'=> $plan->interests_limit > 0 ? $plan->interests_limit : '∞'],
+                        ['icon'=>'fa-message',     'label'=>'Messages Limit',  'val'=> $plan->messages_limit  > 0 ? $plan->messages_limit  : '∞'],
+                        ['icon'=>'fa-image',       'label'=>'Photo Gallery',   'val'=> $plan->photo_gallery_limit > 0 ? $plan->photo_gallery_limit : '∞'],
                     ];
                     $toggles = [
                         ['icon'=>'fa-phone',           'label'=>'See Contact',    'val'=>$plan->can_see_contact],

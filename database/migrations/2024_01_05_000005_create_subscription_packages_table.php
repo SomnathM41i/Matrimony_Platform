@@ -6,6 +6,11 @@ use Illuminate\Support\Facades\Schema;
 
 // FIX: Added 'trial_days' column for free trial support — required for
 // production SaaS subscription management from Admin Panel.
+// CHANGE: Limits are now totals for the full subscription duration, not per-day.
+//   - interests_per_day  → interests_limit   (total interests allowed during plan)
+//   - messages_per_day   → messages_limit    (total messages allowed during plan)
+//   - contact_views      → contact_views     (total contact views allowed, 0 = unlimited)
+//   - photo_gallery_limit stays the same     (max photos user can upload)
 
 return new class extends Migration {
     public function up(): void
@@ -24,10 +29,10 @@ return new class extends Migration {
             $table->boolean('is_active')->default(true);
             $table->unsignedSmallInteger('sort_order')->default(0);
 
-            // ── Feature Limits ────────────────────────────────────────
+            // ── Feature Limits (totals for the full plan duration) ────
             $table->integer('contact_views')->default(0);              // 0 = unlimited
-            $table->integer('interests_per_day')->default(5);
-            $table->integer('messages_per_day')->default(-1);          // -1 = unlimited
+            $table->integer('interests_limit')->default(0);            // 0 = unlimited
+            $table->integer('messages_limit')->default(0);             // 0 = unlimited
             $table->integer('photo_gallery_limit')->default(3);
 
             // ── Feature Flags (per package) ───────────────────────────
