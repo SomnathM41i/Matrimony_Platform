@@ -6,8 +6,8 @@
       <a href="{{ route('home') }}" class="nav-logo">
         <img src="{{ asset('assets/images/logo.png') }}" alt="ExpressMatrimony" onerror="this.style.display='none'">
         <div>
-          <span>Express </span>
-          <span style="color:var(--accent)">Matrimony</span>
+          <span>Vivaah </span>
+          <span style="color:var(--accent)">Express</span>
         </div>
       </a>
 
