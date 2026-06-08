@@ -69,7 +69,7 @@ Route::middleware(['auth', 'verified', 'user.active', 'user.role'])->group(funct
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('user.dashboard');
 
     // ── Profile Setup Wizard ──────────────────────────────────────────────
-    Route::prefix('profile/setup')->name('user.profile.setup.')->group(function () {
+    Route::prefix('profile/setup')->name('user.profile.setup.')->withoutMiddleware('verified')->group(function () {
         Route::get('/{step}',      [ProfileSetupController::class, 'show'])
              ->name('show')->where('step', '[1-7]');
         Route::post('/{step}',     [ProfileSetupController::class, 'save'])

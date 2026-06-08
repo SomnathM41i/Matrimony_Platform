@@ -38,27 +38,23 @@ class MatchesController extends Controller
 
         // ── Base query: opposite gender, active, verified ──────────────────
         $oppositeGender = $authUser->gender === 'male' ? 'female' : 'male';
-// dd($oppositeGender);
-        //  $query = User::query()
-        //     ->where('id', '!=', $authUser->id)
-        //     ->where('gender', $oppositeGender)
-        //     ->where('account_status', 'active')
-        //     ->whereNotNull('email_verified_at')
-        //     ->whereHas('profile', fn($q) => $q->whereNotNull('height_cm'))
-        //     ->with([
-        //         'profile',
-        //         'profile.religion',
-        //         'profile.caste',
-        //         'profile.city',
-        //         'profile.state',
-        //         'profile.educationLevel',
-        //         'profile.profession',
-        //         'primaryPhoto',
-        //     ]);
 
-        $query = User::where('gender', $oppositeGender)
+        $query = User::query()
             ->where('id', '!=', $authUser->id)
-            ->select('id', 'profile_slug', 'name', 'gender');
+            ->where('gender', $oppositeGender)
+            ->where('account_status', 'active')
+            ->whereNotNull('email_verified_at')
+            ->whereHas('profile', fn($q) => $q->whereNotNull('height_cm'))
+            ->with([
+                'profile',
+                'profile.religion',
+                'profile.caste',
+                'profile.city',
+                'profile.state',
+                'profile.educationLevel',
+                'profile.profession',
+                'primaryPhoto',
+            ]);
 
         // ── Filters from request ───────────────────────────────────────────
         $filters = $this->applyFilters($query, $request, $authUser, $pref);
@@ -69,11 +65,7 @@ class MatchesController extends Controller
 
         $matches = $query->paginate(12)->withQueryString();
 
-        // foreach ($matches as $match) {
-            
-        //    // dd($match->profile_slug);
-        // }
-// dd($matches->toArray());
+
         // ── Enrich: add interest/shortlist status per match ────────────────
         $sentInterestUserIds = $authUser->sentInterests->pluck('receiver_id')->flip();
         $shortlistedUserIds  = $authUser->shortlists->pluck('shortlisted_user_id')->flip();

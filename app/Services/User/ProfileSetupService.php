@@ -6,7 +6,8 @@ use App\Models\PartnerPreference;
 use App\Models\ProfilePhoto;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Facades\Image;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class ProfileSetupService
 {
@@ -254,9 +255,10 @@ class ProfileSetupService
         try {
             $thumbnailPath = "profiles/{$userId}/thumbs/" . basename($originalPath);
 
-            $image = Image::make($file)
-                          ->fit(200, 200)
-                          ->encode();
+            $manager = new ImageManager(new Driver());
+            $image = $manager->read($file)
+                          ->cover(200, 200)
+                          ->encodeByExtension('jpg');
 
             Storage::disk('public')->put($thumbnailPath, $image);
 

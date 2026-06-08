@@ -29,7 +29,10 @@ class AdminAuthenticate
             return $next($request);
         }
 
-        if (!$user->role) { /* ... */ }
+        if (!$user->role) {
+            Auth::logout();
+            return redirect()->route('admin.login')->with('error', 'Access denied. No role assigned.');
+        }
 
         $allowedRoles = ['super_admin', 'admin', 'relationship_manager'];
         if (!in_array($user->role->name, $allowedRoles, true)) {

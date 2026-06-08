@@ -274,7 +274,7 @@ class UserController extends Controller
 
         $startDate = Carbon::parse($request->start_date);
         $endDate   = $startDate->copy()->addDays($plan->duration_days);
-///dd($plan->price);
+
         UserSubscription::create([
             'user_id'                 => $user->id,
             'subscription_package_id' => $plan->id,

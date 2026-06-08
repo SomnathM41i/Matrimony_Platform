@@ -18,7 +18,7 @@ class FeatureFlagController extends Controller
     public function index(): View
     {
         $flags = FeatureFlag::orderBy('key')->get();
-        return view('admin.feature-flags.index', compact('flags'));
+        return view('admin.settings.feature-flags.index', compact('flags'));
     }
 
     public function store(Request $request): RedirectResponse
