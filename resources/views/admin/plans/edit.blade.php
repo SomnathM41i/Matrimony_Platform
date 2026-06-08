@@ -18,7 +18,7 @@
                 {{ $plan->is_active ? 'Active' : 'Inactive' }}
             </span>
             @if($plan->is_featured)
-                <span class="badge badge-premium" style="padding:.4rem 1rem;font-size:.8rem;">⭐ Featured</span>
+                <span class="badge badge-premium" style="padding:.4rem 1rem;font-size:.8rem;"><i class="fas fa-star" style="color:var(--gold);"></i> Featured</span>
             @endif
         </div>
     </div>

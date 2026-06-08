@@ -157,13 +157,13 @@
             @if($savedSearches->isNotEmpty())
             <div class="filter-card">
                 <h3 class="filter-card-title">
-                    <svg width="15" height="15" fill="none" stroke="#7c3aed" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+                    <i class="fas fa-sliders" style="color:var(--primary);"></i>
                     Saved Searches
                 </h3>
                 @foreach($savedSearches as $ss)
                     <div class="saved-search-item">
                         <a class="run" href="{{ route('user.search.index', $ss->filters ?? []) }}">
-                            {{ $ss->name }}
+                            <i class="fas fa-floppy-disk"></i> {{ $ss->name }}
                         </a>
                         <form method="POST" action="{{ route('user.search.saved.delete', $ss) }}" style="margin:0;">
                             @csrf @method('DELETE')
@@ -235,7 +235,7 @@
 
                 {{-- Religion & Community --}}
                 <div class="filter-card">
-                    <h3 class="filter-card-title">Religion</h3>
+                    <h3 class="filter-card-title"><i class="fas fa-temple-hindu"></i> Religion</h3>
 
                     <div class="filter-section">
                         <span class="filter-label">Religion</span>
@@ -278,7 +278,7 @@
 
                 {{-- Education & Career --}}
                 <div class="filter-card">
-                    <h3 class="filter-card-title">Education & Career</h3>
+                    <h3 class="filter-card-title"><i class="fas fa-graduation-cap"></i> Education & Career</h3>
 
                     <div class="filter-section">
                         <span class="filter-label">Education</span>
@@ -319,7 +319,7 @@
 
                 {{-- Location --}}
                 <div class="filter-card">
-                    <h3 class="filter-card-title">Location</h3>
+                    <h3 class="filter-card-title"><i class="fas fa-location-dot"></i> Location</h3>
 
                     <div class="filter-section">
                         <span class="filter-label">Country</span>
@@ -360,7 +360,7 @@
 
                 {{-- Lifestyle --}}
                 <div class="filter-card">
-                    <h3 class="filter-card-title">Lifestyle</h3>
+                    <h3 class="filter-card-title"><i class="fas fa-heart"></i> Lifestyle</h3>
 
                     <div class="filter-section">
                         <span class="filter-label">Diet</span>
@@ -393,7 +393,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn-apply">Search</button>
+                <button type="submit" class="btn-apply"><i class="fas fa-magnifying-glass"></i> Search</button>
                 <a href="{{ route('user.search.index') }}" class="btn-reset">Reset All Filters</a>
 
             </form>
@@ -405,14 +405,14 @@
             @if($results === null)
                 {{-- No search run yet --}}
                 <div class="search-prompt">
-                    <div class="icon"></div>
+                    <div class="icon"><i class="fas fa-search"></i></div>
                     <h3>Set your filters and search</h3>
                     <p>Use the filters on the left to find profiles matching exactly what you're looking for.</p>
                 </div>
 
             @elseif($results->isEmpty())
                 <div class="search-prompt">
-                    <div class="icon"></div>
+                    <div class="icon"><i class="fas fa-frown"></i></div>
                     <h3>No profiles found</h3>
                     <p>Try broadening your filters — fewer criteria usually returns more matches.</p>
                 </div>
@@ -491,18 +491,18 @@
                                     <div class="member-photo-placeholder"></div>
                                 @endif
                                 @if($member->is_premium)
-                                    <span class="member-premium-badge">⭐ Premium</span>
+                                    <span class="member-premium-badge"><i class="fas fa-star" style="color:var(--gold);"></i> Premium</span>
                                 @endif
                             </div>
                             <div class="member-body">
-                                <h3 class="member-name" title="{{ $name }}">{{ $name }}</h3>
+                                <h3 class="member-name" title="{{ $name }}"><i class="fas fa-user"></i> {{ $name }}</h3>
                                 <p class="member-sub">
                                     {{ $age ? $age . ' yrs' : '' }}
                                     @if($member->profile_slug) · <span style="color:#9ca3af;font-weight:400;">{{ $member->profile_slug }}</span> @endif
                                 </p>
                                 <div class="member-meta">
-                                    @if($loc)<span class="member-meta-item">{{ $loc }}</span>@endif
-                                    @if($mp?->religion?->name)<span class="member-meta-item">{{ $mp->religion->name }}</span>@endif
+                                    @if($loc)<span class="member-meta-item"><i class="fas fa-location-dot"></i> {{ $loc }}</span>@endif
+                                    @if($mp?->religion?->name)<span class="member-meta-item"><i class="fas fa-temple-hindu"></i> {{ $mp->religion->name }}</span>@endif
                                     @if($mp?->educationLevel?->name)<span class="member-meta-item">{{ $mp->educationLevel->name }}</span>@endif
                                 </div>
                                 <div class="member-actions">
@@ -520,7 +520,7 @@
                                     <form method="POST" action="{{ route('user.shortlist.toggle', $member) }}" style="display:contents;">
                                         @csrf
                                         <button class="m-btn outline {{ $member->is_shortlisted ? 'shortlisted' : '' }}" title="Shortlist">
-                                            {{ $member->is_shortlisted ? '★' : '☆' }}
+                                            @if($member->is_shortlisted)<i class="fas fa-star" style="color:var(--gold);"></i>@else<i class="far fa-star" style="color:var(--gold);"></i>@endif
                                         </button>
                                     </form>
                                 </div>
@@ -546,7 +546,7 @@
                             @endif
                         @endforeach
                         <input type="text" name="search_name" placeholder="Name this search…" required>
-                        <button type="submit">Save</button>
+                        <button type="submit"><i class="fas fa-floppy-disk"></i> Save</button>
                     </form>
                 </div>
 

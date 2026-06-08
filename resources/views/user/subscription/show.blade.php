@@ -11,7 +11,7 @@
             <a href="{{ route('user.dashboard') }}">Dashboard</a><span>/</span>
             <span>My Subscription</span>
         </div>
-        <h1>My Subscription</h1>
+        <h1><i class="fas fa-gem"></i> My Subscription</h1>
         <p>View your current plan, benefits, and payment history.</p>
     </div>
 </section>
@@ -146,11 +146,11 @@
     @if($activeSubscription && $activeSubscription->isValid())
         @php $pkg = $activeSubscription->package; @endphp
         <div class="sub-status-card active">
-            <div class="sub-status-icon"></div>
+            <div class="sub-status-icon"><i class="fas fa-circle-check" style="font-size:3rem;color:#fff;"></i></div>
             <div class="sub-status-body">
-                <span class="sub-status-badge badge-active">✓ Active</span>
-                <h2>{{ $pkg->name }}</h2>
-                <p>Started: {{ $activeSubscription->starts_at->format('d M Y') }}
+                <span class="sub-status-badge badge-active"><i class="fas fa-circle-check" style="color:currentColor;"></i> Active</span>
+                <h2><i class="fas fa-gem"></i> {{ $pkg->name }}</h2>
+                <p><i class="fas fa-calendar"></i> Started: {{ $activeSubscription->starts_at->format('d M Y') }}
                    &nbsp;·&nbsp;
                    Expires: <strong>{{ $activeSubscription->expires_at->format('d M Y') }}</strong>
                    ({{ $activeSubscription->expires_at->diffForHumans() }})
@@ -176,7 +176,7 @@
                         <span class="sub-feat-pill">Priority Listing</span>
                     @endif
                     @if($pkg->highlight_profile)
-                        <span class="sub-feat-pill">⭐ Profile Highlight</span>
+                        <span class="sub-feat-pill"><i class="fas fa-star" style="color:var(--gold);"></i> Profile Highlight</span>
                     @endif
                     @if($pkg->can_see_full_horoscope)
                         <span class="sub-feat-pill">Horoscope Matching</span>
@@ -220,15 +220,15 @@
     @else
         {{-- No active subscription --}}
         <div class="sub-status-card free">
-            <div class="sub-status-icon"></div>
+            <div class="sub-status-icon"><i class="fas fa-star" style="font-size:3rem;color:var(--text-muted);"></i></div>
             <div class="sub-status-body">
-                <span class="sub-status-badge badge-free">Free Plan</span>
-                <h2>Basic (Free) Plan</h2>
+                <span class="sub-status-badge badge-free"><i class="fas fa-circle-check" style="color:currentColor;"></i> Free Plan</span>
+                <h2><i class="fas fa-gem"></i> Basic (Free) Plan</h2>
                 <p>You are currently on the free plan. Upgrade to unlock direct messaging, contact access, and more.</p>
                 <div class="sub-features">
-                    <span class="sub-feat-pill dark">✓ Create Profile</span>
-                    <span class="sub-feat-pill dark">✓ Express Interest</span>
-                    <span class="sub-feat-pill dark">✓ Basic Search</span>
+                    <span class="sub-feat-pill dark"><i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i> Create Profile</span>
+                    <span class="sub-feat-pill dark"><i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i> Express Interest</span>
+                    <span class="sub-feat-pill dark"><i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i> Basic Search</span>
                 </div>
             </div>
         </div>
@@ -240,7 +240,7 @@
                 <p style="margin:0;font-size:0.87rem;color:#6b7280;">Premium members get 3× more profile responses on average.</p>
             </div>
             <a href="{{ route('user.packages.index') }}" class="btn btn-primary">
-                View Plans →
+                <i class="fas fa-arrow-right"></i> View Plans
             </a>
         </div>
     @endif
@@ -256,7 +256,7 @@
 
     @if($history->isEmpty())
         <div class="card" style="padding:40px;text-align:center;color:#9ca3af;">
-            <div style="font-size:2.5rem;margin-bottom:12px;"></div>
+            <div style="font-size:2.5rem;margin-bottom:12px;"><i class="fas fa-receipt" style="color:var(--border);"></i></div>
             <p style="margin:0;">No subscription history yet.</p>
         </div>
     @else

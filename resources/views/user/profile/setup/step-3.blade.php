@@ -3,7 +3,7 @@
 
 @section('content')
 
-@include('user.profile.setup._progress', ['step' => 3])
+@include('user.profile.setup._progress', ['step' => 3, 'pct' => $profile?->completion_percentage ?? 0, 'completed' => $completed])
 
 @php
   $birthTimeValue = old('birth_time', $profile->birth_time ?? '');
@@ -30,7 +30,7 @@
       @endif
 
       <div class="setup-card-header">
-        <div class="setup-step-icon"></div>
+        <div class="setup-step-icon"><i class="fas fa-moon"></i></div>
         <div>
           <h2>Horoscope Details</h2>
           <p>Share your astrological information — or skip and fill it later</p>

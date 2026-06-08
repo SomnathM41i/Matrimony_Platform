@@ -3,14 +3,14 @@
 
 @section('content')
 
-@include('user.profile.setup._progress', ['step' => 2])
+@include('user.profile.setup._progress', ['step' => 2, 'pct' => $profile?->completion_percentage ?? 0, 'completed' => $completed])
 
 <section class="setup-section">
   <div class="container">
     <div class="setup-card">
 
       @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
+        <div class="alert alert-success"><i class="fas fa-circle-check"></i> {{ session('success') }}</div>
       @endif
       @if ($errors->any())
         <div class="alert alert-error">
@@ -20,7 +20,7 @@
       @endif
 
       <div class="setup-card-header">
-        <div class="setup-step-icon"></div>
+        <div class="setup-step-icon"><i class="fas fa-place-of-worship"></i></div>
         <div>
           <h2>Religion &amp; Community</h2>
           <p>Share your religious background and community identity</p>

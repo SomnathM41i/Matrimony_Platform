@@ -106,7 +106,7 @@
                 font-size:.65rem; font-weight:800; letter-spacing:1.5px;
                 text-transform:uppercase; padding:3px 12px; border-radius:20px;
                 box-shadow:0 3px 10px rgba(201,168,108,.4);">
-                ⭐ Featured
+                <i class="fas fa-star" style="color:var(--gold);"></i> Featured
             </div>
         @endif
 

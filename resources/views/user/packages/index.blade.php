@@ -14,7 +14,7 @@
             <a href="{{ route('user.dashboard') }}">Dashboard</a><span>/</span>
             <span>Packages</span>
         </div>
-        <h1>Flexible Packages</h1>
+        <h1><i class="fas fa-gem"></i> Flexible Packages</h1>
         <p>Choose the plan that best suits your needs. Start free, upgrade anytime without hassle.</p>
     </div>
 </section>
@@ -192,7 +192,7 @@
                 </p>
             </div>
             <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
-                <span class="pkg-active-badge">✓ Active</span>
+                <span class="pkg-active-badge"><i class="fas fa-circle-check" style="color:currentColor;"></i> Active</span>
                 <a href="{{ route('user.subscription.show') }}"
                    class="pkg-cta outline"
                    style="width:auto;padding:8px 20px;border-color:rgba(255,255,255,.6);color:#fff;">
@@ -207,7 +207,7 @@
     ══════════════════════════════════════════════════════════════ --}}
     <div class="section-header text-center" style="margin-bottom:36px;">
         <div class="badge">Pricing Plans</div>
-        <h2>Choose Your Perfect Plan</h2>
+        <h2><i class="fas fa-gem"></i> Choose Your Perfect Plan</h2>
         <p>All plans include community-focused features. Premium plans unlock more connections.</p>
         <div class="divider"></div>
     </div>
@@ -266,7 +266,7 @@
                     <div class="pkg-ribbon vip">VIP</div>
                 @endif
 
-                <div class="pkg-name">{{ $pkg->name }}</div>
+                <div class="pkg-name">@if(!$isFree)<i class="fas fa-crown" style="color:var(--gold);"></i> @endif{{ $pkg->name }}</div>
 
                 <div class="pkg-price {{ $isFree ? 'free' : '' }}">
                     @if(!$isFree)<sup>₹</sup>@endif
@@ -276,15 +276,15 @@
 
                 <ul class="pkg-features">
                     {{-- Always-on --}}
-                    <li><span class="ck">✓</span> Create &amp; manage your profile</li>
-                    <li><span class="ck">✓</span> Basic search filters</li>
-                    <li><span class="ck">✓</span> Express interest</li>
-                    <li><span class="ck">✓</span> {{ $photoLabel }}</li>
+                    <li><span class="ck"><i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i></span> Create &amp; manage your profile</li>
+                    <li><span class="ck"><i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i></span> Basic search filters</li>
+                    <li><span class="ck"><i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i></span> Express interest</li>
+                    <li><span class="ck"><i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i></span> {{ $photoLabel }}</li>
 
                     {{-- Dynamic features --}}
                     @foreach($featureMap as $label => $enabled)
                         <li class="{{ $enabled ? '' : 'muted' }}">
-                            <span class="{{ $enabled ? 'ck' : 'cx' }}">{{ $enabled ? '✓' : '✗' }}</span>
+                            <span class="{{ $enabled ? 'ck' : 'cx' }}">@if($enabled)<i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i>@else<i class="fas fa-circle-xmark" style="color:#ef4444;"></i>@endif</span>
                             {{ $label }}
                         </li>
                     @endforeach
@@ -292,14 +292,14 @@
                     {{-- Extra features from JSON --}}
                     @if($pkg->extra_features)
                         @foreach($pkg->extra_features as $extra)
-                            <li><span class="ck">✓</span> {{ $extra }}</li>
+                            <li><span class="ck"><i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i></span> {{ $extra }}</li>
                         @endforeach
                     @endif
                 </ul>
 
                 {{-- CTA button --}}
                 @if($isCurrent)
-                    <span class="pkg-cta disabled">✓ Current Plan</span>
+                    <span class="pkg-cta disabled"><i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i> Current Plan</span>
                 @elseif($isFree)
                     @guest
                         <a href="{{ route('user.register') }}" class="pkg-cta outline">Get Started Free</a>
@@ -313,7 +313,7 @@
                         data-plan-id="{{ $pkg->id }}"
                         data-plan-name="{{ $pkg->name }}"
                         onclick="handleBuyPackage(this)">
-                        {{ $isVip ? '⭐ Buy ' . $pkg->name : 'Buy ' . $pkg->name . ' →' }}
+                        @if($isVip)<i class="fas fa-star" style="color:var(--gold);"></i>@else<i class="fas fa-arrow-right"></i>@endif Buy {{ $pkg->name }}
                     </button>
                 @endif
 
@@ -332,7 +332,7 @@
     ══════════════════════════════════════════════════════════════ --}}
     <div class="section-header text-center" style="margin-bottom:28px;">
         <div class="badge">Side by Side</div>
-        <h2>Plan Comparison</h2>
+        <h2><i class="fas fa-gem"></i> Plan Comparison</h2>
         <p>Compare all features across plans to choose what's right for you.</p>
         <div class="divider"></div>
     </div>
@@ -350,7 +350,7 @@
             <tbody>
                 <tr>
                     <td>Profile Creation</td>
-                    @foreach($packages as $pkg)<td class="yes">✓</td>@endforeach
+                    @foreach($packages as $pkg)<td class="yes"><i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i></td>@endforeach
                 </tr>
                 <tr>
                     <td>Profile Views / Month</td>
@@ -371,26 +371,31 @@
                 </tr>
                 <tr>
                     <td>Basic Search</td>
-                    @foreach($packages as $pkg)<td class="yes">✓</td>@endforeach
+                    @foreach($packages as $pkg)<td class="yes"><i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i></td>@endforeach
                 </tr>
                 <tr>
                     <td>Advanced Filters</td>
                     @foreach($packages as $pkg)
                         <td class="{{ $pkg->priority_in_search ? 'yes' : 'no' }}">
-                            {{ $pkg->priority_in_search ? '✓' : '✗' }}
+                            @if($pkg->priority_in_search)<i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i>@else<i class="fas fa-circle-xmark" style="color:#ef4444;"></i>@endif
                         </td>
                     @endforeach
                 </tr>
                 <tr>
                     <td>Express Interest</td>
-                    @foreach($packages as $pkg)<td class="yes">✓</td>@endforeach
+                    @foreach($packages as $pkg)<td class="yes"><i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i></td>@endforeach
                 </tr>
                 <tr>
                     <td>Direct Messaging</td>
                     @foreach($packages as $pkg)
                         @php $hasMsg = !$pkg->isFree() && ($pkg->messages_limit == 0 || $pkg->messages_limit > 0); @endphp
                         <td class="{{ $hasMsg ? 'yes' : 'no' }}">
-                            {{ $hasMsg ? ($pkg->messages_limit > 0 ? $pkg->messages_limit . ' msgs' : '✓') : '✗' }}
+                            @if($hasMsg)
+                                @if($pkg->messages_limit > 0){{ $pkg->messages_limit }} msgs
+                                @else<i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i>
+                                @endif
+                            @else<i class="fas fa-circle-xmark" style="color:#ef4444;"></i>
+                            @endif
                         </td>
                     @endforeach
                 </tr>
@@ -398,7 +403,7 @@
                     <td>Contact Details Access</td>
                     @foreach($packages as $pkg)
                         <td class="{{ $pkg->can_see_contact ? 'yes' : 'no' }}">
-                            {{ $pkg->can_see_contact ? '✓' : '✗' }}
+                            @if($pkg->can_see_contact)<i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i>@else<i class="fas fa-circle-xmark" style="color:#ef4444;"></i>@endif
                         </td>
                     @endforeach
                 </tr>
@@ -406,7 +411,7 @@
                     <td>Priority Listing</td>
                     @foreach($packages as $pkg)
                         <td class="{{ $pkg->priority_in_search ? 'yes' : 'no' }}">
-                            {{ $pkg->priority_in_search ? '✓' : '✗' }}
+                            @if($pkg->priority_in_search)<i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i>@else<i class="fas fa-circle-xmark" style="color:#ef4444;"></i>@endif
                         </td>
                     @endforeach
                 </tr>
@@ -414,7 +419,7 @@
                     <td>Profile Highlight</td>
                     @foreach($packages as $pkg)
                         <td class="{{ $pkg->highlight_profile ? 'yes' : 'no' }}">
-                            {{ $pkg->highlight_profile ? '✓' : '✗' }}
+                            @if($pkg->highlight_profile)<i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i>@else<i class="fas fa-circle-xmark" style="color:#ef4444;"></i>@endif
                         </td>
                     @endforeach
                 </tr>
@@ -422,7 +427,7 @@
                     <td>Horoscope Matching</td>
                     @foreach($packages as $pkg)
                         <td class="{{ $pkg->can_see_full_horoscope ? 'yes' : 'no' }}">
-                            {{ $pkg->can_see_full_horoscope ? '✓' : '✗' }}
+                            @if($pkg->can_see_full_horoscope)<i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i>@else<i class="fas fa-circle-xmark" style="color:#ef4444;"></i>@endif
                         </td>
                     @endforeach
                 </tr>
@@ -430,9 +435,9 @@
                     <td>Support</td>
                     @foreach($packages as $pkg)
                         <td>
-                            @if($pkg->whatsapp_support) ✓ WhatsApp
+                            @if($pkg->whatsapp_support) <i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i> WhatsApp
                             @elseif(!$pkg->isFree()) Email Only
-                            @else ✗
+                            @else <i class="fas fa-circle-xmark" style="color:#ef4444;"></i>
                             @endif
                         </td>
                     @endforeach
@@ -441,7 +446,7 @@
                     <td>Relationship Manager</td>
                     @foreach($packages as $pkg)
                         <td class="{{ $pkg->rm_assistance ? 'yes' : 'no' }}">
-                            {{ $pkg->rm_assistance ? '✓' : '✗' }}
+                            @if($pkg->rm_assistance)<i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i>@else<i class="fas fa-circle-xmark" style="color:#ef4444;"></i>@endif
                         </td>
                     @endforeach
                 </tr>
@@ -468,7 +473,7 @@
     ══════════════════════════════════════════════════════════════ --}}
     <div class="section-header text-center" style="margin-bottom:28px;">
         <div class="badge">Help</div>
-        <h2>Frequently Asked Questions</h2>
+        <h2><i class="fas fa-gem"></i> Frequently Asked Questions</h2>
         <p>Have questions about our plans? We have answers.</p>
         <div class="divider"></div>
     </div>
@@ -510,7 +515,7 @@
     ══════════════════════════════════════════════════════════════ --}}
     <div class="section-header text-center" style="margin-bottom:28px;">
         <div class="badge">Policy</div>
-        <h2>Refund Policy</h2>
+        <h2><i class="fas fa-gem"></i> Refund Policy</h2>
         <div class="divider"></div>
     </div>
 

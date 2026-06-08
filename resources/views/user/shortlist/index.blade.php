@@ -134,10 +134,10 @@
     </div>
 
     @if($shortlists->isEmpty())
-        <div class="sl-empty">
-            <div class="icon">☆</div>
+            <div class="sl-empty">
+            <div class="icon"><i class="far fa-star" style="color:var(--gold);"></i></div>
             <h3>Your shortlist is empty</h3>
-            <p>Save profiles you like using the ☆ button on any profile or match card.</p>
+            <p>Save profiles you like using the <i class="far fa-star" style="color:var(--gold);"></i> button on any profile or match card.</p>
             <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
                 <a href="{{ route('user.matches.index') }}" class="btn btn-primary">Browse Matches</a>
                 <a href="{{ route('user.search.index') }}"  class="btn btn-outline">Search Members</a>
@@ -162,7 +162,7 @@
                     <form method="POST" action="{{ route('user.shortlist.remove', $sl) }}" style="display:contents;">
                         @csrf @method('DELETE')
                         <button type="submit" class="sl-remove-btn" title="Remove from shortlist"
-                                onclick="return confirm('Remove from shortlist?')"></button>
+                                onclick="return confirm('Remove from shortlist?')"><i class="fas fa-xmark"></i></button>
                     </form>
 
                     {{-- Photo --}}
@@ -174,14 +174,14 @@
                             <div class="sl-photo-placeholder"></div>
                         @endif
                         @if($member->is_premium)
-                            <span class="sl-premium-badge">⭐ Premium</span>
+                            <span class="sl-premium-badge"><i class="fas fa-star" style="color:var(--gold);"></i> Premium</span>
                         @endif
                         <span class="sl-saved-since">{{ $sl->created_at->diffForHumans(null, true) }}</span>
                     </div>
 
                     {{-- Body --}}
                     <div class="sl-body">
-                        <h3 class="sl-name" title="{{ $name }}">{{ $name }}</h3>
+                        <h3 class="sl-name" title="{{ $name }}"><i class="fas fa-user"></i> {{ $name }}</h3>
                         <p class="sl-sub">
                             {{ $age ? $age . ' yrs' : '' }}
                             @if($member->profile_slug)

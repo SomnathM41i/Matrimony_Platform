@@ -7,13 +7,14 @@
 @php
 $stepLabels = [
      1 => ['icon' => '<i class="fas fa-user"></i>', 'label' => 'Basic Info'],
-     2 => ['icon' => '<i class="fas fa-temple-hindu"></i>', 'label' => 'Religion'],
+     2 => ['icon' => '<i class="fas fa-place-of-worship"></i>', 'label' => 'Religion'],
      3 => ['icon' => '<i class="fas fa-moon"></i>', 'label' => 'Horoscope'],
      4 => ['icon' => '<i class="fas fa-graduation-cap"></i>', 'label' => 'Education'],
      5 => ['icon' => '<i class="fas fa-house"></i>', 'label' => 'Location'],
      6 => ['icon' => '<i class="fas fa-hand-holding-heart"></i>', 'label' => 'Partner Pref'],
      7 => ['icon' => '<i class="fas fa-camera"></i>', 'label' => 'Photos'],
 ];
+$completed = (int) ($completed ?? 0);
 @endphp
 
 <div class="setup-progress-header">
@@ -24,8 +25,8 @@ $stepLabels = [
         <p>Step {{ $step }} of 7 — {{ $stepLabels[$step]['label'] }}</p>
       </div>
       <div class="setup-completion">
-        <div class="completion-ring" style="--pct: {{ round(($step - 1) / 7 * 100) }}%">
-          <span>{{ round(($step - 1) / 7 * 100) }}%</span>
+        <div class="completion-ring" style="--pct: {{ $pct }}%">
+          <span>{{ $pct }}%</span>
         </div>
         <span class="completion-label">Complete</span>
       </div>
@@ -33,19 +34,23 @@ $stepLabels = [
 
     <div class="setup-steps-track">
       @foreach ($stepLabels as $n => $info)
-        <div class="setup-step-dot
-          {{ $n < $step ? 'done' : ($n == $step ? 'active' : 'pending') }}">
-          <div class="dot-circle">
-            @if ($n < $step)
-              ✓
-            @else
-              {{ $info['icon'] }}
-            @endif
+        <a href="{{ route('user.profile.setup.show', $n) }}"
+           class="setup-step-link"
+           style="text-decoration:none;display:flex;flex-direction:column;align-items:center;flex-shrink:0;">
+          <div class="setup-step-dot
+            {{ $n <= $completed ? 'done' : ($n == $step ? 'active' : 'pending') }}">
+            <div class="dot-circle">
+              @if ($n <= $completed)
+                <i class="fas fa-circle-check"></i>
+              @else
+                {!! $info['icon'] !!}
+              @endif
+            </div>
+            <span class="dot-label">{{ $info['label'] }}</span>
           </div>
-          <span class="dot-label">{{ $info['label'] }}</span>
-        </div>
+        </a>
         @if ($n < 7)
-          <div class="step-connector {{ $n < $step ? 'done' : '' }}"></div>
+          <div class="step-connector {{ $n <= $completed ? 'done' : '' }}"></div>
         @endif
       @endforeach
     </div>

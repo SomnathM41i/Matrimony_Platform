@@ -412,13 +412,13 @@
           </p>
           <div class="mp-hero-badges">
             @if($user->email_verified_at)
-              <span class="mp-badge verified">Email Verified</span>
+              <span class="mp-badge verified"><i class="fas fa-circle-check"></i> Email Verified</span>
             @endif
             @if($user->isPremiumActive())
-              <span class="mp-badge premium">Premium</span>
+              <span class="mp-badge premium"><i class="fas fa-crown"></i> Premium</span>
             @endif
             @if($profile->completion_percentage >= 100)
-              <span class="mp-badge verified">Profile Complete</span>
+              <span class="mp-badge verified"><i class="fas fa-circle-check"></i> Profile Complete</span>
             @else
               <span class="mp-badge" style="background:rgba(212,160,23,0.12);border-color:rgba(212,160,23,0.35);color:#fde68a;">
                 {{ $pct }}% Complete
@@ -467,7 +467,7 @@
       <div class="mp-card">
         <div class="mp-card-header">
           <h3 class="mp-card-title">
-            <span class="icon" style="background:#fff7ed;"></span> Basic Information
+            <span class="icon" style="background:#fff7ed;"><i class="fas fa-info-circle" style="color:#c2410c;"></i></span> Basic Information
           </h3>
           <a href="{{ route('user.profile.setup.show', 1) }}" class="mp-edit-link">Edit</a>
         </div>
@@ -559,7 +559,7 @@
       <div class="mp-card">
         <div class="mp-card-header">
           <h3 class="mp-card-title">
-            <span class="icon" style="background:#fef3c7;"></span> Religion & Community
+            <span class="icon" style="background:#fef3c7;"><i class="fas fa-temple-hindu" style="color:#d97706;"></i></span> Religion & Community
           </h3>
           <a href="{{ route('user.profile.setup.show', 2) }}" class="mp-edit-link">Edit</a>
         </div>
@@ -631,7 +631,7 @@
       <div class="mp-card">
         <div class="mp-card-header">
           <h3 class="mp-card-title">
-            <span class="icon" style="background:#f0f4ff;"></span> Horoscope
+            <span class="icon" style="background:#f0f4ff;"><i class="fas fa-moon" style="color:#2563eb;"></i></span> Horoscope
           </h3>
           <a href="{{ route('user.profile.setup.show', 3) }}" class="mp-edit-link">Edit</a>
         </div>
@@ -682,7 +682,7 @@
       <div class="mp-card">
         <div class="mp-card-header">
           <h3 class="mp-card-title">
-            <span class="icon" style="background:#ecfdf5;"></span> Education & Career
+            <span class="icon" style="background:#ecfdf5;"><i class="fas fa-graduation-cap" style="color:#059669;"></i></span> Education & Career
           </h3>
           <a href="{{ route('user.profile.setup.show', 4) }}" class="mp-edit-link">Edit</a>
         </div>
@@ -732,7 +732,7 @@
       <div class="mp-card">
         <div class="mp-card-header">
           <h3 class="mp-card-title">
-            <span class="icon" style="background:#fff1f2;"></span> Location & Family
+            <span class="icon" style="background:#fff1f2;"><i class="fas fa-house" style="color:#e11d48;"></i></span> Location & Family
           </h3>
           <a href="{{ route('user.profile.setup.show', 5) }}" class="mp-edit-link">Edit</a>
         </div>
@@ -828,7 +828,7 @@
       <div class="mp-card">
         <div class="mp-card-header">
           <h3 class="mp-card-title">
-            <span class="icon" style="background:#fdf2f8;"></span> Partner Preferences
+            <span class="icon" style="background:#fdf2f8;"><i class="fas fa-heart" style="color:#db2777;"></i></span> Partner Preferences
           </h3>
           <a href="{{ route('user.profile.setup.show', 6) }}" class="mp-edit-link">Edit</a>
         </div>
@@ -899,7 +899,7 @@
       <div class="mp-card">
         <div class="mp-card-header">
           <h3 class="mp-card-title">
-            <span class="icon" style="background:#fdf2f8;"></span> Partner Preferences
+            <span class="icon" style="background:#fdf2f8;"><i class="fas fa-heart" style="color:#db2777;"></i></span> Partner Preferences
           </h3>
         </div>
         <div class="mp-card-body" style="text-align:center;padding:28px;">
@@ -913,7 +913,7 @@
       <div class="mp-card">
         <div class="mp-card-header">
           <h3 class="mp-card-title">
-            <span class="icon" style="background:#f0f9ff;"></span> Photos
+            <span class="icon" style="background:#f0f9ff;"><i class="fas fa-camera" style="color:#0284c7;"></i></span> Photos
           </h3>
           <a href="{{ route('user.profile.setup.show', 7) }}" class="mp-edit-link">Manage</a>
         </div>
@@ -934,7 +934,7 @@
         @else
           <div class="mp-gallery">
             <div class="mp-no-photo">
-              <div style="font-size:2rem;margin-bottom:8px;"></div>
+              <div style="font-size:2rem;margin-bottom:8px;"><i class="fas fa-image"></i></div>
               <p style="margin:0 0 12px;">No photos uploaded yet.</p>
               <a href="{{ route('user.profile.setup.show', 7) }}" class="btn btn-primary btn-sm">Upload Photos</a>
             </div>
@@ -951,7 +951,7 @@
       <div class="mp-card" style="position:sticky;top:20px;">
         <div class="mp-card-header">
           <h3 class="mp-card-title">
-            <span class="icon" style="background:#fef9ee;"></span> Profile Strength
+            <span class="icon" style="background:#fef9ee;"><i class="fas fa-chart-simple" style="color:#92400e;"></i></span> Profile Strength
           </h3>
         </div>
         <div class="mp-card-body">
@@ -1002,7 +1002,7 @@
       <div class="mp-card">
         <div class="mp-card-header">
           <h3 class="mp-card-title">
-            <span class="icon" style="background:#f0f4ff;"></span> Account
+            <span class="icon" style="background:#f0f4ff;"><i class="fas fa-user-shield" style="color:#2563eb;"></i></span> Account
           </h3>
         </div>
         <div class="mp-card-body" style="padding:14px 24px;">
@@ -1036,7 +1036,7 @@
       <div class="mp-card">
         <div class="mp-card-header">
           <h3 class="mp-card-title">
-            <span class="icon" style="background:#f0fdf4;"></span> Privacy
+            <span class="icon" style="background:#f0fdf4;"><i class="fas fa-shield-halved" style="color:#059669;"></i></span> Privacy
           </h3>
           <a href="{{ route('user.profile.setup.show', 7) }}" class="mp-edit-link">Edit</a>
         </div>

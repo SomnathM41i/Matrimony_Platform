@@ -7,7 +7,7 @@
 <section class="page-hero">
   <div class="container">
     <nav class="breadcrumb"><a href="index.html">Home</a><span>›</span><span>Packages</span></nav>
-    <h1>Flexible Packages</h1>
+    <h1><i class="fas fa-gem"></i> Flexible Packages</h1>
     <p>Choose the plan that best suits your needs. Start free, upgrade anytime without hassle.</p>
   </div>
 </section>
@@ -17,7 +17,7 @@
   <div class="container">
     <div class="section-header text-center">
       <div class="badge">Pricing Plans</div>
-      <h2>Choose Your Perfect Plan</h2>
+      <h2><i class="fas fa-gem"></i> Choose Your Perfect Plan</h2>
       <p>All plans come with our community-focused features. Premium plans unlock more connections.</p>
       <div class="divider"></div>
     </div>
@@ -28,16 +28,16 @@
         <div class="package-price"><sup>₹</sup>0</div>
         <div class="package-duration">Free Forever</div>
         <ul class="package-features">
-          <li><span class="check">✓</span> Create your profile</li>
-          <li><span class="check">✓</span> 10 profile views per month</li>
-          <li><span class="check">✓</span> Basic search filters</li>
-          <li><span class="check">✓</span> Photo upload (1 photo)</li>
-          <li><span class="check">✓</span> Express interest</li>
-          <li><span class="cross"></span> Direct messaging</li>
-          <li><span class="cross"></span> Contact details access</li>
-          <li><span class="cross"></span> Advanced filters</li>
-          <li><span class="cross"></span> Priority listing</li>
-          <li><span class="cross"></span> Dedicated support</li>
+          <li><span class="check"><i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i></span> Create your profile</li>
+          <li><span class="check"><i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i></span> 10 profile views per month</li>
+          <li><span class="check"><i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i></span> Basic search filters</li>
+          <li><span class="check"><i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i></span> Photo upload (1 photo)</li>
+          <li><span class="check"><i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i></span> Express interest</li>
+          <li><span class="cross"><i class="fas fa-circle-xmark" style="color:#ef4444;"></i></span> Direct messaging</li>
+          <li><span class="cross"><i class="fas fa-circle-xmark" style="color:#ef4444;"></i></span> Contact details access</li>
+          <li><span class="cross"><i class="fas fa-circle-xmark" style="color:#ef4444;"></i></span> Advanced filters</li>
+          <li><span class="cross"><i class="fas fa-circle-xmark" style="color:#ef4444;"></i></span> Priority listing</li>
+          <li><span class="cross"><i class="fas fa-circle-xmark" style="color:#ef4444;"></i></span> Dedicated support</li>
         </ul>
         <a href="register.html" class="btn btn-outline btn-buy" data-plan="Basic" style="width:100%;justify-content:center">Get Started Free</a>
         <p style="font-size:0.78rem;color:var(--text-light);text-align:center;margin-top:12px;">No credit card required</p>
@@ -46,43 +46,43 @@
       <!-- Premium -->
       <div class="package-card featured reveal">
         <div class="package-badge">Most Popular</div>
-        <div class="package-name">Premium Plan</div>
+        <div class="package-name"><i class="fas fa-crown" style="color:var(--gold);"></i> Premium Plan</div>
         <div class="package-price"><sup>₹</sup>999</div>
         <div class="package-duration">Per 3 Months (₹333/month)</div>
         <ul class="package-features">
-          <li><span class="check"></span> Unlimited profile views</li>
-          <li><span class="check"></span> Direct messaging</li>
-          <li><span class="check"></span> Contact details access</li>
-          <li><span class="check"></span> Upload up to 5 photos</li>
-          <li><span class="check"></span> Priority listing in search</li>
-          <li><span class="check"></span> Advanced search filters</li>
-          <li><span class="check"></span> Express interest + notifications</li>
-          <li><span class="check"></span> Email support</li>
-          <li><span class="cross"></span> Profile highlight</li>
-          <li><span class="cross"></span> Dedicated relationship manager</li>
+          <li><span class="check"><i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i></span> Unlimited profile views</li>
+          <li><span class="check"><i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i></span> Direct messaging</li>
+          <li><span class="check"><i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i></span> Contact details access</li>
+          <li><span class="check"><i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i></span> Upload up to 5 photos</li>
+          <li><span class="check"><i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i></span> Priority listing in search</li>
+          <li><span class="check"><i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i></span> Advanced search filters</li>
+          <li><span class="check"><i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i></span> Express interest + notifications</li>
+          <li><span class="check"><i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i></span> Email support</li>
+          <li><span class="cross"><i class="fas fa-circle-xmark" style="color:#ef4444;"></i></span> Profile highlight</li>
+          <li><span class="cross"><i class="fas fa-circle-xmark" style="color:#ef4444;"></i></span> Dedicated relationship manager</li>
         </ul>
-        <button class="btn btn-primary btn-buy" data-plan="Premium" style="width:100%;justify-content:center">Buy Premium →</button>
+        <button class="btn btn-primary btn-buy" data-plan="Premium" style="width:100%;justify-content:center"><i class="fas fa-arrow-right"></i> Buy Premium</button>
         <p style="font-size:0.78rem;color:var(--text-light);text-align:center;margin-top:12px;">Secure payment • Cancel anytime</p>
       </div>
 
       <!-- VIP -->
       <div class="package-card reveal">
-        <div class="package-name">VIP Plan</div>
+        <div class="package-name"><i class="fas fa-crown" style="color:var(--gold);"></i> VIP Plan</div>
         <div class="package-price"><sup>₹</sup>2499</div>
         <div class="package-duration">Per 6 Months (₹417/month)</div>
         <ul class="package-features">
-          <li><span class="check"></span> All Premium features</li>
-          <li><span class="check"></span> Profile highlight badge</li>
-          <li><span class="check"></span> Featured placement (top results)</li>
-          <li><span class="check"></span> Upload unlimited photos</li>
-          <li><span class="check"></span> Dedicated relationship manager</li>
-          <li><span class="check"></span> Horoscope & kundali matching</li>
-          <li><span class="check"></span> WhatsApp support</li>
-          <li><span class="check"></span> Profile boost (weekly)</li>
-          <li><span class="check"></span> Verified badge on profile</li>
-          <li><span class="check"></span> Exclusive VIP community access</li>
+          <li><span class="check"><i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i></span> All Premium features</li>
+          <li><span class="check"><i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i></span> Profile highlight badge</li>
+          <li><span class="check"><i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i></span> Featured placement (top results)</li>
+          <li><span class="check"><i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i></span> Upload unlimited photos</li>
+          <li><span class="check"><i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i></span> Dedicated relationship manager</li>
+          <li><span class="check"><i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i></span> Horoscope & kundali matching</li>
+          <li><span class="check"><i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i></span> WhatsApp support</li>
+          <li><span class="check"><i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i></span> Profile boost (weekly)</li>
+          <li><span class="check"><i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i></span> Verified badge on profile</li>
+          <li><span class="check"><i class="fas fa-circle-check" style="color:var(--success,#22c55e);"></i></span> Exclusive VIP community access</li>
         </ul>
-        <button class="btn btn-gold btn-buy" data-plan="VIP" style="width:100%;justify-content:center">Buy VIP ⭐</button>
+        <button class="btn btn-gold btn-buy" data-plan="VIP" style="width:100%;justify-content:center"><i class="fas fa-star" style="color:var(--gold);"></i> Buy VIP</button>
         <p style="font-size:0.78rem;color:var(--text-light);text-align:center;margin-top:12px;">Best value for serious seekers</p>
       </div>
     </div>
@@ -94,7 +94,7 @@
   <div class="container">
     <div class="section-header text-center">
       <div class="badge">Side by Side</div>
-      <h2>Plan Comparison</h2>
+      <h2><i class="fas fa-gem"></i> Plan Comparison</h2>
       <p>Compare all features across plans to choose what's right for you.</p>
       <div class="divider"></div>
     </div>
@@ -141,7 +141,7 @@
   <div class="container" style="max-width:760px;">
     <div class="section-header text-center">
       <div class="badge">Help</div>
-      <h2>Frequently Asked Questions</h2>
+      <h2><i class="fas fa-gem"></i> Frequently Asked Questions</h2>
       <p>Have questions about our plans? We have answers.</p>
       <div class="divider"></div>
     </div>
@@ -179,7 +179,7 @@
   <div class="container" style="max-width:760px;">
     <div class="section-header text-center">
       <div class="badge">Policy</div>
-      <h2>Refund Policy</h2>
+      <h2><i class="fas fa-gem"></i> Refund Policy</h2>
       <div class="divider"></div>
     </div>
     <div style="background:#fff;border-radius:var(--radius-md);padding:40px;border:1px solid var(--border);">

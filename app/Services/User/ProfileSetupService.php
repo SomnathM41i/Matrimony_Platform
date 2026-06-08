@@ -281,7 +281,7 @@ class ProfileSetupService
         if (!$profile) return 0;
 
         // Work backwards through required fields per step
-        if ($user->photos()->exists() || $profile->photo_privacy) return 7;
+        if ($user->photos()->exists()) return 7;
         if ($user->partnerPreference) return 6;
         if ($profile->country_id) return 5;
         if ($profile->education_level_id) return 4;

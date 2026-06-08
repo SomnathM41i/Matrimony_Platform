@@ -8,9 +8,9 @@
     $fmt = fn($v) => $v ? ucwords(str_replace('_', ' ', $v)) : '—';
 
     $statusConfig = [
-        'pending'  => ['label' => 'Pending',  'color' => '#f59e0b', 'bg' => '#fef3c7', 'icon' => '⏳'],
-        'accepted' => ['label' => 'Accepted', 'color' => '#22c55e', 'bg' => '#dcfce7', 'icon' => 'accepted'],
-        'declined' => ['label' => 'Declined', 'color' => '#ef4444', 'bg' => '#fee2e2', 'icon' => 'declined'],
+        'pending'  => ['label' => 'Pending',  'color' => '#f59e0b', 'bg' => '#fef3c7', 'icon' => '<i class="fas fa-clock"></i>'],
+        'accepted' => ['label' => 'Accepted', 'color' => '#22c55e', 'bg' => '#dcfce7', 'icon' => '<i class="fas fa-circle-check"></i>'],
+        'declined' => ['label' => 'Declined', 'color' => '#ef4444', 'bg' => '#fee2e2', 'icon' => '<i class="fas fa-circle-xmark"></i>'],
     ];
 @endphp
 
@@ -22,7 +22,7 @@
             <a href="{{ route('user.dashboard') }}">Dashboard</a><span>/</span>
             <span>Interests Received</span>
         </div>
-        <h1>Interests Received</h1>
+        <h1><i class="fas fa-envelope"></i> Interests Received</h1>
         <p>{{ $counts['pending'] }} new interest{{ $counts['pending'] !== 1 ? 's' : '' }} waiting for your response</p>
     </div>
 </section>
@@ -166,7 +166,7 @@
 
     @if($interests->isEmpty())
         <div class="empty-state">
-            <div class="icon"></div>
+            <div class="icon"><i class="fas fa-envelope"></i></div>
             <h3>No interests {{ $statusFilter !== 'all' ? "that are $statusFilter" : 'received yet' }}</h3>
             <p>
                 @if($statusFilter === 'all')
@@ -256,7 +256,7 @@
                         {{-- Status pill (non-pending) --}}
                         @if($interest->status !== 'pending')
                             <span class="int-status-pill" style="background:{{ $sc['bg'] }};color:{{ $sc['color'] }};">
-                                {{ $sc['icon'] }} {{ $sc['label'] }}
+                                {!! $sc['icon'] !!} {{ $sc['label'] }}
                             </span>
                         @endif
 
@@ -265,12 +265,12 @@
                             <form method="POST" action="{{ route('user.interests.accept', $interest) }}" style="width:100%;">
                                 @csrf
                                 @method('PATCH')
-                                <button type="submit" class="int-act-btn accept">Accept</button>
+                                <button type="submit" class="int-act-btn accept"><i class="fas fa-circle-check"></i> Accept</button>
                             </form>
                             <form method="POST" action="{{ route('user.interests.decline', $interest) }}" style="width:100%;">
                                 @csrf
                                 @method('PATCH')
-                                <button type="submit" class="int-act-btn decline">Decline</button>
+                                <button type="submit" class="int-act-btn decline"><i class="fas fa-circle-xmark"></i> Decline</button>
                             </form>
                         @endif
 

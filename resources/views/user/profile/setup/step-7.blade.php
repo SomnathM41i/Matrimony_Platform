@@ -3,7 +3,7 @@
 
 @section('content')
 
-@include('user.profile.setup._progress', ['step' => 7])
+@include('user.profile.setup._progress', ['step' => 7, 'pct' => $profile?->completion_percentage ?? 0, 'completed' => $completed])
 
 <section class="setup-section">
   <div class="container">
@@ -20,7 +20,7 @@
       @endif
 
       <div class="setup-card-header">
-        <div class="setup-step-icon"></div>
+        <div class="setup-step-icon"><i class="fas fa-camera"></i></div>
         <div>
           <h2>Photos &amp; Privacy</h2>
           <p>Upload your photos and set your visibility preferences</p>
@@ -90,7 +90,7 @@
               multiple
               data-max="{{ $remainingPhotos ?? 999 }}"
               style="display:none;">
-            <div class="upload-icon"></div>
+            <div class="upload-icon"><i class="fas fa-upload"></i></div>
             <p class="upload-text">
               <strong>Click to select photos</strong> or drag and drop here
             </p>
@@ -105,7 +105,7 @@
         </div>
         @else
           <div class="skip-notice" style="background:rgba(26,63,160,0.06);border-color:rgba(26,63,160,0.2);">
-            <span></span>
+            <span><i class="fas fa-info-circle"></i></span>
             <div>You have uploaded the maximum of {{ $max_photos }} photo(s) allowed by your current plan.</div>
           </div>
         @endif
@@ -116,7 +116,7 @@
 
           <div class="privacy-grid">
             <div class="privacy-card">
-              <div class="privacy-icon"></div>
+              <div class="privacy-icon"><i class="fas fa-eye"></i></div>
               <div>
                 <label class="form-label">Photo Visibility</label>
                 <select name="photo_privacy"
@@ -136,7 +136,7 @@
             </div>
 
             <div class="privacy-card">
-              <div class="privacy-icon"></div>
+              <div class="privacy-icon"><i class="fas fa-address-card"></i></div>
               <div>
                 <label class="form-label">Contact Details Visibility</label>
                 <select name="contact_privacy"
@@ -156,7 +156,7 @@
             </div>
 
             <div class="privacy-card">
-              <div class="privacy-icon"></div>
+              <div class="privacy-icon"><i class="fas fa-user-shield"></i></div>
               <div>
                 <label class="form-label">Profile Visibility</label>
                 <select name="profile_visibility"
@@ -186,7 +186,7 @@
         {{-- Final CTA --}}
         <div class="setup-final-cta">
           <div class="final-cta-inner">
-            <div class="final-cta-icon"></div>
+            <div class="final-cta-icon"><i class="fas fa-check-circle"></i></div>
             <h3>You're almost there!</h3>
             <p>Submit your profile and start connecting with your perfect match.</p>
           </div>
@@ -375,7 +375,7 @@ document.addEventListener('DOMContentLoaded', function () {
         div.className = 'preview-item';
         div.innerHTML = `
           <img src="${ev.target.result}" alt="Preview">
-          <button type="button" class="remove-btn" data-idx="${i}">✕</button>`;
+          <button type="button" class="remove-btn" data-idx="${i}"><i class="fas fa-times"></i></button>`;
         previewGrid.appendChild(div);
         div.querySelector('.remove-btn').addEventListener('click', () => {
           selectedFiles.splice(i, 1);

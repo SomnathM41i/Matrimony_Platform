@@ -248,10 +248,10 @@
                                 1 => ['label' => 'Basic Information',     'icon' => '<i class="fas fa-user"></i>', 'field' => 'height_cm'],
                                 2 => ['label' => 'Religion & Community',  'icon' => '<i class="fas fa-temple-hindu"></i>', 'field' => 'religion_id'],
                                 3 => ['label' => 'Horoscope',             'icon' => '<i class="fas fa-moon"></i>', 'field' => 'rashi_id'],
-                                4 => ['label' => 'Education & Career',    'icon' => '', 'field' => 'education_level_id'],
-                                5 => ['label' => 'Location & Family',     'icon' => '', 'field' => 'country_id'],
-                                6 => ['label' => 'Partner Preferences',   'icon' => '', 'field' => null],
-                                7 => ['label' => 'Photos & Privacy',      'icon' => '', 'field' => null],
+                                4 => ['label' => 'Education & Career',    'icon' => '<i class="fas fa-graduation-cap"></i>', 'field' => 'education_level_id'],
+                                5 => ['label' => 'Location & Family',     'icon' => '<i class="fas fa-house"></i>', 'field' => 'country_id'],
+                                6 => ['label' => 'Partner Preferences',   'icon' => '<i class="fas fa-hand-holding-heart"></i>', 'field' => null],
+                                7 => ['label' => 'Photos & Privacy',      'icon' => '<i class="fas fa-camera"></i>', 'field' => null],
                             ];
                         @endphp
 
@@ -307,7 +307,7 @@
                 @if($stats['subscription'])
                     <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
                         <div>
-                            <p style="margin:0;font-weight:600;">{{ $stats['subscription']->plan_name }}</p>
+                            <p style="margin:0;font-weight:600;"><i class="fas fa-gem"></i> {{ $stats['subscription']->plan_name }}</p>
                             <p style="margin:0;font-size:0.82rem;color:var(--text-muted);">
                                 Expires: {{ \Carbon\Carbon::parse($stats['subscription']->expires_at)->format('d M Y') }}
                             </p>
@@ -399,13 +399,13 @@
 
                 @if($recentLogs->isEmpty())
                     <p style="font-size:0.875rem;color:var(--text-muted);margin:0;">
-                        Your recent actions will appear here.
+                        <i class="fas fa-bell"></i> Your recent actions will appear here.
                     </p>
                 @else
                     <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;">
                         @foreach($recentLogs as $log)
                             <li style="font-size:0.85rem;border-bottom:1px solid var(--border);padding-bottom:8px;">
-                                <span>{{ $log->description }}</span>
+                                <span><i class="fas fa-clock"></i> {{ $log->description }}</span>
                                 <div style="color:var(--text-muted);font-size:0.78rem;margin-top:2px;">
                                     {{ $log->created_at->diffForHumans() }}
                                 </div>

@@ -218,14 +218,14 @@
           </p>
           <div class="mp-hero-badges">
             @if($user->email_verified_at)
-              <span class="mp-badge verified">Verified</span>
+              <span class="mp-badge verified"><i class="fas fa-circle-check"></i> Verified</span>
             @endif
             @if($user->isPremiumActive())
-              <span class="mp-badge premium">Premium</span>
+              <span class="mp-badge premium"><i class="fas fa-crown"></i> Premium</span>
             @endif
             @if($user->last_login_at)
               <span class="mp-badge">
-                Last active {{ $user->last_login_at->diffForHumans() }}
+                <i class="fas fa-clock"></i> Last active {{ $user->last_login_at->diffForHumans() }}
               </span>
             @endif
           </div>
@@ -246,7 +246,7 @@
             <form method="POST" action="{{ route('user.interests.send', $user) }}">
               @csrf
               <button type="submit" class="btn btn-primary btn-sm">
-                Send Interest
+                <i class="fas fa-paper-plane"></i> Send Interest
               </button>
             </form>
           @endif
@@ -275,7 +275,7 @@
       <div class="mp-card">
         <div class="mp-card-header">
           <h3 class="mp-card-title">
-            <span class="icon" style="background:#f3f0ff;"></span> About
+            <span class="icon" style="background:#f3f0ff;"><i class="fas fa-user" style="color:#6d28d9;"></i></span> About
           </h3>
         </div>
         <div class="mp-card-body">
@@ -288,7 +288,7 @@
       <div class="mp-card">
         <div class="mp-card-header">
           <h3 class="mp-card-title">
-            <span class="icon" style="background:#fff7ed;"></span> Basic Information
+            <span class="icon" style="background:#fff7ed;"><i class="fas fa-info-circle" style="color:#c2410c;"></i></span> Basic Information
           </h3>
         </div>
         <div class="mp-card-body">
@@ -372,7 +372,7 @@
       <div class="mp-card">
         <div class="mp-card-header">
           <h3 class="mp-card-title">
-            <span class="icon" style="background:#fef3c7;"></span> Religion & Community
+            <span class="icon" style="background:#fef3c7;"><i class="fas fa-temple-hindu" style="color:#d97706;"></i></span> Religion & Community
           </h3>
         </div>
         <div class="mp-card-body">
@@ -442,7 +442,7 @@
       <div class="mp-card">
         <div class="mp-card-header">
           <h3 class="mp-card-title">
-            <span class="icon" style="background:#f0f4ff;"></span> Horoscope
+            <span class="icon" style="background:#f0f4ff;"><i class="fas fa-moon" style="color:#2563eb;"></i></span> Horoscope
           </h3>
         </div>
         <div class="mp-card-body">
@@ -492,7 +492,7 @@
       <div class="mp-card">
         <div class="mp-card-header">
           <h3 class="mp-card-title">
-            <span class="icon" style="background:#ecfdf5;"></span> Education & Career
+            <span class="icon" style="background:#ecfdf5;"><i class="fas fa-graduation-cap" style="color:#059669;"></i></span> Education & Career
           </h3>
         </div>
         <div class="mp-card-body">
@@ -541,7 +541,7 @@
       <div class="mp-card">
         <div class="mp-card-header">
           <h3 class="mp-card-title">
-            <span class="icon" style="background:#fff1f2;"></span> Location & Family
+            <span class="icon" style="background:#fff1f2;"><i class="fas fa-house" style="color:#e11d48;"></i></span> Location & Family
           </h3>
         </div>
         <div class="mp-card-body">
@@ -608,7 +608,7 @@
       <div class="mp-card">
         <div class="mp-card-header">
           <h3 class="mp-card-title">
-            <span class="icon" style="background:#f0f9ff;"></span> Photos
+            <span class="icon" style="background:#f0f9ff;"><i class="fas fa-camera" style="color:#0284c7;"></i></span> Photos
           </h3>
         </div>
         <div class="mp-gallery">
@@ -623,7 +623,7 @@
       <div class="mp-card">
         <div class="mp-card-header">
           <h3 class="mp-card-title">
-            <span class="icon" style="background:#f0f9ff;"></span> Photos
+            <span class="icon" style="background:#f0f9ff;"><i class="fas fa-camera" style="color:#0284c7;"></i></span> Photos
           </h3>
         </div>
         <div class="mp-gallery">
@@ -642,7 +642,7 @@
       <div class="action-card">
         <div style="padding:18px 20px 14px;border-bottom:1px solid #f0edf8;">
           <h3 style="font-size:0.95rem;font-weight:600;color:#1a1033;margin:0;display:flex;align-items:center;gap:8px;">
-            <span style="font-size:1.1rem;"></span> Connect with {{ $profile->first_name ?? $user->name }}
+            <span style="font-size:1.1rem;"><i class="fas fa-handshake"></i></span> Connect with {{ $profile->first_name ?? $user->name }}
           </h3>
         </div>
         <div class="action-card-body">
@@ -657,19 +657,19 @@
 
           {{-- Send / Cancel Interest --}}
           @if($sentStatus === 'accepted')
-            <div class="pub-action-btn success">Interest Accepted — You're Connected!</div>
+            <div class="pub-action-btn success"><i class="fas fa-circle-check"></i> Interest Accepted — You're Connected!</div>
           @elseif($sentStatus === 'pending')
-            <div class="pub-action-btn warning">Interest Sent — Awaiting Response</div>
+            <div class="pub-action-btn warning"><i class="fas fa-hourglass-half"></i> Interest Sent — Awaiting Response</div>
             <form method="POST" action="{{ route('user.interests.cancel', $interestSent) }}">
               @csrf
               @method('DELETE')
               <button type="submit" class="pub-action-btn ghost"
                       onclick="return confirm('Withdraw your interest?')" style="width:100%;">
-                Withdraw Interest
+                <i class="fas fa-xmark"></i> Withdraw Interest
               </button>
             </form>
           @elseif($sentStatus === 'declined')
-            <div class="pub-action-btn danger">Interest Declined</div>
+            <div class="pub-action-btn danger"><i class="fas fa-circle-xmark"></i> Interest Declined</div>
           @else
             {{-- Show message textarea optionally --}}
             <form method="POST" action="{{ route('user.interests.send', $user) }}" id="interestForm">
@@ -691,14 +691,14 @@
           <form method="POST" action="{{ route('user.shortlist.toggle', $user) }}">
             @csrf
             <button type="submit" class="pub-action-btn outline {{ $isShortlisted ? 'shortlisted' : '' }}" style="width:100%;">
-              {{ $isShortlisted ? 'Shortlisted' : 'Add to Shortlist' }}
+              <i class="fas fa-star"></i> {{ $isShortlisted ? 'Shortlisted' : 'Add to Shortlist' }}
             </button>
           </form>
 
           {{-- Message (only if connected) --}}
           @if($sentStatus === 'accepted' || $receivedStatus === 'accepted')
             <a href="{{ route('user.messages.index') }}" class="pub-action-btn primary" style="display:flex;margin-top:0;">
-              Send Message
+              <i class="fas fa-comment"></i> Send Message
             </a>
           @endif
 
@@ -726,7 +726,7 @@
       <div class="mp-card">
         <div class="mp-card-header">
           <h3 class="mp-card-title">
-            <span class="icon" style="background:#ecfdf5;"></span> Contact Details
+            <span class="icon" style="background:#ecfdf5;"><i class="fas fa-address-card" style="color:#059669;"></i></span> Contact Details
           </h3>
         </div>
         <div class="mp-card-body">
@@ -752,7 +752,7 @@
       <div class="mp-card">
         <div class="mp-card-header">
           <h3 class="mp-card-title">
-            <span class="icon" style="background:#f0f4ff;"></span> Profile Stats
+            <span class="icon" style="background:#f0f4ff;"><i class="fas fa-chart-bar" style="color:#2563eb;"></i></span> Profile Stats
           </h3>
         </div>
         <div class="mp-card-body" style="padding:16px;">
@@ -782,7 +782,7 @@
       <div class="mp-card">
         <div class="mp-card-header">
           <h3 class="mp-card-title">
-            <span class="icon" style="background:#fdf2f8;"></span> Partner Preferences
+            <span class="icon" style="background:#fdf2f8;"><i class="fas fa-heart" style="color:#db2777;"></i></span> Partner Preferences
           </h3>
         </div>
         <div class="mp-card-body">

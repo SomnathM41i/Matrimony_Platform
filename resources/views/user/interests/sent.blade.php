@@ -8,9 +8,9 @@
     $fmt = fn($v) => $v ? ucwords(str_replace('_', ' ', $v)) : '—';
 
     $statusConfig = [
-        'pending'  => ['label' => 'Pending',  'color' => '#f59e0b', 'bg' => '#fef3c7', 'icon' => '⏳'],
-        'accepted' => ['label' => 'Accepted', 'color' => '#22c55e', 'bg' => '#dcfce7', 'icon' => 'accepted'],
-        'declined' => ['label' => 'Declined', 'color' => '#ef4444', 'bg' => '#fee2e2', 'icon' => 'declined'],
+        'pending'  => ['label' => 'Pending',  'color' => '#f59e0b', 'bg' => '#fef3c7', 'icon' => '<i class="fas fa-clock"></i>'],
+        'accepted' => ['label' => 'Accepted', 'color' => '#22c55e', 'bg' => '#dcfce7', 'icon' => '<i class="fas fa-circle-check"></i>'],
+        'declined' => ['label' => 'Declined', 'color' => '#ef4444', 'bg' => '#fee2e2', 'icon' => '<i class="fas fa-circle-xmark"></i>'],
     ];
 @endphp
 
@@ -22,7 +22,7 @@
             <a href="{{ route('user.dashboard') }}">Dashboard</a><span>/</span>
             <span>Interests Sent</span>
         </div>
-        <h1>Interests Sent</h1>
+        <h1><i class="fas fa-envelope"></i> Interests Sent</h1>
         <p>Track all the profiles you've shown interest in</p>
     </div>
 </section>
@@ -162,7 +162,7 @@
 
     @if($interests->isEmpty())
         <div class="empty-state">
-            <div class="icon"></div>
+            <div class="icon"><i class="fas fa-envelope"></i></div>
             <h3>No interests {{ $statusFilter !== 'all' ? "that are $statusFilter" : 'sent yet' }}</h3>
             <p>
                 @if($statusFilter === 'all')
@@ -230,7 +230,7 @@
                         {{-- Status badge --}}
                         <span class="int-status"
                               style="background:{{ $sc['bg'] }};color:{{ $sc['color'] }};">
-                            {{ $sc['icon'] }} {{ $sc['label'] }}
+                            {!! $sc['icon'] !!} {{ $sc['label'] }}
                         </span>
                     </div>
 
@@ -260,7 +260,7 @@
                                     @method('DELETE')
                                     <button type="submit" class="int-btn cancel"
                                             onclick="return confirm('Cancel this interest?')">
-                                        Cancel
+                                        <i class="fas fa-xmark"></i> Cancel
                                     </button>
                                 </form>
                             @else

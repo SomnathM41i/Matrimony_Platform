@@ -3,7 +3,7 @@
 
 @section('content')
 
-@include('user.profile.setup._progress', ['step' => 1])
+@include('user.profile.setup._progress', ['step' => 1, 'pct' => $profile?->completion_percentage ?? 0, 'completed' => $completed])
 
 <section class="setup-section">
   <div class="container">
@@ -26,7 +26,7 @@
       @endif
 
       <div class="setup-card-header">
-        <div class="setup-step-icon"></div>
+        <div class="setup-step-icon"><i class="fas fa-user"></i></div>
         <div>
           <h2>Basic Information</h2>
           <p>Tell potential matches about yourself</p>

@@ -305,7 +305,7 @@
             @if($matches->isEmpty())
                 {{-- Empty state --}}
                 <div class="empty-state">
-                    <div class="icon"></div>
+                    <div class="icon"><i class="fas fa-heart" style="color:var(--primary);"></i></div>
                     <h3>No matches found</h3>
                     <p class="match-empty-state">Try adjusting your filters or update your partner preferences for better suggestions.</p>
                     <a href="{{ route('user.profile.setup.show', 6) }}" class="btn btn-primary">Update Preferences</a>
@@ -348,7 +348,7 @@
                                 @endif
 
                                 @if($match->is_premium)
-                                    <span class="match-premium-badge">⭐ Premium</span>
+                                    <span class="match-premium-badge"><i class="fas fa-star" style="color:var(--gold);"></i> Premium</span>
                                 @endif
 
                                 <div class="match-compat">
@@ -393,7 +393,7 @@
                                         <form method="POST" action="{{ route('user.interests.send', $match) }}" style="flex:1;">
                                             @csrf
                                             <button type="submit" class="match-btn primary" style="width:100%;">
-                                                Interest
+                                                <i class="fas fa-heart" style="color:var(--primary);"></i> Interest
                                             </button>
                                         </form>
                                     @endif
@@ -409,7 +409,7 @@
                                     <form method="POST" action="{{ route('user.shortlist.toggle', $match) }}" style="display:contents;">
                                         @csrf
                                         <button type="submit" class="match-btn outline {{ $match->is_shortlisted ? 'shortlisted' : '' }}" title="{{ $match->is_shortlisted ? 'Remove from shortlist' : 'Shortlist' }}">
-                                            {{ $match->is_shortlisted ? '★' : '☆' }}
+                                            @if($match->is_shortlisted)<i class="fas fa-star" style="color:var(--gold);"></i>@else<i class="far fa-star" style="color:var(--gold);"></i>@endif
                                         </button>
                                     </form>
                                 </div>

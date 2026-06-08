@@ -65,9 +65,10 @@ class ProfileSetupController extends Controller
         $data = $this->getStepViewData($step, $user);
 
         return view("user.profile.setup.step-{$step}", array_merge($data, [
-            'user'    => $user,
-            'profile' => $profile,
-            'step'    => $step,
+            'user'      => $user,
+            'profile'   => $profile,
+            'step'      => $step,
+            'completed' => $completed,
         ]));
     }
 

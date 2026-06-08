@@ -8,7 +8,7 @@
             <a href="#" class="social-link" aria-label="Facebook">f</a>
             <a href="#" class="social-link" aria-label="Instagram">Ig</a>
             <a href="#" class="social-link" aria-label="WhatsApp">Wa</a>
-            <a href="#" class="social-link" aria-label="YouTube">▶</a>
+            <a href="#" class="social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
           </div>
         </div>
         <div class="footer-col">

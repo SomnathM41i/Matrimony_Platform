@@ -60,7 +60,7 @@
                      onerror="this.src='{{ asset('assets/images/default-user.png') }}'">
 
                 <span>{{ Str::words(Auth::user()->name, 1, '') ?: 'Account' }}</span>
-                <span style="font-size:0.6rem;opacity:0.7;" aria-hidden="true">▼</span>
+                <span style="font-size:0.6rem;opacity:0.7;" aria-hidden="true"><i class="fas fa-chevron-down"></i></span>
               </button>
 
               {{-- DROPDOWN MENU --}}
