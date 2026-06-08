@@ -6,13 +6,13 @@
 
 @php
 $stepLabels = [
-    1 => ['icon' => '👤', 'label' => 'Basic Info'],
-    2 => ['icon' => '🛕', 'label' => 'Religion'],
-    3 => ['icon' => '🌙', 'label' => 'Horoscope'],
-    4 => ['icon' => '🎓', 'label' => 'Education'],
-    5 => ['icon' => '🏠', 'label' => 'Location'],
-    6 => ['icon' => '💑', 'label' => 'Partner Pref'],
-    7 => ['icon' => '📷', 'label' => 'Photos'],
+     1 => ['icon' => '<i class="fas fa-user"></i>', 'label' => 'Basic Info'],
+     2 => ['icon' => '<i class="fas fa-temple-hindu"></i>', 'label' => 'Religion'],
+     3 => ['icon' => '<i class="fas fa-moon"></i>', 'label' => 'Horoscope'],
+     4 => ['icon' => '<i class="fas fa-graduation-cap"></i>', 'label' => 'Education'],
+     5 => ['icon' => '<i class="fas fa-house"></i>', 'label' => 'Location'],
+     6 => ['icon' => '<i class="fas fa-hand-holding-heart"></i>', 'label' => 'Partner Pref'],
+     7 => ['icon' => '<i class="fas fa-camera"></i>', 'label' => 'Photos'],
 ];
 @endphp
 

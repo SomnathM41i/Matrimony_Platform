@@ -11,7 +11,7 @@
 
       {{-- Alerts --}}
       @if (session('success'))
-        <div class="alert alert-success">✅ {{ session('success') }}</div>
+        <div class="alert alert-success">{{ session('success') }}</div>
       @endif
 
       @if ($errors->any())
@@ -26,7 +26,7 @@
       @endif
 
       <div class="setup-card-header">
-        <div class="setup-step-icon">👤</div>
+        <div class="setup-step-icon"></div>
         <div>
           <h2>Basic Information</h2>
           <p>Tell potential matches about yourself</p>

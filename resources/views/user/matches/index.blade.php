@@ -20,7 +20,7 @@
             <span>/</span>
             <span>My Matches</span>
         </div>
-        <h1>Your Matches 💕</h1>
+        <h1>Your Matches</h1>
         <p>Profiles tailored to your preferences &amp; partner criteria</p>
     </div>
 </section>
@@ -305,7 +305,7 @@
             @if($matches->isEmpty())
                 {{-- Empty state --}}
                 <div class="empty-state">
-                    <div class="icon">💔</div>
+                    <div class="icon"></div>
                     <h3>No matches found</h3>
                     <p class="match-empty-state">Try adjusting your filters or update your partner preferences for better suggestions.</p>
                     <a href="{{ route('user.profile.setup.show', 6) }}" class="btn btn-primary">Update Preferences</a>
@@ -342,9 +342,9 @@
                             <div class="match-photo-wrap">
                                 @if($photoUrl)
                                     <img src="{{ $photoUrl }}" alt="{{ $name }}" class="match-photo"
-                                         onerror="this.parentElement.innerHTML='<div class=\'match-photo-placeholder\'>👤</div>'">
+                                         onerror="this.parentElement.innerHTML='<div class=\'match-photo-placeholder\'></div>'">
                                 @else
-                                    <div class="match-photo-placeholder">👤</div>
+                                    <div class="match-photo-placeholder"></div>
                                 @endif
 
                                 @if($match->is_premium)
@@ -387,13 +387,13 @@
                                     {{-- Send / Sent Interest --}}
                                     @if($match->interest_sent)
                                         <button class="match-btn primary sent" disabled>
-                                            ✓ Sent
+                                            Sent
                                         </button>
                                     @else
                                         <form method="POST" action="{{ route('user.interests.send', $match) }}" style="flex:1;">
                                             @csrf
                                             <button type="submit" class="match-btn primary" style="width:100%;">
-                                                💌 Interest
+                                                Interest
                                             </button>
                                         </form>
                                     @endif

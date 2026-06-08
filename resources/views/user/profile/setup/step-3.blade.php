@@ -17,10 +17,10 @@
     <div class="setup-card">
 
       @if (session('success'))
-        <div class="alert alert-success">✅ {{ session('success') }}</div>
+        <div class="alert alert-success">{{ session('success') }}</div>
       @endif
       @if (session('info'))
-        <div class="alert alert-info">ℹ️ {{ session('info') }}</div>
+        <div class="alert alert-info">{{ session('info') }}</div>
       @endif
       @if ($errors->any())
         <div class="alert alert-error">
@@ -30,7 +30,7 @@
       @endif
 
       <div class="setup-card-header">
-        <div class="setup-step-icon">🌙</div>
+        <div class="setup-step-icon"></div>
         <div>
           <h2>Horoscope Details</h2>
           <p>Share your astrological information — or skip and fill it later</p>
@@ -39,7 +39,7 @@
 
       {{-- Skip notice --}}
       <div class="skip-notice">
-        <span class="skip-notice-icon">💡</span>
+        <span class="skip-notice-icon"></span>
         <div>
           <strong>This step is optional.</strong>
           You can skip horoscope details now and update them anytime from your profile settings.

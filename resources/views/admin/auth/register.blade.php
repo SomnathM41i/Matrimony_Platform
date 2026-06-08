@@ -7,7 +7,7 @@
 
     <div class="card-body">
 
-        <h2 class="form-title">Create Super Admin 👑</h2>
+        <h2 class="form-title">Create Super Admin</h2>
         <p class="form-sub">Setup your first admin account</p>
 
         <form method="POST" action="{{ route('admin.register.post') }}">

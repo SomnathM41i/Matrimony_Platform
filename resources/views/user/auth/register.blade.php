@@ -6,13 +6,13 @@
   <div class="register-card">
 
     <div class="register-header">
-      <h2>Create Your Free Profile 🙏</h2>
+      <h2>Create Your Free Profile</h2>
       <p>Complete your profile in simple steps.</p>
     </div>
 
     <div class="register-body">
 
-      {{-- 🔴 Top Errors --}}
+      {{-- Top Errors --}}
       @if ($errors->any())
         <div style="background:#ffe6e6;padding:12px;border-radius:8px;margin-bottom:20px;">
           <ul style="margin:0;padding-left:18px;color:#b30000;">
@@ -91,26 +91,29 @@
 
       <div class="form-group" style="position:relative;">
         <label>Password *</label>
-        <input type="password" name="password"
+        <input type="password" name="password" minlength="8"
+              autocomplete="new-password"
               class="form-control @error('password') is-invalid @enderror">
 
         <button type="button" class="toggle-pass"
-          onclick="togglePassword(this)"
-          style="position:absolute; right:14px; top:38px; background:none; border:none;">
-          👁️
+          style="position:absolute; right:14px; top:38px; background:none; border:none; cursor:pointer;">
+          Show
         </button>
+
+        <small style="color:var(--text-muted);display:block;margin-top:4px;">Min 8 chars, with upper, lower &amp; number</small>
 
         @error('password') <small class="error">{{ $message }}</small> @enderror
       </div>
 
       <div class="form-group" style="position:relative;">
         <label>Confirm Password *</label>
-        <input type="password" name="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror">
+        <input type="password" name="password_confirmation" minlength="8"
+              autocomplete="new-password"
+              class="form-control @error('password_confirmation') is-invalid @enderror">
 
         <button type="button" class="toggle-pass"
-          onclick="togglePassword(this)"
-          style="position:absolute; right:14px; top:38px; background:none; border:none;">
-          👁️
+          style="position:absolute; right:14px; top:38px; background:none; border:none; cursor:pointer;">
+          Show
         </button>
       </div>
 
@@ -123,7 +126,7 @@
         @error('terms') <small class="error">{{ $message }}</small> @enderror
       </div>
 
-      <button type="submit" class="btn btn-primary">🎉 Register</button>
+      <button type="submit" class="btn btn-primary">Register</button>
     </form>
 
     </div>
@@ -146,24 +149,6 @@
 }
 </style>
 
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    @if ($errors->any())
-        let step = 0;
 
-        if (@json($errors->has('phone') || $errors->has('email'))) {
-            step = 1;
-        }
-
-        if (@json($errors->has('password') || $errors->has('terms'))) {
-            step = 2;
-        }
-
-        document.querySelectorAll('.form-step').forEach((el, i) => {
-            el.classList.toggle('active', i === step);
-        });
-    @endif
-});
-</script>
 
 @endsection

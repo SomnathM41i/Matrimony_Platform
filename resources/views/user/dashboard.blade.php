@@ -17,7 +17,7 @@
         </div>
         <h1>
             Welcome,
-            {{ $user->profile?->first_name ?? $user->name }} 👋
+            {{ $user->profile?->first_name ?? $user->name }}
         </h1>
         <p>Manage your profile, connections &amp; activity</p>
     </div>
@@ -29,17 +29,17 @@
     {{-- ─── FLASH MESSAGES ──────────────────────────────────────────────── --}}
     @if(session('success'))
         <div class="alert alert-success" style="margin-bottom:20px;">
-            ✅ {{ session('success') }}
+            {{ session('success') }}
         </div>
     @endif
     @if(session('info'))
         <div class="alert alert-info" style="margin-bottom:20px;">
-            ℹ️ {{ session('info') }}
+            {{ session('info') }}
         </div>
     @endif
     @if(session('error'))
         <div class="alert alert-error" style="margin-bottom:20px;">
-            ❌ {{ session('error') }}
+            {{ session('error') }}
         </div>
     @endif
 
@@ -48,7 +48,7 @@
     ──────────────────────────────────────────────────────────────────────── --}}
     @if($siteNotice)
         <div class="card" style="padding:14px 20px;margin-bottom:24px;border-left:4px solid var(--primary);display:flex;align-items:center;gap:12px;">
-            <span style="font-size:1.2rem;">📢</span>
+            <span style="font-size:1.2rem;"><i class="fas fa-bullhorn"></i></span>
             <p style="margin:0;font-size:0.95rem;">{{ $siteNotice }}</p>
         </div>
     @endif
@@ -94,7 +94,7 @@
                 </div>
             @else
                 <p style="margin-top:10px;font-size:0.875rem;color:var(--text-muted);">
-                    ✅ Great! Your profile looks complete.
+                    Great! Your profile looks complete.
                 </p>
             @endif
 
@@ -160,7 +160,7 @@
                         {{-- Premium badge --}}
                         @if($user->isPremiumActive())
                             <span style="position:absolute;bottom:0;right:0;background:var(--gold,#f59e0b);border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:11px;border:2px solid #fff;" title="Premium Member">
-                                💎
+                                <i class="fas fa-crown"></i>
                             </span>
                         @endif
                     </div>
@@ -177,16 +177,16 @@
 
                         @if($user->profile?->city)
                             <p style="margin:0 0 10px;font-size:0.85rem;color:var(--text-muted);">
-                                📍 {{ $user->profile->city->name }}{{ $user->profile->state ? ', ' . $user->profile->state->name : '' }}
+                                {{ $user->profile->city->name }}{{ $user->profile->state ? ', ' . $user->profile->state->name : '' }}
                             </p>
                         @endif
 
                         <div style="display:flex;gap:8px;flex-wrap:wrap;">
                             <a href="{{ route('user.profile.me') }}" class="btn btn-outline btn-sm">
-                                👤 View Profile
+                                View Profile
                             </a>
                             <a href="{{ route('user.profile.edit') }}" class="btn btn-primary btn-sm">
-                                ✏️ Edit Profile
+                                Edit Profile
                             </a>
                         </div>
                     </div>
@@ -203,19 +203,16 @@
                 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;">
 
                     <a href="{{ route('user.search.index') }}" class="quick-action-btn">
-                        <span style="font-size:1.4rem;">🔍</span>
-                        <span>Search</span>
+                        <span><i class="fas fa-magnifying-glass"></i> Search</span>
                     </a>
 
                     <a href="{{ route('user.matches.index') }}" class="quick-action-btn">
-                        <span style="font-size:1.4rem;">💞</span>
-                        <span>Matches</span>
+                        <span><i class="fas fa-heart"></i> Matches</span>
                     </a>
 
                     <a href="{{ route('user.interests.received') }}" class="quick-action-btn">
-                        <span style="font-size:1.4rem;">💌</span>
                         <span>
-                            Interests
+                            <i class="fas fa-hand-holding-heart"></i> Interests
                             @if($stats['unread_interests'] > 0)
                                 <span class="badge-count">{{ $stats['unread_interests'] }}</span>
                             @endif
@@ -223,18 +220,15 @@
                     </a>
 
                     <a href="{{ route('user.shortlist.index') }}" class="quick-action-btn">
-                        <span style="font-size:1.4rem;">⭐</span>
-                        <span>Shortlist</span>
+                        <span><i class="fas fa-star"></i> Shortlist</span>
                     </a>
 
                     <!-- <a href="{{ route('user.messages.index') }}" class="quick-action-btn">
-                        <span style="font-size:1.4rem;">💬</span>
                         <span>Messages</span>
                     </a> -->
 
                     <a href="{{ route('user.subscription.show') }}" class="quick-action-btn" style="border-color:var(--gold,#f59e0b);color:var(--gold,#f59e0b);">
-                        <span style="font-size:1.4rem;">💎</span>
-                        <span>Upgrade</span>
+                        <span><i class="fas fa-crown"></i> Upgrade</span>
                     </a>
 
                 </div>
@@ -251,13 +245,13 @@
                     <div style="display:flex;flex-direction:column;gap:10px;">
                         @php
                             $wizardSteps = [
-                                1 => ['label' => 'Basic Information',     'icon' => '👤', 'field' => 'height_cm'],
-                                2 => ['label' => 'Religion & Community',  'icon' => '🙏', 'field' => 'religion_id'],
-                                3 => ['label' => 'Horoscope',             'icon' => '⭐', 'field' => 'rashi_id'],
-                                4 => ['label' => 'Education & Career',    'icon' => '🎓', 'field' => 'education_level_id'],
-                                5 => ['label' => 'Location & Family',     'icon' => '📍', 'field' => 'country_id'],
-                                6 => ['label' => 'Partner Preferences',   'icon' => '💞', 'field' => null],
-                                7 => ['label' => 'Photos & Privacy',      'icon' => '📷', 'field' => null],
+                                1 => ['label' => 'Basic Information',     'icon' => '<i class="fas fa-user"></i>', 'field' => 'height_cm'],
+                                2 => ['label' => 'Religion & Community',  'icon' => '<i class="fas fa-temple-hindu"></i>', 'field' => 'religion_id'],
+                                3 => ['label' => 'Horoscope',             'icon' => '<i class="fas fa-moon"></i>', 'field' => 'rashi_id'],
+                                4 => ['label' => 'Education & Career',    'icon' => '', 'field' => 'education_level_id'],
+                                5 => ['label' => 'Location & Family',     'icon' => '', 'field' => 'country_id'],
+                                6 => ['label' => 'Partner Preferences',   'icon' => '', 'field' => null],
+                                7 => ['label' => 'Photos & Privacy',      'icon' => '', 'field' => null],
                             ];
                         @endphp
 
@@ -284,7 +278,7 @@
                                 </div>
 
                                 @if($isDone)
-                                    <span style="color:var(--success,#22c55e);font-size:0.85rem;font-weight:600;">✅ Done</span>
+                                    <span style="color:var(--success,#22c55e);font-size:0.85rem;font-weight:600;">Done</span>
                                 @else
                                     <a href="{{ route('user.profile.setup.show', $num) }}" class="btn btn-primary btn-sm" style="font-size:0.8rem;padding:4px 12px;">
                                         Fill Now
@@ -312,7 +306,6 @@
 
                 @if($stats['subscription'])
                     <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
-                        <span style="font-size:1.5rem;">💎</span>
                         <div>
                             <p style="margin:0;font-weight:600;">{{ $stats['subscription']->plan_name }}</p>
                             <p style="margin:0;font-size:0.82rem;color:var(--text-muted);">
@@ -328,7 +321,7 @@
                         You are on the <strong>Free Plan</strong>. Upgrade to unlock premium features.
                     </p>
                     <!-- <a href="{{ route('user.packages.index') }}" class="btn btn-gold btn-sm" style="width:100%;justify-content:center;">
-                        💎 Upgrade Now
+                        Upgrade Now
                     </a> -->
                 @endif
             </div>

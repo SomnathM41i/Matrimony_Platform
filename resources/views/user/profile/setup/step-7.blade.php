@@ -10,7 +10,7 @@
     <div class="setup-card">
 
       @if (session('success'))
-        <div class="alert alert-success">✅ {{ session('success') }}</div>
+        <div class="alert alert-success">{{ session('success') }}</div>
       @endif
       @if ($errors->any())
         <div class="alert alert-error">
@@ -20,7 +20,7 @@
       @endif
 
       <div class="setup-card-header">
-        <div class="setup-step-icon">📷</div>
+        <div class="setup-step-icon"></div>
         <div>
           <h2>Photos &amp; Privacy</h2>
           <p>Upload your photos and set your visibility preferences</p>
@@ -36,7 +36,7 @@
         <div class="form-section">
           <h3 class="form-section-title">Your Current Photos</h3>
           <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:16px;">
-            ⏳ Photos are pending admin approval before they appear to matches.
+            Photos are pending admin approval before they appear to matches.
             You can set one as your primary / display photo.
           </p>
           <div class="photo-grid">
@@ -90,7 +90,7 @@
               multiple
               data-max="{{ $remainingPhotos ?? 999 }}"
               style="display:none;">
-            <div class="upload-icon">📸</div>
+            <div class="upload-icon"></div>
             <p class="upload-text">
               <strong>Click to select photos</strong> or drag and drop here
             </p>
@@ -105,7 +105,7 @@
         </div>
         @else
           <div class="skip-notice" style="background:rgba(26,63,160,0.06);border-color:rgba(26,63,160,0.2);">
-            <span>✅</span>
+            <span></span>
             <div>You have uploaded the maximum of {{ $max_photos }} photo(s) allowed by your current plan.</div>
           </div>
         @endif
@@ -116,7 +116,7 @@
 
           <div class="privacy-grid">
             <div class="privacy-card">
-              <div class="privacy-icon">🖼️</div>
+              <div class="privacy-icon"></div>
               <div>
                 <label class="form-label">Photo Visibility</label>
                 <select name="photo_privacy"
@@ -136,7 +136,7 @@
             </div>
 
             <div class="privacy-card">
-              <div class="privacy-icon">📞</div>
+              <div class="privacy-icon"></div>
               <div>
                 <label class="form-label">Contact Details Visibility</label>
                 <select name="contact_privacy"
@@ -156,7 +156,7 @@
             </div>
 
             <div class="privacy-card">
-              <div class="privacy-icon">👁️</div>
+              <div class="privacy-icon"></div>
               <div>
                 <label class="form-label">Profile Visibility</label>
                 <select name="profile_visibility"
@@ -186,7 +186,7 @@
         {{-- Final CTA --}}
         <div class="setup-final-cta">
           <div class="final-cta-inner">
-            <div class="final-cta-icon">🎉</div>
+            <div class="final-cta-icon"></div>
             <h3>You're almost there!</h3>
             <p>Submit your profile and start connecting with your perfect match.</p>
           </div>
@@ -195,7 +195,7 @@
         <div class="setup-actions">
           <a href="{{ route('user.profile.setup.show', 6) }}" class="btn btn-outline">← Back</a>
           <button type="submit" class="btn btn-primary btn-lg">
-            🚀 Complete Profile Setup
+            Complete Profile Setup
           </button>
         </div>
       </form>

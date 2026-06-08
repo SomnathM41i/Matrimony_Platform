@@ -10,7 +10,7 @@
         <h2 class="form-title">Create User</h2>
         <p class="form-sub">Add a new user to system</p>
 
-        {{-- ✅ Show Validation Errors --}}
+        {{-- Show Validation Errors --}}
         @if ($errors->any())
             <div class="alert alert-danger">
                 @foreach ($errors->all() as $error)

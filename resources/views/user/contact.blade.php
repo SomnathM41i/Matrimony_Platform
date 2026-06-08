@@ -23,7 +23,7 @@
         <p style="margin-bottom:32px;">Our dedicated team is ready to assist you with profile help, account queries, and anything else you need on your matrimonial journey.</p>
         
         <div class="contact-item">
-          <div class="contact-icon">📍</div>
+          <div class="contact-icon"><i class="fas fa-location-dot"></i></div>
           <div class="contact-text">
             <h4>Office Address</h4>
             <p>Express Matrimony Pvt. Ltd.<br>Civil Lines, Nagpur – 440001<br>Maharashtra, India</p>
@@ -31,7 +31,7 @@
         </div>
         
         <div class="contact-item">
-          <div class="contact-icon">📧</div>
+          <div class="contact-icon"></div>
           <div class="contact-text">
             <h4>Email Address</h4>
             <p>info@expressmatrimony.com<br>support@expressmatrimony.com</p>
@@ -39,7 +39,7 @@
         </div>
         
         <div class="contact-item">
-          <div class="contact-icon">📞</div>
+          <div class="contact-icon"></div>
           <div class="contact-text">
             <h4>Phone Number</h4>
             <p>+91 98765 43210<br>+91 87654 32109</p>
@@ -47,7 +47,7 @@
         </div>
         
         <div class="contact-item">
-          <div class="contact-icon">⏰</div>
+          <div class="contact-icon"></div>
           <div class="contact-text">
             <h4>Business Hours</h4>
             <p>Monday – Saturday<br>9:00 AM to 6:00 PM IST</p>
@@ -56,7 +56,7 @@
         
         <!-- Map Placeholder -->
         <div class="map-placeholder">
-          <span>🗺️</span>
+          <span></span>
           <span>Map — Nagpur, Maharashtra, India</span>
         </div>
         
@@ -65,8 +65,8 @@
           <p style="font-weight:600;color:var(--text);font-size:0.9rem;margin-bottom:12px;">Connect With Us</p>
           <div class="social-links">
             <a href="#" class="social-link" style="background:var(--bg-light);color:var(--text);">f</a>
-            <a href="#" class="social-link" style="background:var(--bg-light);color:var(--text);">📷</a>
-            <a href="#" class="social-link" style="background:var(--bg-light);color:var(--text);">💬</a>
+            <a href="#" class="social-link" style="background:var(--bg-light);color:var(--text);"></a>
+            <a href="#" class="social-link" style="background:var(--bg-light);color:var(--text);"></a>
             <a href="#" class="social-link" style="background:var(--bg-light);color:var(--text);">▶</a>
           </div>
         </div>
@@ -131,22 +131,22 @@
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;">
       <div style="text-align:center;padding:32px 20px;background:#fff;border-radius:var(--radius-md);border:1px solid var(--border);">
-        <div style="font-size:2.2rem;margin-bottom:12px;">👤</div>
+        <div style="font-size:2.2rem;margin-bottom:12px;"></div>
         <h4 style="margin-bottom:8px;font-family:var(--font-body);font-weight:600;">Profile Help</h4>
         <p style="font-size:0.88rem;">Need help creating or editing your profile? Our team will guide you step by step.</p>
       </div>
       <div style="text-align:center;padding:32px 20px;background:#fff;border-radius:var(--radius-md);border:1px solid var(--border);">
-        <div style="font-size:2.2rem;margin-bottom:12px;">💳</div>
+        <div style="font-size:2.2rem;margin-bottom:12px;"></div>
         <h4 style="margin-bottom:8px;font-family:var(--font-body);font-weight:600;">Payment Support</h4>
         <p style="font-size:0.88rem;">Payment or subscription issues? We'll resolve them within 24 business hours.</p>
       </div>
       <div style="text-align:center;padding:32px 20px;background:#fff;border-radius:var(--radius-md);border:1px solid var(--border);">
-        <div style="font-size:2.2rem;margin-bottom:12px;">🔍</div>
+        <div style="font-size:2.2rem;margin-bottom:12px;"></div>
         <h4 style="margin-bottom:8px;font-family:var(--font-body);font-weight:600;">Matchmaking Help</h4>
         <p style="font-size:0.88rem;">Not finding the right match? Our relationship advisors will assist you personally.</p>
       </div>
       <div style="text-align:center;padding:32px 20px;background:#fff;border-radius:var(--radius-md);border:1px solid var(--border);">
-        <div style="font-size:2.2rem;margin-bottom:12px;">🛡️</div>
+        <div style="font-size:2.2rem;margin-bottom:12px;"></div>
         <h4 style="margin-bottom:8px;font-family:var(--font-body);font-weight:600;">Safety & Reports</h4>
         <p style="font-size:0.88rem;">Report any suspicious or inappropriate profiles. We take all safety concerns seriously.</p>
       </div>

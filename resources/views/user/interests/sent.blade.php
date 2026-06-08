@@ -9,8 +9,8 @@
 
     $statusConfig = [
         'pending'  => ['label' => 'Pending',  'color' => '#f59e0b', 'bg' => '#fef3c7', 'icon' => '⏳'],
-        'accepted' => ['label' => 'Accepted', 'color' => '#22c55e', 'bg' => '#dcfce7', 'icon' => '✅'],
-        'declined' => ['label' => 'Declined', 'color' => '#ef4444', 'bg' => '#fee2e2', 'icon' => '❌'],
+        'accepted' => ['label' => 'Accepted', 'color' => '#22c55e', 'bg' => '#dcfce7', 'icon' => 'accepted'],
+        'declined' => ['label' => 'Declined', 'color' => '#ef4444', 'bg' => '#fee2e2', 'icon' => 'declined'],
     ];
 @endphp
 
@@ -22,7 +22,7 @@
             <a href="{{ route('user.dashboard') }}">Dashboard</a><span>/</span>
             <span>Interests Sent</span>
         </div>
-        <h1>Interests Sent 💌</h1>
+        <h1>Interests Sent</h1>
         <p>Track all the profiles you've shown interest in</p>
     </div>
 </section>
@@ -137,15 +137,15 @@
         <a href="{{ route('user.interests.sent') }}"
            class="btn btn-primary btn-sm"
            style="background:#7c3aed;">
-           💌 Sent ({{ $counts['all'] }})
+           Sent ({{ $counts['all'] }})
         </a>
         <a href="{{ route('user.interests.received') }}"
            class="btn btn-outline btn-sm">
-           📬 Received
+           Received
         </a>
         <a href="{{ route('user.matches.index') }}"
            class="btn btn-outline btn-sm">
-           💕 Browse Matches
+           Browse Matches
         </a>
     </div>
 
@@ -162,7 +162,7 @@
 
     @if($interests->isEmpty())
         <div class="empty-state">
-            <div class="icon">💌</div>
+            <div class="icon"></div>
             <h3>No interests {{ $statusFilter !== 'all' ? "that are $statusFilter" : 'sent yet' }}</h3>
             <p>
                 @if($statusFilter === 'all')
@@ -200,9 +200,9 @@
                         @if($photo)
                             <img src="{{ $photo }}" alt="{{ $name }}" class="int-avatar"
                                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-                            <div class="int-avatar-placeholder" style="display:none;">👤</div>
+                            <div class="int-avatar-placeholder" style="display:none;"></div>
                         @else
-                            <div class="int-avatar-placeholder">👤</div>
+                            <div class="int-avatar-placeholder"></div>
                         @endif
 
                         {{-- Info --}}
@@ -216,13 +216,13 @@
                             </p>
                             <div class="int-meta">
                                 @if($location)
-                                    <span>📍 {{ $location }}</span>
+                                    <span>{{ $location }}</span>
                                 @endif
                                 @if($mp?->religion?->name)
-                                    <span>🙏 {{ $mp->religion->name }}</span>
+                                    <span>{{ $mp->religion->name }}</span>
                                 @endif
                                 @if($mp?->educationLevel?->name)
-                                    <span>🎓 {{ $mp->educationLevel->name }}</span>
+                                    <span>{{ $mp->educationLevel->name }}</span>
                                 @endif
                             </div>
                         </div>
@@ -260,12 +260,12 @@
                                     @method('DELETE')
                                     <button type="submit" class="int-btn cancel"
                                             onclick="return confirm('Cancel this interest?')">
-                                        ✕ Cancel
+                                        Cancel
                                     </button>
                                 </form>
                             @else
                                 <span class="int-btn disabled">
-                                    {{ $interest->status === 'accepted' ? '💬 Message' : '—' }}
+                                    {{ $interest->status === 'accepted' ? 'Message' : '—' }}
                                 </span>
                             @endif
                         </div>

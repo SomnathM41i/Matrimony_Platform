@@ -33,11 +33,11 @@
           <li><span class="check">✓</span> Basic search filters</li>
           <li><span class="check">✓</span> Photo upload (1 photo)</li>
           <li><span class="check">✓</span> Express interest</li>
-          <li><span class="cross">✗</span> Direct messaging</li>
-          <li><span class="cross">✗</span> Contact details access</li>
-          <li><span class="cross">✗</span> Advanced filters</li>
-          <li><span class="cross">✗</span> Priority listing</li>
-          <li><span class="cross">✗</span> Dedicated support</li>
+          <li><span class="cross"></span> Direct messaging</li>
+          <li><span class="cross"></span> Contact details access</li>
+          <li><span class="cross"></span> Advanced filters</li>
+          <li><span class="cross"></span> Priority listing</li>
+          <li><span class="cross"></span> Dedicated support</li>
         </ul>
         <a href="register.html" class="btn btn-outline btn-buy" data-plan="Basic" style="width:100%;justify-content:center">Get Started Free</a>
         <p style="font-size:0.78rem;color:var(--text-light);text-align:center;margin-top:12px;">No credit card required</p>
@@ -50,16 +50,16 @@
         <div class="package-price"><sup>₹</sup>999</div>
         <div class="package-duration">Per 3 Months (₹333/month)</div>
         <ul class="package-features">
-          <li><span class="check">✓</span> Unlimited profile views</li>
-          <li><span class="check">✓</span> Direct messaging</li>
-          <li><span class="check">✓</span> Contact details access</li>
-          <li><span class="check">✓</span> Upload up to 5 photos</li>
-          <li><span class="check">✓</span> Priority listing in search</li>
-          <li><span class="check">✓</span> Advanced search filters</li>
-          <li><span class="check">✓</span> Express interest + notifications</li>
-          <li><span class="check">✓</span> Email support</li>
-          <li><span class="cross">✗</span> Profile highlight</li>
-          <li><span class="cross">✗</span> Dedicated relationship manager</li>
+          <li><span class="check"></span> Unlimited profile views</li>
+          <li><span class="check"></span> Direct messaging</li>
+          <li><span class="check"></span> Contact details access</li>
+          <li><span class="check"></span> Upload up to 5 photos</li>
+          <li><span class="check"></span> Priority listing in search</li>
+          <li><span class="check"></span> Advanced search filters</li>
+          <li><span class="check"></span> Express interest + notifications</li>
+          <li><span class="check"></span> Email support</li>
+          <li><span class="cross"></span> Profile highlight</li>
+          <li><span class="cross"></span> Dedicated relationship manager</li>
         </ul>
         <button class="btn btn-primary btn-buy" data-plan="Premium" style="width:100%;justify-content:center">Buy Premium →</button>
         <p style="font-size:0.78rem;color:var(--text-light);text-align:center;margin-top:12px;">Secure payment • Cancel anytime</p>
@@ -71,16 +71,16 @@
         <div class="package-price"><sup>₹</sup>2499</div>
         <div class="package-duration">Per 6 Months (₹417/month)</div>
         <ul class="package-features">
-          <li><span class="check">✓</span> All Premium features</li>
-          <li><span class="check">✓</span> Profile highlight badge</li>
-          <li><span class="check">✓</span> Featured placement (top results)</li>
-          <li><span class="check">✓</span> Upload unlimited photos</li>
-          <li><span class="check">✓</span> Dedicated relationship manager</li>
-          <li><span class="check">✓</span> Horoscope & kundali matching</li>
-          <li><span class="check">✓</span> WhatsApp support</li>
-          <li><span class="check">✓</span> Profile boost (weekly)</li>
-          <li><span class="check">✓</span> Verified badge on profile</li>
-          <li><span class="check">✓</span> Exclusive VIP community access</li>
+          <li><span class="check"></span> All Premium features</li>
+          <li><span class="check"></span> Profile highlight badge</li>
+          <li><span class="check"></span> Featured placement (top results)</li>
+          <li><span class="check"></span> Upload unlimited photos</li>
+          <li><span class="check"></span> Dedicated relationship manager</li>
+          <li><span class="check"></span> Horoscope & kundali matching</li>
+          <li><span class="check"></span> WhatsApp support</li>
+          <li><span class="check"></span> Profile boost (weekly)</li>
+          <li><span class="check"></span> Verified badge on profile</li>
+          <li><span class="check"></span> Exclusive VIP community access</li>
         </ul>
         <button class="btn btn-gold btn-buy" data-plan="VIP" style="width:100%;justify-content:center">Buy VIP ⭐</button>
         <p style="font-size:0.78rem;color:var(--text-light);text-align:center;margin-top:12px;">Best value for serious seekers</p>
@@ -109,21 +109,21 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td>Profile Creation</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+          <tr><td>Profile Creation</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
           <tr><td>Profile Views / Month</td><td>10</td><td>Unlimited</td><td>Unlimited</td></tr>
           <tr><td>Photo Upload</td><td>1 Photo</td><td>5 Photos</td><td>Unlimited</td></tr>
-          <tr><td>Basic Search</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-          <tr><td>Advanced Filters</td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-          <tr><td>Express Interest</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-          <tr><td>Direct Messaging</td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-          <tr><td>Contact Details Access</td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-          <tr><td>Priority Listing</td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-          <tr><td>Profile Highlight</td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td></tr>
-          <tr><td>Featured Placement</td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td></tr>
-          <tr><td>Horoscope Matching</td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td></tr>
-          <tr><td>Dedicated Support</td><td class="no">✗</td><td>Email Only</td><td class="yes">✓ WhatsApp</td></tr>
-          <tr><td>Profile Boost</td><td class="no">✗</td><td class="no">✗</td><td class="yes">Weekly</td></tr>
-          <tr><td>Verified Badge</td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td></tr>
+          <tr><td>Basic Search</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+          <tr><td>Advanced Filters</td><td class="no">No</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+          <tr><td>Express Interest</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+          <tr><td>Direct Messaging</td><td class="no">No</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+          <tr><td>Contact Details Access</td><td class="no">No</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+          <tr><td>Priority Listing</td><td class="no">No</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+          <tr><td>Profile Highlight</td><td class="no">No</td><td class="no">No</td><td class="yes">Yes</td></tr>
+          <tr><td>Featured Placement</td><td class="no">No</td><td class="no">No</td><td class="yes">Yes</td></tr>
+          <tr><td>Horoscope Matching</td><td class="no">No</td><td class="no">No</td><td class="yes">Yes</td></tr>
+          <tr><td>Dedicated Support</td><td class="no">No</td><td>Email Only</td><td class="yes">WhatsApp</td></tr>
+          <tr><td>Profile Boost</td><td class="no">No</td><td class="no">No</td><td class="yes">Weekly</td></tr>
+          <tr><td>Verified Badge</td><td class="no">No</td><td class="no">No</td><td class="yes">Yes</td></tr>
           <tr>
             <td style="font-weight:700;color:var(--text);">Price</td>
             <td style="font-weight:700;color:var(--primary);">Free</td>

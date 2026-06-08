@@ -20,14 +20,14 @@
         <h2 class="form-title">{{ $user->name }}</h2>
         <p class="form-sub">Modify user account information</p>
 
-        {{-- ✅ SUCCESS --}}
+        {{-- SUCCESS --}}
         @if(session('success'))
             <div class="badge badge-active mb-2">
                 {{ session('success') }}
             </div>
         @endif
 
-        {{-- ✅ GLOBAL ERRORS --}}
+        {{-- GLOBAL ERRORS --}}
         @if ($errors->any())
             <div class="alert alert-danger mb-2">
                 @foreach ($errors->all() as $error)

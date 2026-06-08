@@ -10,7 +10,7 @@
         <div>
             <div class="page-eyebrow">Admin Panel</div>
             <h1 class="page-title">Dashboard <em>Overview</em></h1>
-            <p class="page-subtitle">Welcome back {{ auth()->user()->name }} 😌</p>
+            <p class="page-subtitle">Welcome back {{ auth()->user()->name }}</p>
         </div>
         <div class="date-chip">
             <span id="currentDate"></span>

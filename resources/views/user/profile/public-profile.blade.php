@@ -218,10 +218,10 @@
           </p>
           <div class="mp-hero-badges">
             @if($user->email_verified_at)
-              <span class="mp-badge verified">✓ Verified</span>
+              <span class="mp-badge verified">Verified</span>
             @endif
             @if($user->isPremiumActive())
-              <span class="mp-badge premium">★ Premium</span>
+              <span class="mp-badge premium">Premium</span>
             @endif
             @if($user->last_login_at)
               <span class="mp-badge">
@@ -236,17 +236,17 @@
         <div class="mp-hero-actions">
           @if($sentStatus === 'accepted')
             <span class="btn btn-sm" style="background:rgba(34,197,94,0.2);color:#86efac;border:1px solid rgba(34,197,94,0.4);">
-              ✅ Connected
+              Connected
             </span>
           @elseif($sentStatus === 'pending')
             <span class="btn btn-sm" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.2);">
-              ⏳ Interest Sent
+              Interest Sent
             </span>
           @else
             <form method="POST" action="{{ route('user.interests.send', $user) }}">
               @csrf
               <button type="submit" class="btn btn-primary btn-sm">
-                💌 Send Interest
+                Send Interest
               </button>
             </form>
           @endif
@@ -275,7 +275,7 @@
       <div class="mp-card">
         <div class="mp-card-header">
           <h3 class="mp-card-title">
-            <span class="icon" style="background:#f3f0ff;">💬</span> About
+            <span class="icon" style="background:#f3f0ff;"></span> About
           </h3>
         </div>
         <div class="mp-card-body">
@@ -288,7 +288,7 @@
       <div class="mp-card">
         <div class="mp-card-header">
           <h3 class="mp-card-title">
-            <span class="icon" style="background:#fff7ed;">👤</span> Basic Information
+            <span class="icon" style="background:#fff7ed;"></span> Basic Information
           </h3>
         </div>
         <div class="mp-card-body">
@@ -372,7 +372,7 @@
       <div class="mp-card">
         <div class="mp-card-header">
           <h3 class="mp-card-title">
-            <span class="icon" style="background:#fef3c7;">🛕</span> Religion & Community
+            <span class="icon" style="background:#fef3c7;"></span> Religion & Community
           </h3>
         </div>
         <div class="mp-card-body">
@@ -442,7 +442,7 @@
       <div class="mp-card">
         <div class="mp-card-header">
           <h3 class="mp-card-title">
-            <span class="icon" style="background:#f0f4ff;">🌙</span> Horoscope
+            <span class="icon" style="background:#f0f4ff;"></span> Horoscope
           </h3>
         </div>
         <div class="mp-card-body">
@@ -492,7 +492,7 @@
       <div class="mp-card">
         <div class="mp-card-header">
           <h3 class="mp-card-title">
-            <span class="icon" style="background:#ecfdf5;">🎓</span> Education & Career
+            <span class="icon" style="background:#ecfdf5;"></span> Education & Career
           </h3>
         </div>
         <div class="mp-card-body">
@@ -541,7 +541,7 @@
       <div class="mp-card">
         <div class="mp-card-header">
           <h3 class="mp-card-title">
-            <span class="icon" style="background:#fff1f2;">🏠</span> Location & Family
+            <span class="icon" style="background:#fff1f2;"></span> Location & Family
           </h3>
         </div>
         <div class="mp-card-body">
@@ -608,7 +608,7 @@
       <div class="mp-card">
         <div class="mp-card-header">
           <h3 class="mp-card-title">
-            <span class="icon" style="background:#f0f9ff;">📷</span> Photos
+            <span class="icon" style="background:#f0f9ff;"></span> Photos
           </h3>
         </div>
         <div class="mp-gallery">
@@ -623,7 +623,7 @@
       <div class="mp-card">
         <div class="mp-card-header">
           <h3 class="mp-card-title">
-            <span class="icon" style="background:#f0f9ff;">📷</span> Photos
+            <span class="icon" style="background:#f0f9ff;"></span> Photos
           </h3>
         </div>
         <div class="mp-gallery">
@@ -642,7 +642,7 @@
       <div class="action-card">
         <div style="padding:18px 20px 14px;border-bottom:1px solid #f0edf8;">
           <h3 style="font-size:0.95rem;font-weight:600;color:#1a1033;margin:0;display:flex;align-items:center;gap:8px;">
-            <span style="font-size:1.1rem;">💌</span> Connect with {{ $profile->first_name ?? $user->name }}
+            <span style="font-size:1.1rem;"></span> Connect with {{ $profile->first_name ?? $user->name }}
           </h3>
         </div>
         <div class="action-card-body">
@@ -650,26 +650,26 @@
           {{-- Incoming interest banner --}}
           @if($receivedStatus === 'pending')
             <div class="interest-received-banner">
-              💛 This person has sent you an interest!
+              This person has sent you an interest!
               <a href="{{ route('user.interests.received') }}" style="font-weight:700;color:#92400e;margin-left:auto;white-space:nowrap;">View →</a>
             </div>
           @endif
 
           {{-- Send / Cancel Interest --}}
           @if($sentStatus === 'accepted')
-            <div class="pub-action-btn success">✅ Interest Accepted — You're Connected!</div>
+            <div class="pub-action-btn success">Interest Accepted — You're Connected!</div>
           @elseif($sentStatus === 'pending')
-            <div class="pub-action-btn warning">⏳ Interest Sent — Awaiting Response</div>
+            <div class="pub-action-btn warning">Interest Sent — Awaiting Response</div>
             <form method="POST" action="{{ route('user.interests.cancel', $interestSent) }}">
               @csrf
               @method('DELETE')
               <button type="submit" class="pub-action-btn ghost"
                       onclick="return confirm('Withdraw your interest?')" style="width:100%;">
-                ✕ Withdraw Interest
+                Withdraw Interest
               </button>
             </form>
           @elseif($sentStatus === 'declined')
-            <div class="pub-action-btn danger">✕ Interest Declined</div>
+            <div class="pub-action-btn danger">Interest Declined</div>
           @else
             {{-- Show message textarea optionally --}}
             <form method="POST" action="{{ route('user.interests.send', $user) }}" id="interestForm">
@@ -680,7 +680,7 @@
                 style="width:100%;padding:10px 12px;border:1.5px solid #e5e7eb;border-radius:10px;font-size:0.84rem;resize:none;outline:none;font-family:inherit;box-sizing:border-box;margin-bottom:10px;"
                 onfocus="this.style.borderColor='#7c3aed'" onblur="this.style.borderColor='#e5e7eb'"></textarea>
               <button type="submit" class="pub-action-btn primary" style="width:100%;">
-                💌 Send Interest
+                Send Interest
               </button>
             </form>
           @endif
@@ -691,14 +691,14 @@
           <form method="POST" action="{{ route('user.shortlist.toggle', $user) }}">
             @csrf
             <button type="submit" class="pub-action-btn outline {{ $isShortlisted ? 'shortlisted' : '' }}" style="width:100%;">
-              {{ $isShortlisted ? '★ Shortlisted' : '☆ Add to Shortlist' }}
+              {{ $isShortlisted ? 'Shortlisted' : 'Add to Shortlist' }}
             </button>
           </form>
 
           {{-- Message (only if connected) --}}
           @if($sentStatus === 'accepted' || $receivedStatus === 'accepted')
             <a href="{{ route('user.messages.index') }}" class="pub-action-btn primary" style="display:flex;margin-top:0;">
-              💬 Send Message
+              Send Message
             </a>
           @endif
 
@@ -712,10 +712,10 @@
             This is how others see your profile.
           </p>
           <a href="{{ route('user.profile.me') }}" class="pub-action-btn outline" style="display:flex;">
-            👤 View My Profile Dashboard
+            View My Profile Dashboard
           </a>
           <a href="{{ route('user.profile.edit') }}" class="pub-action-btn primary" style="display:flex;">
-            ✏️ Edit Profile
+            Edit Profile
           </a>
         </div>
       </div>
@@ -726,7 +726,7 @@
       <div class="mp-card">
         <div class="mp-card-header">
           <h3 class="mp-card-title">
-            <span class="icon" style="background:#ecfdf5;">📞</span> Contact Details
+            <span class="icon" style="background:#ecfdf5;"></span> Contact Details
           </h3>
         </div>
         <div class="mp-card-body">
@@ -752,7 +752,7 @@
       <div class="mp-card">
         <div class="mp-card-header">
           <h3 class="mp-card-title">
-            <span class="icon" style="background:#f0f4ff;">📊</span> Profile Stats
+            <span class="icon" style="background:#f0f4ff;"></span> Profile Stats
           </h3>
         </div>
         <div class="mp-card-body" style="padding:16px;">
@@ -782,7 +782,7 @@
       <div class="mp-card">
         <div class="mp-card-header">
           <h3 class="mp-card-title">
-            <span class="icon" style="background:#fdf2f8;">💑</span> Partner Preferences
+            <span class="icon" style="background:#fdf2f8;"></span> Partner Preferences
           </h3>
         </div>
         <div class="mp-card-body">

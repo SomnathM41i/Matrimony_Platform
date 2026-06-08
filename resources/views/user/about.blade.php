@@ -39,7 +39,7 @@
       </div>
       
       <div style="background:linear-gradient(135deg,var(--primary-dark),#1A1A2E);border-radius:var(--radius-lg);padding:48px;color:#fff;text-align:center;">
-        <div style="font-size:5rem;margin-bottom:16px;">💕</div>
+        <div style="font-size:5rem;margin-bottom:16px;"><i class="fas fa-heart" style="color:var(--gold-light);"></i></div>
         <h3 style="color:var(--gold-light);margin-bottom:12px;font-size:1.4rem;">Find Your Forever</h3>
         <p style="color:rgba(255,255,255,0.8);font-size:0.97rem;line-height:1.8;">"Connecting souls with love, trust, and compatibility."</p>
         <div style="margin-top:28px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.15);">
@@ -56,12 +56,12 @@
   <div class="container">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;" class="mv-grid">
       <div style="background:#fff;border-radius:var(--radius-md);padding:48px;border:1px solid var(--border);border-top:4px solid var(--primary);">
-        <div style="font-size:2.5rem;margin-bottom:16px;">🎯</div>
+        <div style="font-size:2.5rem;margin-bottom:16px;"><i class="fas fa-bullseye" style="color:var(--primary);"></i></div>
         <h3 style="color:var(--primary);margin-bottom:16px;font-size:1.4rem;">Our Mission</h3>
         <p style="font-size:1.02rem;line-height:1.9;">To provide a safe, trusted, and user-friendly matrimonial platform where individuals and families can find compatible life partners with ease and confidence.</p>
       </div>
       <div style="background:#fff;border-radius:var(--radius-md);padding:48px;border:1px solid var(--border);border-top:4px solid var(--accent);">
-        <div style="font-size:2.5rem;margin-bottom:16px;">🌟</div>
+        <div style="font-size:2.5rem;margin-bottom:16px;"><i class="fas fa-eye" style="color:var(--accent);"></i></div>
         <h3 style="color:var(--accent);margin-bottom:16px;font-size:1.4rem;">Our Vision</h3>
         <p style="font-size:1.02rem;line-height:1.9;">To become India's most preferred matrimonial platform, known for successful matches, transparency, and bringing happiness to millions of families.</p>
       </div>
@@ -80,42 +80,42 @@
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;">
       <div style="display:flex;gap:16px;padding:24px;background:var(--bg-light);border-radius:var(--radius-md);border:1px solid var(--border);">
-        <div style="font-size:1.8rem;flex-shrink:0;">🏘️</div>
+        <div style="font-size:1.8rem;flex-shrink:0;"><i class="fas fa-users" style="color:var(--primary);"></i></div>
         <div>
           <h4 style="font-size:1rem;margin-bottom:6px;font-family:var(--font-body);font-weight:600;">Community Focused</h4>
           <p style="font-size:0.88rem;">Built with deep understanding of Indian culture, traditions, and family values.</p>
         </div>
       </div>
       <div style="display:flex;gap:16px;padding:24px;background:var(--bg-light);border-radius:var(--radius-md);border:1px solid var(--border);">
-        <div style="font-size:1.8rem;flex-shrink:0;">✅</div>
+        <div style="font-size:1.8rem;flex-shrink:0;"><i class="fas fa-shield-halved" style="color:var(--primary);"></i></div>
         <div>
           <h4 style="font-size:1rem;margin-bottom:6px;font-family:var(--font-body);font-weight:600;">Verified Profiles</h4>
           <p style="font-size:0.88rem;">Every profile is manually verified for authenticity and safety.</p>
         </div>
       </div>
       <div style="display:flex;gap:16px;padding:24px;background:var(--bg-light);border-radius:var(--radius-md);border:1px solid var(--border);">
-        <div style="font-size:1.8rem;flex-shrink:0;">🔐</div>
+        <div style="font-size:1.8rem;flex-shrink:0;"><i class="fas fa-lock" style="color:var(--primary);"></i></div>
         <div>
           <h4 style="font-size:1rem;margin-bottom:6px;font-family:var(--font-body);font-weight:600;">Secure & Private</h4>
           <p style="font-size:0.88rem;">Advanced security and privacy protection for all members.</p>
         </div>
       </div>
       <div style="display:flex;gap:16px;padding:24px;background:var(--bg-light);border-radius:var(--radius-md);border:1px solid var(--border);">
-        <div style="font-size:1.8rem;flex-shrink:0;">💡</div>
+        <div style="font-size:1.8rem;flex-shrink:0;"><i class="fas fa-robot" style="color:var(--primary);"></i></div>
         <div>
           <h4 style="font-size:1rem;margin-bottom:6px;font-family:var(--font-body);font-weight:600;">Smart Matchmaking</h4>
           <p style="font-size:0.88rem;">Intelligent matching based on your preferences and compatibility.</p>
         </div>
       </div>
       <div style="display:flex;gap:16px;padding:24px;background:var(--bg-light);border-radius:var(--radius-md);border:1px solid var(--border);">
-        <div style="font-size:1.8rem;flex-shrink:0;">📱</div>
+        <div style="font-size:1.8rem;flex-shrink:0;"><i class="fas fa-mobile-button" style="color:var(--primary);"></i></div>
         <div>
           <h4 style="font-size:1rem;margin-bottom:6px;font-family:var(--font-body);font-weight:600;">Mobile Friendly</h4>
           <p style="font-size:0.88rem;">Seamless experience on mobile, tablet, and desktop.</p>
         </div>
       </div>
       <div style="display:flex;gap:16px;padding:24px;background:var(--bg-light);border-radius:var(--radius-md);border:1px solid var(--border);">
-        <div style="font-size:1.8rem;flex-shrink:0;">🤝</div>
+        <div style="font-size:1.8rem;flex-shrink:0;"><i class="fas fa-headset" style="color:var(--primary);"></i></div>
         <div>
           <h4 style="font-size:1rem;margin-bottom:6px;font-family:var(--font-body);font-weight:600;">Dedicated Support</h4>
           <p style="font-size:0.88rem;">Our team is always here to assist you throughout your journey.</p>
@@ -136,22 +136,22 @@
     </div>
     <div class="values-grid">
       <div class="value-card">
-        <div class="value-icon">🕊️</div>
+        <div class="value-icon"><i class="fas fa-handshake"></i></div>
         <h3>Trust</h3>
         <p>We build trust through transparency, verified profiles, and honest communication.</p>
       </div>
       <div class="value-card">
-        <div class="value-icon">🙏</div>
+        <div class="value-icon"><i class="fas fa-heart"></i></div>
         <h3>Respect</h3>
         <p>Every member and family deserves dignity and respect on our platform.</p>
       </div>
       <div class="value-card">
-        <div class="value-icon">🌸</div>
+        <div class="value-icon"><i class="fas fa-circle-check"></i></div>
         <h3>Compatibility</h3>
         <p>We help you find partners who match your values, culture, and aspirations.</p>
       </div>
       <div class="value-card">
-        <div class="value-icon">🔍</div>
+        <div class="value-icon"><i class="fas fa-eye"></i></div>
         <h3>Transparency</h3>
         <p>Clear processes, no fake profiles, and complete honesty at every step.</p>
       </div>
@@ -170,25 +170,25 @@
     </div>
     <div class="team-grid">
       <div class="team-card">
-        <div class="team-avatar">👨‍💼</div>
+        <div class="team-avatar"><i class="fas fa-user-tie"></i></div>
         <div class="team-name">Rajesh Kamble</div>
         <div class="team-role">Founder & CEO</div>
         <p style="font-size:0.85rem;margin-top:10px;">Passionate about using technology to create meaningful connections and strengthen families.</p>
       </div>
       <div class="team-card">
-        <div class="team-avatar">👩‍💼</div>
+        <div class="team-avatar"><i class="fas fa-user-tie"></i></div>
         <div class="team-name">Sunita Meshram</div>
         <div class="team-role">Co-Founder & COO</div>
         <p style="font-size:0.85rem;margin-top:10px;">Committed to building a safe and trustworthy platform for Indian families.</p>
       </div>
       <div class="team-card">
-        <div class="team-avatar">👨‍💻</div>
+        <div class="team-avatar"><i class="fas fa-laptop-code"></i></div>
         <div class="team-name">Amol Gaikwad</div>
         <div class="team-role">Head of Technology</div>
         <p style="font-size:0.85rem;margin-top:10px;">Ensures Express Matrimony is secure, fast, and easy to use.</p>
       </div>
       <div class="team-card">
-        <div class="team-avatar">👩‍🎨</div>
+        <div class="team-avatar"><i class="fas fa-users"></i></div>
         <div class="team-name">Pooja Rathod</div>
         <div class="team-role">Community Manager</div>
         <p style="font-size:0.85rem;margin-top:10px;">Works closely with members to ensure a warm and supportive experience.</p>

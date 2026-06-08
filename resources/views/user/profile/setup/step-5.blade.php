@@ -10,7 +10,7 @@
     <div class="setup-card">
 
       @if (session('success'))
-        <div class="alert alert-success">✅ {{ session('success') }}</div>
+        <div class="alert alert-success">{{ session('success') }}</div>
       @endif
       @if ($errors->any())
         <div class="alert alert-error">
@@ -20,7 +20,7 @@
       @endif
 
       <div class="setup-card-header">
-        <div class="setup-step-icon">🏠</div>
+        <div class="setup-step-icon"></div>
         <div>
           <h2>Location &amp; Family</h2>
           <p>Where you live and about your family background</p>

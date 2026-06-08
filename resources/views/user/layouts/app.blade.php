@@ -190,7 +190,7 @@
       {{-- Left: who is being impersonated and by whom --}}
       <div class="imp-left">
         <div class="imp-dot" aria-hidden="true"></div>
-        <div class="imp-badge" aria-hidden="true">👤</div>
+        <div class="imp-badge" aria-hidden="true"></div>
         <div class="imp-text">
           <span class="imp-title">Admin Preview Mode</span>
           <span class="imp-subtitle">

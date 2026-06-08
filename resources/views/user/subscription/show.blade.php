@@ -134,10 +134,10 @@
 <div class="container section">
 
     @if(session('success'))
-        <div class="alert alert-success" style="margin-bottom:20px;">✅ {{ session('success') }}</div>
+        <div class="alert alert-success" style="margin-bottom:20px;">{{ session('success') }}</div>
     @endif
     @if(session('error'))
-        <div class="alert alert-error" style="margin-bottom:20px;">❌ {{ session('error') }}</div>
+        <div class="alert alert-error" style="margin-bottom:20px;">{{ session('error') }}</div>
     @endif
 
     {{-- ══════════════════════════════════════════════════════════════
@@ -146,7 +146,7 @@
     @if($activeSubscription && $activeSubscription->isValid())
         @php $pkg = $activeSubscription->package; @endphp
         <div class="sub-status-card active">
-            <div class="sub-status-icon">💎</div>
+            <div class="sub-status-icon"></div>
             <div class="sub-status-body">
                 <span class="sub-status-badge badge-active">✓ Active</span>
                 <h2>{{ $pkg->name }}</h2>
@@ -165,32 +165,32 @@
 
                 <div class="sub-features">
                     @if($pkg->can_see_contact)
-                        <span class="sub-feat-pill">📞 Contact Access</span>
+                        <span class="sub-feat-pill">Contact Access</span>
                     @endif
                     @if($pkg->messages_limit == 0 || $pkg->messages_limit > 0)
-                        <span class="sub-feat-pill">💬 Direct Messaging
+                        <span class="sub-feat-pill">Direct Messaging
                             @if($pkg->messages_limit > 0)({{ $pkg->messages_limit }} total)@endif
                         </span>
                     @endif
                     @if($pkg->priority_in_search)
-                        <span class="sub-feat-pill">🔝 Priority Listing</span>
+                        <span class="sub-feat-pill">Priority Listing</span>
                     @endif
                     @if($pkg->highlight_profile)
                         <span class="sub-feat-pill">⭐ Profile Highlight</span>
                     @endif
                     @if($pkg->can_see_full_horoscope)
-                        <span class="sub-feat-pill">🔭 Horoscope Matching</span>
+                        <span class="sub-feat-pill">Horoscope Matching</span>
                     @endif
                     @if($pkg->rm_assistance)
-                        <span class="sub-feat-pill">🤝 Relationship Manager</span>
+                        <span class="sub-feat-pill">Relationship Manager</span>
                     @endif
                     @if($pkg->whatsapp_support)
-                        <span class="sub-feat-pill">📱 WhatsApp Support</span>
+                        <span class="sub-feat-pill">WhatsApp Support</span>
                     @endif
                     @if($pkg->photo_gallery_limit <= 0)
-                        <span class="sub-feat-pill">📷 Unlimited Photos</span>
+                        <span class="sub-feat-pill">Unlimited Photos</span>
                     @elseif($pkg->photo_gallery_limit > 1)
-                        <span class="sub-feat-pill">📷 Up to {{ $pkg->photo_gallery_limit }} Photos</span>
+                        <span class="sub-feat-pill">Up to {{ $pkg->photo_gallery_limit }} Photos</span>
                     @endif
                 </div>
             </div>
@@ -220,7 +220,7 @@
     @else
         {{-- No active subscription --}}
         <div class="sub-status-card free">
-            <div class="sub-status-icon">🆓</div>
+            <div class="sub-status-icon"></div>
             <div class="sub-status-body">
                 <span class="sub-status-badge badge-free">Free Plan</span>
                 <h2>Basic (Free) Plan</h2>
@@ -256,7 +256,7 @@
 
     @if($history->isEmpty())
         <div class="card" style="padding:40px;text-align:center;color:#9ca3af;">
-            <div style="font-size:2.5rem;margin-bottom:12px;">📋</div>
+            <div style="font-size:2.5rem;margin-bottom:12px;"></div>
             <p style="margin:0;">No subscription history yet.</p>
         </div>
     @else

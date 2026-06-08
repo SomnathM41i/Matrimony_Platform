@@ -10,7 +10,7 @@
 
         <div class="card-body">
 
-            <h2 class="form-title">Welcome Back 👋</h2>
+            <h2 class="form-title">Welcome Back</h2>
             <p class="form-sub">Login to your admin panel</p>
 
             <!-- SUCCESS -->

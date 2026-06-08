@@ -9,8 +9,8 @@
 
     $statusConfig = [
         'pending'  => ['label' => 'Pending',  'color' => '#f59e0b', 'bg' => '#fef3c7', 'icon' => '⏳'],
-        'accepted' => ['label' => 'Accepted', 'color' => '#22c55e', 'bg' => '#dcfce7', 'icon' => '✅'],
-        'declined' => ['label' => 'Declined', 'color' => '#ef4444', 'bg' => '#fee2e2', 'icon' => '❌'],
+        'accepted' => ['label' => 'Accepted', 'color' => '#22c55e', 'bg' => '#dcfce7', 'icon' => 'accepted'],
+        'declined' => ['label' => 'Declined', 'color' => '#ef4444', 'bg' => '#fee2e2', 'icon' => 'declined'],
     ];
 @endphp
 
@@ -22,7 +22,7 @@
             <a href="{{ route('user.dashboard') }}">Dashboard</a><span>/</span>
             <span>Interests Received</span>
         </div>
-        <h1>Interests Received 📬</h1>
+        <h1>Interests Received</h1>
         <p>{{ $counts['pending'] }} new interest{{ $counts['pending'] !== 1 ? 's' : '' }} waiting for your response</p>
     </div>
 </section>
@@ -144,11 +144,11 @@
 
     {{-- Sub-nav: Sent / Received --}}
     <div style="display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap;">
-        <a href="{{ route('user.interests.sent') }}" class="btn btn-outline btn-sm">💌 Sent</a>
+        <a href="{{ route('user.interests.sent') }}" class="btn btn-outline btn-sm">Sent</a>
         <a href="{{ route('user.interests.received') }}" class="btn btn-primary btn-sm" style="background:#7c3aed;">
-            📬 Received ({{ $counts['all'] }})
+            Received ({{ $counts['all'] }})
         </a>
-        <a href="{{ route('user.matches.index') }}" class="btn btn-outline btn-sm">💕 Browse Matches</a>
+        <a href="{{ route('user.matches.index') }}" class="btn btn-outline btn-sm">Browse Matches</a>
     </div>
 
     {{-- Status Tabs --}}
@@ -166,7 +166,7 @@
 
     @if($interests->isEmpty())
         <div class="empty-state">
-            <div class="icon">📬</div>
+            <div class="icon"></div>
             <h3>No interests {{ $statusFilter !== 'all' ? "that are $statusFilter" : 'received yet' }}</h3>
             <p>
                 @if($statusFilter === 'all')
@@ -201,9 +201,9 @@
                         @if($photo)
                             <img src="{{ $photo }}" alt="{{ $name }}"
                                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-                            <div class="int-photo-placeholder" style="display:none;">👤</div>
+                            <div class="int-photo-placeholder" style="display:none;"></div>
                         @else
-                            <div class="int-photo-placeholder">👤</div>
+                            <div class="int-photo-placeholder"></div>
                         @endif
                     </div>
 
@@ -225,16 +225,16 @@
                                 </span>
                             @endif
                             @if($mp?->religion?->name)
-                                <span class="int-meta-item">🙏 {{ $mp->religion->name }}</span>
+                                <span class="int-meta-item">{{ $mp->religion->name }}</span>
                             @endif
                             @if($mp?->educationLevel?->name)
-                                <span class="int-meta-item">🎓 {{ $mp->educationLevel->name }}</span>
+                                <span class="int-meta-item">{{ $mp->educationLevel->name }}</span>
                             @endif
                             @if($mp?->profession?->name)
-                                <span class="int-meta-item">💼 {{ $mp->profession->name }}</span>
+                                <span class="int-meta-item">{{ $mp->profession->name }}</span>
                             @endif
                             @if($mp?->marital_status)
-                                <span class="int-meta-item">💍 {{ $fmt($mp->marital_status) }}</span>
+                                <span class="int-meta-item">{{ $fmt($mp->marital_status) }}</span>
                             @endif
                         </div>
 
@@ -265,12 +265,12 @@
                             <form method="POST" action="{{ route('user.interests.accept', $interest) }}" style="width:100%;">
                                 @csrf
                                 @method('PATCH')
-                                <button type="submit" class="int-act-btn accept">✅ Accept</button>
+                                <button type="submit" class="int-act-btn accept">Accept</button>
                             </form>
                             <form method="POST" action="{{ route('user.interests.decline', $interest) }}" style="width:100%;">
                                 @csrf
                                 @method('PATCH')
-                                <button type="submit" class="int-act-btn decline">✕ Decline</button>
+                                <button type="submit" class="int-act-btn decline">Decline</button>
                             </form>
                         @endif
 
@@ -284,7 +284,7 @@
                         {{-- Message if accepted --}}
                         @if($interest->status === 'accepted')
                             <a href="{{ route('user.messages.index') }}" class="int-act-btn msg">
-                                💬 Message
+                                Message
                             </a>
                         @endif
 

@@ -11,7 +11,7 @@
             <a href="{{ route('user.dashboard') }}">Dashboard</a><span>/</span>
             <span>Shortlist</span>
         </div>
-        <h1>My Shortlist ★</h1>
+        <h1>My Shortlist</h1>
         <p>{{ $totalCount }} profile{{ $totalCount !== 1 ? 's' : '' }} saved — revisit any time</p>
     </div>
 </section>
@@ -116,9 +116,9 @@
     {{-- Topbar --}}
     <div class="sl-topbar">
         <div class="sl-nav-links">
-            <a href="{{ route('user.matches.index') }}" class="btn btn-outline btn-sm">💕 Matches</a>
-            <a href="{{ route('user.search.index') }}"  class="btn btn-outline btn-sm">🔍 Search</a>
-            <a href="{{ route('user.interests.sent') }}" class="btn btn-outline btn-sm">💌 Interests</a>
+            <a href="{{ route('user.matches.index') }}" class="btn btn-outline btn-sm">Matches</a>
+            <a href="{{ route('user.search.index') }}"  class="btn btn-outline btn-sm">Search</a>
+            <a href="{{ route('user.interests.sent') }}" class="btn btn-outline btn-sm">Interests</a>
         </div>
 
         @if($shortlists->isNotEmpty())
@@ -162,21 +162,21 @@
                     <form method="POST" action="{{ route('user.shortlist.remove', $sl) }}" style="display:contents;">
                         @csrf @method('DELETE')
                         <button type="submit" class="sl-remove-btn" title="Remove from shortlist"
-                                onclick="return confirm('Remove from shortlist?')">✕</button>
+                                onclick="return confirm('Remove from shortlist?')"></button>
                     </form>
 
                     {{-- Photo --}}
                     <div class="sl-photo-wrap">
                         @if($photo)
                             <img src="{{ $photo }}" alt="{{ $name }}" class="sl-photo"
-                                 onerror="this.parentElement.innerHTML='<div class=\'sl-photo-placeholder\'>👤</div>'">
+                                 onerror="this.parentElement.innerHTML='<div class=\'sl-photo-placeholder\'></div>'">
                         @else
-                            <div class="sl-photo-placeholder">👤</div>
+                            <div class="sl-photo-placeholder"></div>
                         @endif
                         @if($member->is_premium)
                             <span class="sl-premium-badge">⭐ Premium</span>
                         @endif
-                        <span class="sl-saved-since">★ {{ $sl->created_at->diffForHumans(null, true) }}</span>
+                        <span class="sl-saved-since">{{ $sl->created_at->diffForHumans(null, true) }}</span>
                     </div>
 
                     {{-- Body --}}
@@ -189,18 +189,18 @@
                             @endif
                         </p>
                         <div class="sl-meta">
-                            @if($loc)<span class="sl-meta-item">📍 {{ $loc }}</span>@endif
-                            @if($mp?->religion?->name)<span class="sl-meta-item">🛕 {{ $mp->religion->name }}</span>@endif
-                            @if($mp?->educationLevel?->name)<span class="sl-meta-item">🎓 {{ $mp->educationLevel->name }}</span>@endif
-                            @if($mp?->profession?->name)<span class="sl-meta-item">💼 {{ $mp->profession->name }}</span>@endif
+                            @if($loc)<span class="sl-meta-item">{{ $loc }}</span>@endif
+                            @if($mp?->religion?->name)<span class="sl-meta-item">{{ $mp->religion->name }}</span>@endif
+                            @if($mp?->educationLevel?->name)<span class="sl-meta-item">{{ $mp->educationLevel->name }}</span>@endif
+                            @if($mp?->profession?->name)<span class="sl-meta-item">{{ $mp->profession->name }}</span>@endif
                         </div>
                         <div class="sl-actions">
                             @if($member->interest_sent)
-                                <button class="sl-btn primary sent" disabled>✓ Interest Sent</button>
+                                <button class="sl-btn primary sent" disabled>Interest Sent</button>
                             @else
                                 <form method="POST" action="{{ route('user.interests.send', $member) }}" style="flex:1;">
                                     @csrf
-                                    <button class="sl-btn primary" style="width:100%;">💌 Send Interest</button>
+                                    <button class="sl-btn primary" style="width:100%;">Send Interest</button>
                                 </form>
                             @endif
                             <a href="{{ route('user.profile.public', $member->profile_slug ?? $member->id) }}"

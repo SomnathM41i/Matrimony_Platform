@@ -100,19 +100,19 @@
                 </div>
 
                 <a href="{{ route('user.profile.me') }}" class="dropdown-item" role="menuitem">
-                  👤 My Profile
+                  My Profile
                 </a>
 
                 <a href="{{ route('user.profile.edit') }}" class="dropdown-item" role="menuitem">
-                  ✏️ Edit Profile
+                  Edit Profile
                 </a>
 
                 <a href="{{ route('user.subscription.show') }}" class="dropdown-item" role="menuitem">
-                  💎 My Plan
+                  My Plan
                 </a>
 
                 <a href="{{ route('user.profile.setup.show', 7) }}" class="dropdown-item" role="menuitem">
-                  ⚙️ Settings
+                  Settings
                 </a>
 
                 <hr style="margin:6px 0;border:none;border-top:1px solid var(--border);">
@@ -121,7 +121,7 @@
                   @csrf
                   <button type="submit" class="dropdown-item" role="menuitem"
                           style="width:100%;text-align:left;background:none;border:none;cursor:pointer;color:var(--danger,#dc2626);">
-                    🚪 Logout
+                    Logout
                   </button>
                 </form>
 

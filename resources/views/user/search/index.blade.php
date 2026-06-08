@@ -16,7 +16,7 @@
             <a href="{{ route('user.dashboard') }}">Dashboard</a><span>/</span>
             <span>Search</span>
         </div>
-        <h1>Search Members 🔍</h1>
+        <h1>Search Members</h1>
         <p>Filter by any combination of criteria to find your ideal match</p>
     </div>
 </section>
@@ -163,11 +163,11 @@
                 @foreach($savedSearches as $ss)
                     <div class="saved-search-item">
                         <a class="run" href="{{ route('user.search.index', $ss->filters ?? []) }}">
-                            📋 {{ $ss->name }}
+                            {{ $ss->name }}
                         </a>
                         <form method="POST" action="{{ route('user.search.saved.delete', $ss) }}" style="margin:0;">
                             @csrf @method('DELETE')
-                            <button type="submit" title="Delete">✕</button>
+                            <button type="submit" title="Delete"></button>
                         </form>
                     </div>
                 @endforeach
@@ -235,7 +235,7 @@
 
                 {{-- Religion & Community --}}
                 <div class="filter-card">
-                    <h3 class="filter-card-title">🛕 Religion</h3>
+                    <h3 class="filter-card-title">Religion</h3>
 
                     <div class="filter-section">
                         <span class="filter-label">Religion</span>
@@ -278,7 +278,7 @@
 
                 {{-- Education & Career --}}
                 <div class="filter-card">
-                    <h3 class="filter-card-title">🎓 Education & Career</h3>
+                    <h3 class="filter-card-title">Education & Career</h3>
 
                     <div class="filter-section">
                         <span class="filter-label">Education</span>
@@ -319,7 +319,7 @@
 
                 {{-- Location --}}
                 <div class="filter-card">
-                    <h3 class="filter-card-title">📍 Location</h3>
+                    <h3 class="filter-card-title">Location</h3>
 
                     <div class="filter-section">
                         <span class="filter-label">Country</span>
@@ -360,7 +360,7 @@
 
                 {{-- Lifestyle --}}
                 <div class="filter-card">
-                    <h3 class="filter-card-title">🌿 Lifestyle</h3>
+                    <h3 class="filter-card-title">Lifestyle</h3>
 
                     <div class="filter-section">
                         <span class="filter-label">Diet</span>
@@ -393,7 +393,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn-apply">🔍 Search</button>
+                <button type="submit" class="btn-apply">Search</button>
                 <a href="{{ route('user.search.index') }}" class="btn-reset">Reset All Filters</a>
 
             </form>
@@ -405,14 +405,14 @@
             @if($results === null)
                 {{-- No search run yet --}}
                 <div class="search-prompt">
-                    <div class="icon">🔍</div>
+                    <div class="icon"></div>
                     <h3>Set your filters and search</h3>
                     <p>Use the filters on the left to find profiles matching exactly what you're looking for.</p>
                 </div>
 
             @elseif($results->isEmpty())
                 <div class="search-prompt">
-                    <div class="icon">😔</div>
+                    <div class="icon"></div>
                     <h3>No profiles found</h3>
                     <p>Try broadening your filters — fewer criteria usually returns more matches.</p>
                 </div>
@@ -423,19 +423,19 @@
                 @if(!empty($f))
                 <div class="active-filters">
                     @if(!empty($f['keyword']))
-                        <span class="filter-chip">🔤 {{ $f['keyword'] }}<a href="{{ request()->fullUrlWithoutQuery('keyword') }}">✕</a></span>
+                        <span class="filter-chip">{{ $f['keyword'] }}<a href="{{ request()->fullUrlWithoutQuery('keyword') }}">✕</a></span>
                     @endif
                     @if(!empty($f['religion_id']))
-                        <span class="filter-chip">🛕 Religion set<a href="{{ request()->fullUrlWithoutQuery('religion_id') }}">✕</a></span>
+                        <span class="filter-chip">Religion set<a href="{{ request()->fullUrlWithoutQuery('religion_id') }}">✕</a></span>
                     @endif
                     @if(!empty($f['city_id']) || !empty($f['state_id']) || !empty($f['country_id']))
-                        <span class="filter-chip">📍 Location set</span>
+                        <span class="filter-chip">Location set</span>
                     @endif
                     @if(!empty($f['education_level_id']))
-                        <span class="filter-chip">🎓 Education set</span>
+                        <span class="filter-chip">Education set</span>
                     @endif
                     @if(!empty($f['with_photo']))
-                        <span class="filter-chip">📷 With Photo</span>
+                        <span class="filter-chip">With Photo</span>
                     @endif
                 </div>
                 @endif
@@ -486,9 +486,9 @@
                             <div class="member-photo-wrap">
                                 @if($photo)
                                     <img src="{{ $photo }}" alt="{{ $name }}" class="member-photo"
-                                         onerror="this.parentElement.innerHTML='<div class=\'member-photo-placeholder\'>👤</div>'">
+                                         onerror="this.parentElement.innerHTML='<div class=\'member-photo-placeholder\'></div>'">
                                 @else
-                                    <div class="member-photo-placeholder">👤</div>
+                                    <div class="member-photo-placeholder"></div>
                                 @endif
                                 @if($member->is_premium)
                                     <span class="member-premium-badge">⭐ Premium</span>
@@ -501,17 +501,17 @@
                                     @if($member->profile_slug) · <span style="color:#9ca3af;font-weight:400;">{{ $member->profile_slug }}</span> @endif
                                 </p>
                                 <div class="member-meta">
-                                    @if($loc)<span class="member-meta-item">📍 {{ $loc }}</span>@endif
-                                    @if($mp?->religion?->name)<span class="member-meta-item">🛕 {{ $mp->religion->name }}</span>@endif
-                                    @if($mp?->educationLevel?->name)<span class="member-meta-item">🎓 {{ $mp->educationLevel->name }}</span>@endif
+                                    @if($loc)<span class="member-meta-item">{{ $loc }}</span>@endif
+                                    @if($mp?->religion?->name)<span class="member-meta-item">{{ $mp->religion->name }}</span>@endif
+                                    @if($mp?->educationLevel?->name)<span class="member-meta-item">{{ $mp->educationLevel->name }}</span>@endif
                                 </div>
                                 <div class="member-actions">
                                     @if($member->interest_sent)
-                                        <button class="m-btn primary sent" disabled>✓ Sent</button>
+                                        <button class="m-btn primary sent" disabled>Sent</button>
                                     @else
                                         <form method="POST" action="{{ route('user.interests.send', $member) }}" style="flex:1;">
                                             @csrf
-                                            <button class="m-btn primary" style="width:100%;">💌 Interest</button>
+                                            <button class="m-btn primary" style="width:100%;">Interest</button>
                                         </form>
                                     @endif
                                     <a href="{{ route('user.profile.public', $member->profile_slug ?? $member->id) }}" class="m-btn ghost" title="View">
@@ -535,7 +535,7 @@
 
                 {{-- Save search bar (shown after results) --}}
                 <div style="margin-top:24px;background:#fff;border-radius:12px;padding:16px 20px;box-shadow:0 2px 10px rgba(0,0,0,.06);">
-                    <p style="font-size:0.84rem;color:#6b7280;margin:0 0 8px;">💾 Save this search to rerun it later:</p>
+                    <p style="font-size:0.84rem;color:#6b7280;margin:0 0 8px;">Save this search to rerun it later:</p>
                     <form method="POST" action="{{ route('user.search.save') }}" class="save-search-bar">
                         @csrf
                         @foreach($f as $key => $val)

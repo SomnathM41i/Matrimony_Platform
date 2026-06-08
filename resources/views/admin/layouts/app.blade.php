@@ -655,7 +655,7 @@
     // Welcome toast on load
     window.addEventListener('load', () => {
         setTimeout(() => showToast('Welcome back!', '24 verifications pending your review.', 'rose'), 800);
-        setTimeout(() => showToast('Revenue Update', 'MRR crossed ₹4L this month 🎉', 'gold'), 2000);
+        setTimeout(() => showToast('Revenue Update', 'MRR crossed ₹4L this month', 'gold'), 2000);
     });
 
     // ── NAV ACTIVE STATE ──────────────────────────────────────

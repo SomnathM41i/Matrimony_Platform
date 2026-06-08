@@ -173,10 +173,10 @@
     {{-- ── Flash messages ─────────────────────────────────────────────── --}}
     <div class="pkg-flash">
         @if(session('success'))
-            <div class="alert alert-success">✅ {{ session('success') }}</div>
+            <div class="alert alert-success">{{ session('success') }}</div>
         @endif
         @if(session('error'))
-            <div class="alert alert-error">❌ {{ session('error') }}</div>
+            <div class="alert alert-error">{{ session('error') }}</div>
         @endif
     </div>
 
@@ -185,7 +185,7 @@
         @php $ap = $activeSubscription->package; @endphp
         <div class="pkg-active-banner">
             <div>
-                <h3>🎉 You're on the <strong>{{ $ap->name }}</strong></h3>
+                <h3>You're on the <strong>{{ $ap->name }}</strong></h3>
                 <p>
                     Active until {{ $activeSubscription->expires_at->format('d M Y') }}
                     ({{ $activeSubscription->expires_at->diffForHumans() }})
@@ -545,7 +545,6 @@
 <div id="pkg-modal-overlay"
      style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9000;align-items:center;justify-content:center;">
     <div style="background:#fff;border-radius:20px;padding:36px 32px;max-width:420px;width:90%;text-align:center;box-shadow:0 16px 48px rgba(0,0,0,.2);">
-        <div style="font-size:2.8rem;margin-bottom:12px;">🚀</div>
         <h3 id="pkg-modal-title" style="margin:0 0 10px;font-size:1.15rem;">Buy Plan</h3>
         <p style="font-size:0.9rem;color:#6b7280;margin:0 0 24px;line-height:1.6;">
             Online payment is coming soon! To subscribe now, please contact our support team and we will help you get set up.
@@ -553,7 +552,7 @@
         <div style="display:flex;flex-direction:column;gap:10px;">
             <a href="mailto:support@{{ str_replace(['https://','http://','www.'],'',config('app.url','matrimony.com')) }}"
                class="pkg-cta primary" style="text-decoration:none;">
-                📧 Contact Support
+                Contact Support
             </a>
             <button onclick="closeModal()" class="pkg-cta outline">Close</button>
         </div>

@@ -10,7 +10,7 @@
     <div class="auth-card">
       <div class="auth-logo">
         <img src="{{ asset('assets/images/logo.png') }}" alt="BouddhMatrimony" onerror="this.style.display='none'">
-        <h2>Welcome Back 🙏</h2>
+        <h2>Welcome Back</h2>
         <p>Login to your Matrimony account</p>
       </div>
 
@@ -52,9 +52,8 @@
                    style="padding-right:52px;">
 
               <button type="button" class="toggle-pass"
-                onclick="togglePassword(this)"
                 style="position:absolute; right:14px; z-index:10; background:none; border:none; cursor:pointer; font-size:1.1rem;">
-                👁️
+                Show
               </button>
           </div>
 
@@ -86,20 +85,20 @@
       {{-- FOOTER --}}
       <div class="auth-footer">
         Don't have an account?
-        <a href="{{ route('user.register') }}">Register Free 🙏</a>
+        <a href="{{ route('user.register') }}">Register Free</a>
       </div>
     </div>
 
     {{-- TRUST BADGES --}}
     <div style="display:flex;justify-content:center;gap:24px;margin-top:28px;flex-wrap:wrap;">
       <div style="display:flex;align-items:center;gap:6px;font-size:0.8rem;color:var(--text-muted);">
-        <span style="color:var(--primary);">🔒</span> Secure Login
+        Secure Login
       </div>
       <div style="display:flex;align-items:center;gap:6px;font-size:0.8rem;color:var(--text-muted);">
-        <span style="color:var(--primary);">✅</span> Verified Platform
+        Verified Platform
       </div>
       <div style="display:flex;align-items:center;gap:6px;font-size:0.8rem;color:var(--text-muted);">
-        <span style="color:var(--primary);">🛡️</span> Privacy Protected
+        Privacy Protected
       </div>
     </div>
 

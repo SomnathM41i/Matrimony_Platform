@@ -6,8 +6,8 @@
           <p>Dedicated matrimonial platform connecting hearts with trust, tradition, and shared values.</p>
           <div class="social-links">
             <a href="#" class="social-link" aria-label="Facebook">f</a>
-            <a href="#" class="social-link" aria-label="Instagram">📷</a>
-            <a href="#" class="social-link" aria-label="WhatsApp">💬</a>
+            <a href="#" class="social-link" aria-label="Instagram">Ig</a>
+            <a href="#" class="social-link" aria-label="WhatsApp">Wa</a>
             <a href="#" class="social-link" aria-label="YouTube">▶</a>
           </div>
         </div>
@@ -34,9 +34,9 @@
         </div>
         <div class="footer-col footer-contact">
           <h4>Contact Us</h4>
-          <p>📍 Office: Nagpur, Maharashtra, India</p>
-          <p>📧 info@expressmatrimony.com</p>
-          <p>📞 +91 98765 43210</p>
+          <p>Office: Nagpur, Maharashtra, India</p>
+          <p>info@expressmatrimony.com</p>
+          <p>+91 98765 43210</p>
           <p>⏰ Mon–Sat: 9AM – 6PM</p>
         </div>
       </div>
