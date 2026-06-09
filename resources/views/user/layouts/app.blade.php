@@ -205,7 +205,7 @@
       <a href="{{ route('admin.users.stop-impersonation') }}"
          class="imp-return-btn"
          title="End impersonation and return to admin panel">
-        <span class="imp-return-icon" aria-hidden="true">✕</span>
+        <span class="imp-return-icon" aria-hidden="true"><i class="fas fa-xmark"></i></span>
         Return to Admin Panel
       </a>
 

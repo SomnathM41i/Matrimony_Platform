@@ -363,7 +363,7 @@ select.form-control {
   margin-bottom: 28px;
   backdrop-filter: blur(8px);
 }
-.hero-badge::before { content: '🙏'; font-size: 1rem; }
+.hero-badge::before { display: none; }
 
 .hero h1 {
   color: #fff;

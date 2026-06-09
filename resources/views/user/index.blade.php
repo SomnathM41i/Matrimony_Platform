@@ -577,13 +577,13 @@
     <div class="hero-bg-img"></div>
     <div class="hero-mandala"></div>
 
-    <span class="hero-floral f1">🌸</span>
-    <span class="hero-floral f2">🏵️</span>
-    <span class="hero-floral f3">✨</span>
+    <span class="hero-floral f1"><i class="fas fa-leaf"></i></span>
+    <span class="hero-floral f2"><i class="fas fa-ribbon"></i></span>
+    <span class="hero-floral f3"><i class="fas fa-star"></i></span>
 
     <div class="container">
         <div class="hero-content animate-fade-up">
-            <div class="hero-badge">🙏 Trusted by Thousands of Indian Families</div>
+            <div class="hero-badge"><i class="fas fa-hand-holding-heart"></i> Trusted by Thousands of Indian Families</div>
 
             <h1>
                 Find Your Perfect<br>
@@ -723,7 +723,7 @@
                 <img src="{{ asset('assets/images/card1.jpg') }}"
                      alt="Verified Indian bride" loading="lazy">
                 <div class="feat-img-overlay">
-                    <div class="feat-img-icon">✅</div>
+                    <div class="feat-img-icon"><i class="fas fa-circle-check"></i></div>
                     <h3>Verified Profiles</h3>
                     <p>Every profile is manually verified for authenticity and family trust.</p>
                 </div>
@@ -733,7 +733,7 @@
                 <img src="{{ asset('assets/images/card2.webp') }}"
                      alt="Secure platform" loading="lazy">
                 <div class="feat-img-overlay">
-                    <div class="feat-img-icon">🔒</div>
+                    <div class="feat-img-icon"><i class="fas fa-lock"></i></div>
                     <h3>100% Secure</h3>
                     <p>Your data and private conversations are fully protected at all times.</p>
                 </div>
@@ -743,7 +743,7 @@
                 <img src="{{ asset('assets/images/card3.jpg') }}"
                      alt="Smart matching" loading="lazy">
                 <div class="feat-img-overlay">
-                    <div class="feat-img-icon">💡</div>
+                    <div class="feat-img-icon"><i class="fas fa-lightbulb"></i></div>
                     <h3>Smart Matching</h3>
                     <p>AI-driven suggestions tuned to Indian community preferences.</p>
                 </div>
@@ -753,7 +753,7 @@
                 <img src="{{ asset('assets/images/card4.jpg') }}"
                      alt="Easy communication" loading="lazy">
                 <div class="feat-img-overlay">
-                    <div class="feat-img-icon">💬</div>
+                    <div class="feat-img-icon"><i class="fas fa-comments"></i></div>
                     <h3>Easy Communication</h3>
                     <p>Connect, chat and build meaningful bonds safely with families.</p>
                 </div>
@@ -876,11 +876,11 @@
                 <div class="story-photo">
                     <img src="{{ asset('assets/images/card5.jpeg') }}"
                          alt="Rahul & Priya" loading="lazy">
-                    <span class="story-ribbon">Mumbai ❤️</span>
+                    <span class="story-ribbon">Mumbai <i class="fas fa-heart"></i></span>
                 </div>
                 <div class="story-body">
                     <div class="story-names">Rahul & Priya</div>
-                    <div class="story-location">📍 Mumbai, Maharashtra</div>
+                    <div class="story-location"><i class="fas fa-location-dot"></i> Mumbai, Maharashtra</div>
                     <p class="story-quote">We found each other within 2 months. Our families approved instantly. Thank you Express Matrimony!</p>
                 </div>
             </div>
@@ -889,11 +889,11 @@
                 <div class="story-photo">
                     <img src="{{ asset('assets/images/card2.webp') }}"
                          alt="Amit & Sunita" loading="lazy">
-                    <span class="story-ribbon">Delhi ❤️</span>
+                    <span class="story-ribbon">Delhi <i class="fas fa-heart"></i></span>
                 </div>
                 <div class="story-body">
                     <div class="story-names">Amit & Sunita</div>
-                    <div class="story-location">📍 New Delhi</div>
+                    <div class="story-location"><i class="fas fa-location-dot"></i> New Delhi</div>
                     <p class="story-quote">Best decision ever. Very genuine profiles and a smooth family-friendly process throughout.</p>
                 </div>
             </div>
@@ -902,11 +902,11 @@
                 <div class="story-photo">
                     <img src="{{ asset('assets/images/card1.jpg') }}"
                          alt="Suresh & Kavita" loading="lazy">
-                    <span class="story-ribbon">Bangalore ❤️</span>
+                    <span class="story-ribbon">Bangalore <i class="fas fa-heart"></i></span>
                 </div>
                 <div class="story-body">
                     <div class="story-names">Suresh & Kavita</div>
-                    <div class="story-location">📍 Bangalore, Karnataka</div>
+                    <div class="story-location"><i class="fas fa-location-dot"></i> Bangalore, Karnataka</div>
                     <p class="story-quote">Our families loved the platform. The verification process gave everyone real peace of mind.</p>
                 </div>
             </div>
@@ -930,22 +930,22 @@
 
         <div class="trust-grid">
             <div class="trust-card">
-                <div class="trust-icon">🕉️</div>
+                <div class="trust-icon"><i class="fas fa-place-of-worship"></i></div>
                 <h3>All Communities</h3>
                 <p>Serving Hindu, Muslim, Christian, Sikh, Jain, Buddhist and every Indian community with equal respect.</p>
             </div>
             <div class="trust-card">
-                <div class="trust-icon">👨‍👩‍👧‍👦</div>
+                <div class="trust-icon"><i class="fas fa-users"></i></div>
                 <h3>Family Values</h3>
                 <p>We understand the importance of family approval and provide tools for parents to participate.</p>
             </div>
             <div class="trust-card">
-                <div class="trust-icon">🔐</div>
+                <div class="trust-icon"><i class="fas fa-shield-halved"></i></div>
                 <h3>Privacy First</h3>
                 <p>Control who sees your photos and contact details. Your privacy is respected at every step.</p>
             </div>
             <div class="trust-card">
-                <div class="trust-icon">⭐</div>
+                <div class="trust-icon"><i class="fas fa-star"></i></div>
                 <h3>Genuine Profiles</h3>
                 <p>Aadhaar-linked checks, phone OTP and manual review ensure only real, trustworthy members.</p>
             </div>
@@ -967,7 +967,7 @@
             Join thousands of happy Indian families who found their perfect match
             with trust and love through Express Matrimony.
         </p>
-        <a href="{{ route('register') }}" class="btn btn-gold btn-lg">Register Free Now 🙏</a>
+        <a href="{{ route('register') }}" class="btn btn-gold btn-lg">Register Free Now <i class="fas fa-hand-holding-heart"></i></a>
     </div>
 </section>
 

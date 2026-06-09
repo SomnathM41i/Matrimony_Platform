@@ -423,10 +423,10 @@
                 @if(!empty($f))
                 <div class="active-filters">
                     @if(!empty($f['keyword']))
-                        <span class="filter-chip">{{ $f['keyword'] }}<a href="{{ request()->fullUrlWithoutQuery('keyword') }}">✕</a></span>
+                        <span class="filter-chip">{{ $f['keyword'] }}<a href="{{ request()->fullUrlWithoutQuery('keyword') }}"><i class="fas fa-xmark"></i></a></span>
                     @endif
                     @if(!empty($f['religion_id']))
-                        <span class="filter-chip">Religion set<a href="{{ request()->fullUrlWithoutQuery('religion_id') }}">✕</a></span>
+                        <span class="filter-chip">Religion set<a href="{{ request()->fullUrlWithoutQuery('religion_id') }}"><i class="fas fa-xmark"></i></a></span>
                     @endif
                     @if(!empty($f['city_id']) || !empty($f['state_id']) || !empty($f['country_id']))
                         <span class="filter-chip">Location set</span>
